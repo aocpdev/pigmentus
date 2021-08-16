@@ -11,7 +11,7 @@ const verifyAuth = (req, res, next) => {
   jwt.verify(token, process.env.JWT_KEY, (err, decoded) => {
     if (err) {
 
-      return res.status(401).json({
+      return res.json({
         mensaje: 'Error de token',
         err
       })
