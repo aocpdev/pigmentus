@@ -24,7 +24,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Express Session
 app.use(session({
-    secret: 'secret',
+    secret: process.env.JWT_KEY,
     resave: false,
     saveUninitialized: false
 }))
