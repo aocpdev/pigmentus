@@ -50,7 +50,7 @@ export default {
     },
     methods: {
         getUsers: async function () {
-            axios.get('api/v1.0/users')
+            axios.get('api/users')
             .then(res => {
                 res.data.users.rows.forEach( item => {
                     let userObject = {

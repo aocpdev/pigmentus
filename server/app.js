@@ -41,15 +41,15 @@ app.use(function(req, res, next) {
 
 
 // Routes
-app.use('/api/v1.0', require('./api/routes/index'));
-app.use('/api/v1.0/auth', require('./auth/routes/auth'));
-app.use('/api/v1.0/collections', require('./api/routes/collections'));
-app.use('/api/v1.0/categories', require('./api/routes/categories'));
-app.use('/api/v1.0/courses', require('./api/routes/courses'));
-app.use('/api/v1.0/products', require('./api/routes/products'));
-app.use('/api/v1.0/users', require('./auth/routes/users'));
-app.use('/api/v1.0/cart', require('./api/routes/cart'));
-app.use('/api/v1.0/fees', require('./api/routes/fees'));
+app.use('/api', require('./api/routes/index'));
+app.use('/api/auth', require('./auth/routes/auth'));
+app.use('/api/collections', require('./api/routes/collections'));
+app.use('/api/categories', require('./api/routes/categories'));
+app.use('/api/courses', require('./api/routes/courses'));
+app.use('/api/products', require('./api/routes/products'));
+app.use('/api/users', require('./auth/routes/users'));
+app.use('/api/cart', require('./api/routes/cart'));
+app.use('/api/fees', require('./api/routes/fees'));
 // app.use('/api/v1.0/paypal', require('./api/routes/paypal'));
 // app.use('/profile', require('./api/routes/profile'));
 

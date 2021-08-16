@@ -145,11 +145,11 @@ export default {
         },
         createUser() {
             this.user.enable = true;
-            this.axios.post('/api/v1.0/auth/signup', this.user)
+            this.axios.post('/api/auth/signup', this.user)
                 .then(res => {
                     if (res.data.message === "User added succesfully"){
                       let userLogin = {email: this.user.email, password: this.user.password1}
-                      this.axios.post('/api/v1.0/auth/login', userLogin)
+                      this.axios.post('/api/auth/login', userLogin)
                         .then(res => {
                           if (this.$route.query.fromCart === "true") {
                             router.push({ name: "Signin", query: { fromCart: 'true' }});

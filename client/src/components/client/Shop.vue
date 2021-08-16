@@ -101,7 +101,7 @@ export default {
     methods: {
         getCollections: async function () {
             let categories = [];
-            axios.get('api/v1.0/products/inventory').then( inventoryResponse => {
+            axios.get('api/products/inventory').then( inventoryResponse => {
                 let inventory = inventoryResponse.data.inventory.rows;
                 let list = [];
                 inventory.map((inventoryValue, inventoryIndex) => {
@@ -109,8 +109,8 @@ export default {
                         list.push(inventoryValue.collectionId);
                     }
                 });
-                axios.get('api/v1.0/categories').then(categoriesResponse => {
-                    axios.get('api/v1.0/collections/all').then(collectionsResponse => {
+                axios.get('api/categories').then(categoriesResponse => {
+                    axios.get('api/collections/all').then(collectionsResponse => {
                         categoriesResponse.data.categories.rows.map((categorieValue, categorieIndex) => {
                             categorieValue.children = [];
                             list.map((compareCollectionId, compareIndex) => {

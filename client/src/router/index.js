@@ -84,7 +84,7 @@ Vue.use(VueRouter)
       {
         path: '/admin',
         beforeEnter: (to, from, next) => {
-          axios.get('http://localhost:3000/api/v1.0/auth').then(user => {
+          axios.get('http://localhost:3000/api/auth').then(user => {
             console.log(user);
 
             // if (user.data.user === undefined){

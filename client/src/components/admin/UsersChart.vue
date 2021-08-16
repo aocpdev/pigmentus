@@ -123,7 +123,7 @@ export default {
     methods: {
         getUser: async function () {
             this.loaded = false
-            axios.get('api/v1.0/users')
+            axios.get('api/users')
                 .then(res => {
                     this.options.title.text = "Total Users: " + " (" + res.data.users.rows.length + ")";
 

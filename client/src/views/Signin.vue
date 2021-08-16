@@ -93,7 +93,7 @@ export default {
   methods: {
     ...mapMutations(['changeLoginStatus', 'setUser', 'isAuth', 'changeRole']),
     login() {
-      this.axios.post('/api/v1.0/auth/signin', this.user)
+      this.axios.post('/api//auth/signin', this.user)
         .then(res => {
           this.changeLoginStatus(true);
           let user = {

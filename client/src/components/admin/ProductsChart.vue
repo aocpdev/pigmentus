@@ -123,7 +123,7 @@ export default {
     methods: {
         getTotalProducts: async function () {
             this.loaded = false
-            axios.get('api/v1.0/products/inventory')
+            axios.get('api/products/inventory')
                 .then(res => {
                     this.options.title.text = "Total Products: " + " (" + res.data.inventory.rows.length + ")";
 

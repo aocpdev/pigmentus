@@ -180,7 +180,7 @@ export default {
         getUsers: async function () {
             this.loaded = false
             // this.datacollection.datasets = [];
-            axios.get('api/v1.0/users')
+            axios.get('api/users')
                 .then(res => {
 
                     const sortById = res.data.users.rows.sort(function(a, b) {

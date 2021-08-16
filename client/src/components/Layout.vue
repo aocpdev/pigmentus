@@ -339,7 +339,7 @@ export default {
     },
     logOut() {
       axios
-        .get("api/v1.0/auth/logout")
+        .get("api/auth/logout")
         .then((res) => {
           if (res.status === 200) {
             this.$store.state.user = "";

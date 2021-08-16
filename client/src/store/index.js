@@ -100,7 +100,7 @@ export default new Vuex.Store({
 
 
         state.user= user;
-        axios.get('api/v1.0/cart', { params: { userId: user.id} }).then(res => {
+        axios.get('api/cart', { params: { userId: user.id} }).then(res => {
           state.cartDetails = res.data.cartDetails;
         }).catch(err => console.log(err))
 
@@ -110,7 +110,7 @@ export default new Vuex.Store({
   },
   actions: {
     isAuth: async function ({commit}) {
-      axios.get('https://pigmentus.herokuapp.com/api/v1.0/auth')
+      axios.get('https://pigmentus.herokuapp.com/api/auth')
         .then(user => {
           if (user.data.user === '') {
             state.user = "";

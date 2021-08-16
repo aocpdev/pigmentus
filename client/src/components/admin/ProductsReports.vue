@@ -190,7 +190,7 @@ export default {
     methods: {
         getTotalProducts: async function () {
             this.loaded = false
-            axios.get('api/v1.0/products/inventory')
+            axios.get('api/products/inventory')
                 .then(res => {
 
                     const sortById = res.data.inventory.rows.sort(function(a, b) {

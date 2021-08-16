@@ -269,7 +269,7 @@ export default {
       pathArray.shift();
       let collectionId = pathArray[1];
       axios
-        .get("api/v1.0/collections/collection", {
+        .get("api/collections/collection", {
           params: { id: collectionId },
         })
         .then((res1) => {
@@ -282,7 +282,7 @@ export default {
         })
         .catch((err) => console.log(err));
       axios
-        .get("api/v1.0/products/prod", { params: { id: productId } })
+        .get("api/products/prod", { params: { id: productId } })
         .then((res) => {
           this.product = res.data.product.rows;
           this.cart.productId = this.product[0].id;
@@ -302,7 +302,7 @@ export default {
         };
 
         axios
-          .get("api/v1.0/products/prod", { params: { id: cart.productId } })
+          .get("api/products/prod", { params: { id: cart.productId } })
           .then((res) => {
             let cartObj = {
               productId: cart.productId,
@@ -443,7 +443,7 @@ export default {
         });
       } else {
         axios
-          .post("api/v1.0/cart", cart)
+          .post("api/cart", cart)
           .then((res) => {
             this.getCart(this.$store.state.user.id);
           })
@@ -452,7 +452,7 @@ export default {
     },
     getCart: async function (userId) {
       axios
-        .get("api/v1.0/cart", { params: { userId: userId } })
+        .get("api/cart", { params: { userId: userId } })
         .then((res) => {
           this.$store.state.cartDetails = res.data.cartDetails;
           console.log();

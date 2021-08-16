@@ -170,7 +170,7 @@
               router.push({ path: '/cart/shipping'});
             },
             getCart: async function (userId) {
-                axios.get('api/v1.0/cart', { params: { userId: userId} }).then(res => {
+                axios.get('api/cart', { params: { userId: userId} }).then(res => {
                 this.$store.state.cartDetails = res.data.cartDetails;
                 }).catch(err => console.log(err))
             },

@@ -55,7 +55,7 @@ export default {
             // if (this.$store.state.isPaymenLoading === true) {
             //     this.$store.state.isPaymenLoading === false;
             // }
-            axios.get('api/v1.0/paypal/success', { params: { payerId: payerId, paymentId: paymentId, paymentToken: paymentToken } })
+            axios.get('api/paypal/success', { params: { payerId: payerId, paymentId: paymentId, paymentToken: paymentToken } })
                     .then(res => {
                         console.log(res);
                     }).catch(err => console.log(err))

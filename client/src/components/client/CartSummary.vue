@@ -446,7 +446,7 @@ export default {
     getCart: async function (userId) {
       if (userId !== undefined) {
 
-      axios.get("api/v1.0/cart", { params: { userId: userId } }).then((res) => {
+      axios.get("api/cart", { params: { userId: userId } }).then((res) => {
 
         this.cartDetails = res.data.cartDetails;
         this.$store.state.cartDetails.productsQuantity = this.cartDetails.productsQuantity;
@@ -479,7 +479,7 @@ export default {
       if (this.$store.state.user.id !== undefined) {
         item.isEditInCart = true;
         axios
-          .post("api/v1.0/cart", item)
+          .post("api/cart", item)
           .then((res) => {
             this.getCart(this.$store.state.user.id);
           })

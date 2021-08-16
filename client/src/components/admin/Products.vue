@@ -446,7 +446,7 @@ export default {
     },
     methods: {
         getCollections: async function () {
-            let collections = await axios.get('api/v1.0/collections');
+            let collections = await axios.get('api/collections');
             return collections;
         },
         getInventory: async function () {
@@ -457,7 +457,7 @@ export default {
                         this.collections.push(item)
                     }
                 })
-                axios.get('api/v1.0/products/inventory')
+                axios.get('api/products/inventory')
                 .then(res => {
                     this.inventory = res.data.inventory.rows;
                     this.isLoading = false;
@@ -466,7 +466,7 @@ export default {
 
         },
         postProduct: async function (product, option) {
-            axios.post('api/v1.0/products', product).then(res => {
+            axios.post('api/products', product).then(res => {
                 console.log(product);
                 this.getInventory();
                 this.snackbar = true;
@@ -523,7 +523,7 @@ export default {
                     dateCreated: item.dateCreated
                 };
 
-                axios.get('api/v1.0/products/inventory')
+                axios.get('api/products/inventory')
                 .then(res => {
                     let inventory = res.data.inventory.rows;
                     inventory.map((value, index) => {
@@ -538,7 +538,7 @@ export default {
                     })
                     console.log(product)
 
-                    axios.post('api/v1.0/products', product).then(res => {
+                    axios.post('api/products', product).then(res => {
                     this.getInventory();
                     this.snackbar = true;
                     this.text = res.data.message;
@@ -560,7 +560,7 @@ export default {
                 product.isDealDay = false;
                 product.specialOfferPercentage = 0.00,
                 product.lastCustomerPrice = product.customerPrice;
-                axios.post('api/v1.0/products', product).then(res => {
+                axios.post('api/products', product).then(res => {
                     this.getInventory();
                     this.snackbar = true;
                     console.log(res);

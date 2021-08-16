@@ -132,12 +132,12 @@ export default {
     methods: {
         getProducts: async function (collectionId) {
             if (collectionId == 1) {
-                axios.get('api/v1.0/products/inventory')
+                axios.get('api/products/inventory')
                 .then(res => {
                     this.products = res.data.inventory.rows;
                 }).catch(err => console.log(err))
             } else {
-                axios.get('api/v1.0/products', { params: { collectionId: collectionId } })
+                axios.get('api/products', { params: { collectionId: collectionId } })
                 .then(res => {
                     this.products = res.data.products.rows;
                 }).catch(err => console.log(err))

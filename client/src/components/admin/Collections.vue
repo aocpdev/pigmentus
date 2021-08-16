@@ -216,7 +216,7 @@ export default {
     },
     methods: {
         getCollections: async function () {
-            axios.get('api/v1.0/collections')
+            axios.get('api/collections')
             .then(res => {
                 res.data.collections.rows.forEach( item => {
                     let collectionsObject = {

@@ -282,7 +282,7 @@ export default {
     methods: {
         getTotalUsers: async function () {
             this.isLoadingCustomers = true;
-            axios.get('api/v1.0/users')
+            axios.get('api/users')
             .then(res => {
                 this.totalUsers = res.data.users.rows.length;
                 this.isLoadingCustomers = false;
@@ -291,7 +291,7 @@ export default {
         },
         getTotalProducts: async function () {
             this.isLoadingProducts = true;
-            axios.get('api/v1.0/products/inventory')
+            axios.get('api/products/inventory')
                 .then(res => {
                     this.totalProducts = res.data.inventory.rows.length;
                     this.isLoadingProducts = false;

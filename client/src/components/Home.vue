@@ -352,7 +352,7 @@
         },
         methods: {
             getInventory: async function () {
-              axios.get('api/v1.0/products/inventory')
+              axios.get('api/products/inventory')
               .then(res => {
                   res.data.inventory.rows.map((value, index) => {
                     if (value.isDealDay === true) {
