@@ -13,7 +13,7 @@ var VueCookie = require('vue-cookie');
 
 
 
-require('../../node_modules/dotenv').config();
+require('dotenv').config();
 Vue.use(VueAxios, axios, vuetify);
 Vue.use(VueCookie);
 Vue.use(VueLodash, { lodash: lodash });
@@ -35,7 +35,7 @@ Vue.use(VCurrencyField, {
 Vue.config.productionTip = false
 
 // API URL
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV == 'production') {
   console.log(process.env.NODE_ENV);
   axios.defaults.baseURL = 'https://pigmentus.herokuapp.com'; // Production
 }else {
