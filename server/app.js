@@ -35,11 +35,10 @@ app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     if ('OPTIONS' == req.method) {
         res.header('Access-Control-Allow-Methods', 'DELETE, PUT, POST, GET, PATCH' );
-       res.status(200).json({});
-     }
-     else {
-       next();
-     }});
+        res.status(200).json({});
+    }
+    next();
+    });
 
 
 
