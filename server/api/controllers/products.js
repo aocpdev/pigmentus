@@ -62,7 +62,7 @@ exports.getInventory = (req, res, next) => {
                 inventory.rows[inventoryIndex].purchasePrice = formatter.format(inventoryValue.purchasePrice);
             });
             res.status(200).json({inventory: inventory});
-        }).catch(err => res.status(401).json({ err }));
+        }).catch(err => res.status(500).json({ err }));
     } catch (error) {
         res.status(500).json({
             message: 'Error ocurred',
