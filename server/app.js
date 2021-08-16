@@ -6,7 +6,7 @@ const history = require('connect-history-api-fallback');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 
-require('dotenv').config();
+require('../node_modules/dotenv').config();
 
 const app = express();
 
@@ -24,7 +24,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Express Session
 app.use(session({
-    secret: process.env.JWT_KEY,
+    secret: 'secret',
     resave: false,
     saveUninitialized: false
 }))
