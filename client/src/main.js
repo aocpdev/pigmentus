@@ -35,12 +35,12 @@ Vue.use(VCurrencyField, {
 Vue.config.productionTip = false
 
 // API URL
-// if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'production') {
   axios.defaults.baseURL = 'https://pigmentus.herokuapp.com'; // Production
-// }else {
-  // axios.defaults.baseURL = 'http://localhost:3000'; // Local
+}else {
+  axios.defaults.baseURL = 'http://localhost:3000'; // Local
 
-// }
+}
 
 
 
