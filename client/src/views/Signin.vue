@@ -1,14 +1,15 @@
 <template>
-    <v-row align="center" justify="center">
-      <v-col cols="12" sm="8" md="8">
-        <v-card class='elevation-12'>
+    <v-container fill-height fluid>
+      <v-row justify="center">
+      <v-col cols="12" sm="8" md="8" align="center">
+        <v-card class='elevation-12' max-width="650px" max-height="500px">
           <v-window>
             <v-window-item>
               <v-row>
                 <v-col cols="12" md="8">
                   <v-card-text class="mt-12">
-                    <h1 class="text-center display-2 textColor text--accent-3">Sign in to Pigmentus</h1>
-                    <div class=text-center>
+                    <!-- <h1 class="text-center display-2 textColor text--accent-3">Sign in to Pigmentus</h1> -->
+                    <!-- <div class=text-center>
                       <v-btn class="mx-2 facebook" fab color="rgb(66 103 178)"
                       href="https://www.facebook.com/Pigmentus"
                       >
@@ -24,7 +25,7 @@
                       >
                         <v-icon color="white">mdi-linkedin</v-icon>
                       </v-btn>
-                    </div>
+                    </div> -->
                     <div style="padding-top: 20px" v-if="error">
                       <v-alert
                       text
@@ -58,7 +59,7 @@
                     <h3 class="text-center mt-3">Forget your password?</h3>
                   </v-card-text>
                   <div class="text-center mt-3">
-                    <v-btn rounded color="rgb(187, 162, 87)" @click="login()">SING IN</v-btn>
+                    <v-btn rounded color="rgb(187, 162, 87)" @click="login()">SIGN IN</v-btn>
                   </div>
                 </v-col>
                 <v-col cols="12" md="4" class="goldColor accent-3">
@@ -76,6 +77,8 @@
         </v-card>
       </v-col>
     </v-row>
+    </v-container>
+
 </template>
 <script>
 import {mapMutations, mapState} from 'vuex'
@@ -84,10 +87,11 @@ export default {
   data: () => ({
     user: {},
     error: false,
-    errorMessage: ''
+    errorMessage: '',
+    prevRoute: '',
   }),
   methods: {
-    ...mapMutations(['changeLoginStatus', 'setUser', 'isAuth']),
+    ...mapMutations(['changeLoginStatus', 'setUser', 'isAuth', 'changeRole']),
     login() {
       this.axios.post('/api/v1.0/auth/signin', this.user)
         .then(res => {
@@ -97,10 +101,19 @@ export default {
             name: res.data.name,
             lastName: res.data.lastName,
             email: res.data.email,
-            preferences: res.data.preferences
+            preferences: res.data.preferences,
+            roleId: res.data.roleId
           }
+          this.$store.state.snackbarMessage = "Welcome Back!" + " "  + user.name + " "  + user.lastName
+          this.$store.state.snackbar = true;
           this.setUser(user);
-          router.push('/');
+          this.changeRole(user.roleId);
+          if (this.$route.query.fromCart === "true") {
+            router.push({ name: "cartShipping"});
+          } else {
+            router.push('/home');
+          }
+
         })
         .catch(err => {
           this.error = false;
@@ -112,9 +125,24 @@ export default {
         });
     },
     goSignup () {
-      router.push({ name: "Signup"});
+      if (this.$route.query.fromCart === "true") {
+        router.push({ name: "Signup", query: { fromCart: 'true' }});
+      } else {
+        router.push({ name: "Signup"});
+      }
+
     }
-  }
+  },
+  created() {
+    console.log(this.$route.query.fromCart);
+  },
+  beforeRouteEnter(to, from, next) {
+    next(vm => {
+      console.log(from);
+      vm.prevRoute = from.fullPath;
+    })
+  },
+
 }
 </script>
 

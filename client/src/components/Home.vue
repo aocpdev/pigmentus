@@ -1,7 +1,9 @@
 <template>
-  <div>
-    <v-carousel reverse-transition="fade-transition"
+    <v-col class="col-md-12 col-sm-12 col-xs-12 pr-0 pl-0 pt-0 pb-0">
+      <v-carousel reverse-transition="fade-transition"
       transition="fade-transition" hide-delimiters
+      :show-arrows="false"
+      cycle
     >
       <v-carousel-item
         :src="require('../assets/FirstImage.png')"
@@ -41,9 +43,9 @@
             gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
             height="400px"
           >
-           <h1 class="text-center font-size">Top Picks</h1>
+           <h1 class="text-center font-size border">Top Picks</h1>
             <div class="text-center">
-              <v-btn  href="/shop" class="white--text " outlined>SHOP NOW</v-btn>
+              <v-btn  to="/shop" class="white--text" outlined>SHOP NOW</v-btn>
             </div>
 
 
@@ -74,9 +76,9 @@
             gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
             height="400px"
           >
-            <h1 class="text-center font-size">New Arrivals</h1>
+            <h1 class="text-center font-size border">New Arrivals</h1>
             <div class="text-center">
-              <v-btn  href="/shop" class="white--text" outlined>SHOP NOW</v-btn>
+              <v-btn  to="/shop" class="white--text" outlined>SHOP NOW</v-btn>
             </div>
           </v-img>
         </v-card>
@@ -95,9 +97,9 @@
             gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
             height="300px"
           >
-            <h1 class="text-center font-size">Colors</h1>
+            <h1 class="text-center font-size border">Colors</h1>
             <div class="text-center mt-2">
-              <v-btn class="white--text caption"  href="/shop" text>SHOP NOW <v-icon class="white--text caption">mdi-arrow-right</v-icon></v-btn>
+              <v-btn class="white--text caption" to="/shop" text>SHOP NOW <v-icon class="white--text caption">mdi-arrow-right</v-icon></v-btn>
             </div>
           </v-img>
         </v-card>
@@ -114,9 +116,9 @@
             gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
             height="300px"
           >
-            <h1 class="text-center font-size">Needles</h1>
+            <h1 class="text-center font-size border">Needles</h1>
             <div class="text-center mt-2">
-              <v-btn class="white--text caption"  href="/shop" text>SHOP NOW <v-icon class="white--text caption">mdi-arrow-right</v-icon></v-btn>
+              <v-btn class="white--text caption" to="/shop" text>SHOP NOW <v-icon class="white--text caption">mdi-arrow-right</v-icon></v-btn>
             </div>
           </v-img>
         </v-card>
@@ -133,9 +135,10 @@
             gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
             height="300px"
           >
-            <h1 class="text-center font-size">Kits</h1>
+            <h1 class="text-center font-size border">Kits</h1>
             <div class="text-center mt-2">
-              <v-btn class="white--text caption"  href="/shop" text>SHOP NOW <v-icon class="white--text caption">mdi-arrow-right</v-icon></v-btn>
+              <v-btn class="white--text caption" to="/shop" text>SHOP NOW <v-icon class="white--text caption">  mdi-arrow-right</v-icon></v-btn>
+
             </div>
           </v-img>
         </v-card>
@@ -143,6 +146,8 @@
     </div>
     <v-container>
       <v-row no-gutters>
+
+
         <v-col :cols="12">
           <v-card-text
             class=""
@@ -151,34 +156,53 @@
           >
             <v-card-title class="subheading ">Deals of the Day</v-card-title>
             <v-divider></v-divider>
-            <div class="row">
-              <div class="col-12 col-md-3 col-sm-6 col-xs-6 text-center">
+            <v-row
+
+            >
+
+              <div class="col-12 col-md-3 col-sm-6 col-xs-6 text-center" :key="i.id" v-for="(item, i) in dealsArray">
                 <v-hover
                   v-slot:default="{ hover }"
                   open-delay="200"
                 >
                   <v-card
                     :elevation="hover ? 16 : 2"
+                    class="mx-auto"
                 >
                   <v-img
+                    content
                     class="white--text align-end"
+                    :aspect-ratio="16/9"
                     height="200px"
+                    :src='item.image'
 
                   >
-                    <v-card-title>Bags & Purses </v-card-title>
+                   <v-row no-gutters  justify="start"  class="mt-n4 mb-0">
+                                    <v-col  class="py-0 my-0" align="start" style="text-align: start" v-if="item.isDealDay">
+                                        <svg align="start" style="width:40px;height:40px; color: red" viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="M5.5,7A1.5,1.5 0 0,1 4,5.5A1.5,1.5 0 0,1 5.5,4A1.5,1.5 0 0,1 7,5.5A1.5,1.5 0 0,1 5.5,7M21.41,11.58L12.41,2.58C12.05,2.22 11.55,2 11,2H4C2.89,2 2,2.89 2,4V11C2,11.55 2.22,12.05 2.59,12.41L11.58,21.41C11.95,21.77 12.45,22 13,22C13.55,22 14.05,21.77 14.41,21.41L21.41,14.41C21.78,14.05 22,13.55 22,13C22,12.44 21.77,11.94 21.41,11.58Z" />
+                                            <text x="3" y="14" style="font-size: 8px; color: white; font-weight: bold">-{{item.specialOfferPercentage}}%</text>
+                                        </svg>
+                                    </v-col>
+                                    <!-- <v-col cols="12" v-if="false">
+                                        <svg style="width:40px;height:40px; color: rgb(187, 162, 87)" viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="M20,4C21.11,4 22,4.89 22,6V18C22,19.11 21.11,20 20,20H4C2.89,20 2,19.11 2,18V6C2,4.89 2.89,4 4,4H20M8.5,15V9H7.25V12.5L4.75,9H3.5V15H4.75V11.5L7.3,15H8.5M13.5,10.26V9H9.5V15H13.5V13.75H11V12.64H13.5V11.38H11V10.26H13.5M20.5,14V9H19.25V13.5H18.13V10H16.88V13.5H15.75V9H14.5V14A1,1 0 0,0 15.5,15H19.5A1,1 0 0,0 20.5,14Z" />
+                                        </svg>
+                                    </v-col> -->
+                                </v-row>
                   </v-img>
 
-                  <v-card-text class="text--primary text-center">
-                    <div>Upto 60% + Extra 10%</div>
-                    <div>Baggit, Zara, Fossil</div>
+                  <v-card-text class="text--primary text-center" style="background-color: rgb(252, 249, 237)">
+                    <div>{{item.name}}</div>
+                    <div>${{item.customerPrice}} <span v-if="item.isDealDay">-</span><span v-if="item.isDealDay" style="color: red"> $<strike>{{item.lastCustomerPrice}}</strike></span></div>
                   </v-card-text>
 
-                  <div class="text-center">
+                  <div class="text-center" style="background-color: rgb(252, 249, 237)">
                     <v-btn
-                      href="/shop"
+                      :to="`/shop/${item.collectionId}/product/${item.id}`"
                       class="ma-2"
                       outlined
-                      color="info"
+                      color="primary"
                     >
                       Explore
                     </v-btn>
@@ -186,7 +210,7 @@
                 </v-card>
                 </v-hover>
               </div>
-              <div class="col-12 col-md-3 col-sm-6 col-xs-6 text-center" >
+              <!-- <div class="col-12 col-md-3 col-sm-6 col-xs-6 text-center" >
                 <v-hover
                   v-slot:default="{ hover }"
                   open-delay="200"
@@ -211,7 +235,7 @@
                     <v-btn href="/shop"
                       class="ma-2"
                       outlined
-                      color="info"
+                      color="primary"
                     >
                       Explore
                     </v-btn>
@@ -244,7 +268,7 @@
                     <v-btn href="/shop"
                       class="ma-2"
                       outlined
-                      color="info"
+                      color="primary"
                     >
                       Explore
                     </v-btn>
@@ -277,23 +301,28 @@
                     <v-btn href="/shop"
                       class="ma-2"
                       outlined
-                      color="info"
+                      color="primary"
                     >
                       Explore
                     </v-btn>
                   </div>
                 </v-card>
                 </v-hover>
-              </div>
-            </div>
+              </div> -->
+
+            </v-row>
+
+
+
           </v-card-text>
         </v-col>
       </v-row>
     </v-container>
-  </div>
+    </v-col>
 </template>
 
 <script>
+  import axios from 'axios'
     export default {
         data () {
             return {
@@ -318,7 +347,25 @@
                     'Fourth',
                     'Fifth',
                 ],
+                dealsArray: [],
             }
+        },
+        methods: {
+            getInventory: async function () {
+              axios.get('api/v1.0/products/inventory')
+              .then(res => {
+                  res.data.inventory.rows.map((value, index) => {
+                    if (value.isDealDay === true) {
+                      this.dealsArray.push(value)
+                    }
+                  })
+              }).catch(err => console.log(err))
+
+              console.log(this.dealsArray);
+          },
+        },
+        created() {
+          this.getInventory();
         },
     }
 </script>
@@ -334,5 +381,9 @@
   .v-btn .v-btn__content .v-icon {
         color: white;
     }
+
+  .border {
+    text-shadow: -0.094rem 0 rgb(187, 162, 87), 0 0.094rem rgb(187, 162, 87), 0.094rem 0 rgb(187, 162, 87), 0 -0.094rem rgb(187, 162, 87);
+  }
 </style>
 

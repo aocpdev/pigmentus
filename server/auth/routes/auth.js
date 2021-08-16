@@ -14,4 +14,6 @@ router.post('/delete', AuthController.userDelete);
 
 router.put('/update', AuthController.userUpdate);
 
+router.get('/logout', AuthController.userLogout);
+
 module.exports = router;

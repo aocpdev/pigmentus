@@ -55,9 +55,8 @@ export default {
         return {
             activeTab: 'admin/inventory',
             tabs: [
-                { id: 1, name: "Inventory", route: '/' },
-                { id: 2, name: "Online Collections", route: '/admin/inventory/collections' },
-                { id: 3, name: "Online Products", route: '/admin/inventory/products' },
+                { id: 1, name: "Inventory", route: '/admin/inventory/products' },
+                { id: 2, name: "Collections", route: '/admin/inventory/collections' },
 
             ]
             }

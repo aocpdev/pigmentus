@@ -1,7 +1,8 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { getUserByEmail, createUser, deleteUser, updateUser } = require('../queries/users');
-const { saveToken, hasToken, updateToken } = require('../queries/auth');
+const { saveToken, hasToken, updateToken, updateUserLastSeen } = require('../queries/auth');
+const { resource } = require("../routes/auth");
 
 require('dotenv').config();
 
@@ -42,10 +43,22 @@ exports.userSignin = (req, res, next) => {
                                                         name: user.name,
                                                         lastName: user.last_name,
                                                         email: user.email,
-                                                        preferences: user.preferences
+                                                        preferences: user.preferences,
+                                                        roleId: user.role_id
                                                     }
                                                     res.cookie('token', token, { maxAge: 12 * 60 * 60 * 1000, httpOnly: true, secret: 'secret', path:'/'}).send(userForClient);
                                                 }).catch(err => res.status(401).json({ err }));
+
+                                                let userForLastSeen = {
+                                                    lastSeen: new Date(),
+                                                    id: user.id
+                                                }
+                                                updateUserLastSeen(userForLastSeen)
+                                                    .then(user => {
+                                                        res.status(200).json({
+                                                            message: 'User last seen updated successfully'
+                                                        })
+                                                    })
                                         } else {
                                             saveToken(authToken)
                                                 .then(authInfo => {
@@ -54,10 +67,21 @@ exports.userSignin = (req, res, next) => {
                                                         name: user.name,
                                                         lastName: user.last_name,
                                                         email: user.email,
-                                                        preferences: user.preferences
+                                                        preferences: user.preferences,
+                                                        roleId: user.role_id
                                                     }
                                                     res.cookie('token', token, { maxAge: 12 * 60 * 60 * 1000, httpOnly: true, secret: 'secret', path:'/'}).send(userForClient);
                                                 }).catch(err => res.status(401).json({ err }));
+                                                let userForLastSeen = {
+                                                    lastSeen: new Date(),
+                                                    id: user.id
+                                                }
+                                                updateUserLastSeen(userForLastSeen)
+                                                    .then(user => {
+                                                        res.status(200).json({
+                                                            message: 'User last seen updated successfully'
+                                                        })
+                                                    })
                                         }
                                     }).catch(err => res.status(401).json({ err, message: 'por que esta aqui'}));
                             } else {
@@ -188,19 +212,43 @@ exports.userIsAuth = (req, res, next) => {
 
         if (err) {
 
-        return res.status(401).json({
+        return res.status(403).json({
         mensaje: 'Error de token',
         err
         })
     } else {
+
         const user = {
             id: decoded.data.id,
             name: decoded.data.name,
             lastName: decoded.data.last_name,
             email: decoded.data.email,
-            preferences: decoded.data.preferences
+            preferences: decoded.data.preferences,
+            roleId: decoded.data.role_id
         }
+
+        const userForLastSeen = {
+            lastSeen: new Date(),
+            id: decoded.data.id
+        }
+        updateUserLastSeen(userForLastSeen)
+            .then(user => {
+                res.status(200).json({
+                    message: 'User last seen updated successfully'
+                })
+            })
         res.status(200).json({user: user})
     }
     });
+}
+
+exports.userLogout = (req, res, next) => {
+    try {
+        res.clearCookie('token').send(req.cookies.token);
+    } catch (error) {
+        return res.status(500).json({
+            message: "Error Ocurred",
+            error
+        });
+    }
 }

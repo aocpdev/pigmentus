@@ -1,7 +1,7 @@
 <template>
     <v-row no-gutters>
-    <h1 style="text-align: center;"> Collections </h1>
-    <v-col  cols="12" class="pl-10 pr-10">
+    <!-- <h1 style="text-align: center;"> Collections </h1> -->
+    <v-col  cols="12" class="pl-10 pr-10 pt-10">
         <v-data-table
         :headers="headers"
         :items="collections"
@@ -12,7 +12,7 @@
             <v-toolbar
                 flat
             >
-                <v-toolbar-title>My collections</v-toolbar-title>
+                <v-toolbar-title>Pigmentus collections</v-toolbar-title>
                 <v-divider
                 class="mx-4"
                 inset

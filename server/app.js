@@ -9,11 +9,11 @@ const cookieParser = require('cookie-parser');
 require('dotenv').config();
 
 const app = express();
+
 var corsOptions = {
     origin: '*',
     optionsSuccessStatus: 200,
-  }
-
+}
 
 // Midlewares
 app.use(cookieParser())
@@ -40,6 +40,8 @@ app.use('/api/v1.0/courses', require('./api/routes/courses'));
 app.use('/api/v1.0/products', require('./api/routes/products'));
 app.use('/api/v1.0/users', require('./auth/routes/users'));
 app.use('/api/v1.0/cart', require('./api/routes/cart'));
+app.use('/api/v1.0/fees', require('./api/routes/fees'));
+// app.use('/api/v1.0/paypal', require('./api/routes/paypal'));
 // app.use('/profile', require('./api/routes/profile'));
 
 

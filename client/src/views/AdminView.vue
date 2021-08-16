@@ -46,7 +46,7 @@
             dense
             style="background-color: rgb(252, 249, 237)"
             >
-            <v-toolbar-title>Admin</v-toolbar-title>
+            <v-toolbar-title><b>Admin:</b> <i>{{$store.state.user.name}} {{$store.state.user.lastName}}</i></v-toolbar-title>
             <v-spacer></v-spacer>
 
             <v-btn
@@ -114,6 +114,11 @@ export default {
 
 <style>
 
+.v-toolbar-title {
+    font-size: 1rem!important;
+    line-height: 1!important;
+
+}
 
 
 </style>

@@ -1,10 +1,10 @@
 <template>
     <v-row no-gutters>
-    <h1 style="text-align: center;"> Online Products</h1>
-    <v-col  cols="12" class="pl-10 pr-10">
+    <!-- <h1 style="text-align: center;"> Online Products</h1> -->
+    <v-col  cols="12" class="pl-10 pr-10 pt-10">
         <v-card>
             <v-card-title>
-                All Products
+                Pigmentus Inventory
                 <v-divider
                 class="mx-4"
                 inset
@@ -100,12 +100,11 @@
                                 sm="4"
                                 md="4"
                             >
-                                <v-text-field
+                            <v-currency-field
                                 v-model="editedItem.purchasePrice"
                                 label="Purchase price"
                                 prefix="$"
-                                color="rgb(187, 162, 87)"
-                                ></v-text-field>
+                                color="rgb(187, 162, 87)"/>
                             </v-col>
                             <v-col
                                 cols="12"
@@ -128,6 +127,18 @@
                                 label="In stock"
                                 color="rgb(187, 162, 87)"
                                 ></v-text-field>
+                            </v-col>
+                            <v-col
+                                cols="12"
+                                sm="4"
+                                md="4"
+                                v-if="editedIndex > -1"
+                            >
+                                <v-currency-field
+                                v-model="editedItem.specialOfferPercentage"
+                                label="Discount percent"
+                                prefix="%"
+                                color="rgb(187, 162, 87)"/>
                             </v-col>
 
                             <v-col cols="12">
@@ -391,6 +402,9 @@ export default {
                 inStock: 0,
                 purchasePrice: 0,
                 weight: 0,
+                isDealDay: false,
+                specialOfferPercentage: 0,
+                lastCustomerPrice: 0,
             },
             defaultItem: {
                 id: 0,
@@ -405,6 +419,9 @@ export default {
                 inStock: 0,
                 purchasePrice: 0,
                 weight: 0,
+                isDealDay: false,
+                specialOfferPercentage: 0,
+                lastCustomerPrice: 0,
             },
             imageURL: '',
             productName: '',
@@ -492,6 +509,41 @@ export default {
         save (item) {
             if (this.editedIndex > -1) {
 
+                let product = {
+                    id: item.id,
+                    name: item.name,
+                    description: item.description,
+                    image: item.image,
+                    customerPrice: item.customerPrice,
+                    collectionId: item.collectionId,
+                    enabled: item.enabled,
+                    inStock: item.inStock,
+                    purchasePrice: item.purchasePrice,
+                    weight: item.weight,
+                    dateCreated: item.dateCreated
+                };
+
+                axios.get('api/v1.0/products/inventory')
+                .then(res => {
+                    let inventory = res.data.inventory.rows;
+                    inventory.map((value, index) => {
+                        if (product.id === value.id) {
+                            product.isDealDay = true;
+                            product.special = item.specialOfferPercentage;
+                            product.lastCustomerPrice = product.customerPrice;
+
+                            product.customerPrice = ( product.customerPrice - (product.customerPrice * (product.special / 100))).toFixed(2)
+
+                        }
+                    })
+                    console.log(product)
+
+                    axios.post('api/v1.0/products', product).then(res => {
+                    this.getInventory();
+                    this.snackbar = true;
+                    this.text = res.data.message;
+                }).catch(err => console.log(err))
+                }).catch(err => console.log(err))
 
             } else {
                 let product = {
@@ -504,8 +556,10 @@ export default {
                     inStock: item.inStock,
                     purchasePrice: item.purchasePrice,
                     weight: item.weight
-
                 }
+                product.isDealDay = false;
+                product.specialOfferPercentage = 0.00,
+                product.lastCustomerPrice = product.customerPrice;
                 axios.post('api/v1.0/products', product).then(res => {
                     this.getInventory();
                     this.snackbar = true;

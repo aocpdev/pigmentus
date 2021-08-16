@@ -10,7 +10,7 @@
         </div>
     </div>
 </transition>
-    
+
 </template>
 
 <script>
@@ -32,11 +32,11 @@ export default {
                 this.show = false;
                 this.loading(true);
                 fadeOut.style.animation = 'fadeout 1.5s ease'
-                
+
 			}, 4000)
         }
-  },
-  
+    },
+
 }
 </script>
 

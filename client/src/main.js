@@ -9,11 +9,15 @@ import VCurrencyField from 'v-currency-field'
 import { VTextField } from 'vuetify/lib'
 import VueLodash from 'vue-lodash'
 import lodash from 'lodash'
+var VueCookie = require('vue-cookie');
+
+
 
 require('dotenv').config();
-Vue.use(VueAxios, axios, vuetify)
-Vue.use(VueLodash, { lodash: lodash })
-Vue.component('v-text-field', VTextField)
+Vue.use(VueAxios, axios, vuetify);
+Vue.use(VueCookie);
+Vue.use(VueLodash, { lodash: lodash });
+Vue.component('v-text-field', VTextField);
 Vue.use(VCurrencyField, {
 
 	locale: 'en-US',
@@ -25,7 +29,7 @@ Vue.use(VCurrencyField, {
   valueAsInteger: false,
   allowNegative: true
 
-})
+});
 
 
 Vue.config.productionTip = false

@@ -1,7 +1,7 @@
 <template>
     <v-row no-gutters>
-            <h1 style="text-align: center;"> Customers</h1>
-            <v-col  cols="12" class="pl-10 pr-10">
+            <!-- <h1 style="text-align: center;"> Customers</h1> -->
+            <v-col  cols="12" class="pl-10 pr-10 pt-10">
                     <v-card>
                         <v-card-title>
                         All Customers

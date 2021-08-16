@@ -1,7 +1,9 @@
 <template>
-  <v-row align="center" justify="center">
-      <v-col cols="12" sm="8" md="8">
-        <v-card class='elevation-12'>
+
+  <v-container fill-height fluid>
+    <v-row justify="center">
+      <v-col cols="12" sm="8" md="8" align="center">
+        <v-card class='elevation-12' max-width="650px">
           <v-window>
             <v-window-item>
               <v-row class="fill-height">
@@ -16,8 +18,8 @@
                 </v-col>
                 <v-col cols="12" md="8">
                   <v-card-text class="mt-12">
-                    <h1 class="text-center display-2 textColor text--accent-3"> Create Account</h1>
-                    <div class="text-center ">
+                    <!-- <h1 class="text-center display-2 textColor text--accent-3"> Create Account</h1> -->
+                    <!-- <div class="text-center ">
                       <v-btn class="mx-2 facebook" fab color="rgb(66 103 178)"
                       href="https://www.facebook.com/Pigmentus"
                       >
@@ -33,7 +35,7 @@
                       >
                         <v-icon color="white">mdi-linkedin</v-icon>
                       </v-btn>
-                    </div>
+                    </div> -->
                     <div style="padding-top: 20px" v-if="error">
                       <v-alert
                       text
@@ -43,7 +45,7 @@
                       icon="mdi-email"
                       type="error"
                     >
-                       {{errorMessage}}
+                      {{errorMessage}}
                     </v-alert>
                     </div>
                     <v-form v-model="valid">
@@ -103,6 +105,9 @@
         </v-card>
       </v-col>
   </v-row>
+  </v-container>
+
+
 </template>
 
 <script>
@@ -131,7 +136,12 @@ export default {
     }),
     methods: {
         goLogin () {
-          router.push({ name: "Signin"});
+          if (this.$route.query.fromCart === "true") {
+            router.push({ name: "Signin", query: { fromCart: 'true' }});
+          } else {
+            router.push({ name: "Signin"});
+          }
+
         },
         createUser() {
             this.user.enable = true;
@@ -141,10 +151,14 @@ export default {
                       let userLogin = {email: this.user.email, password: this.user.password1}
                       this.axios.post('/api/v1.0/auth/login', userLogin)
                         .then(res => {
-                          // router.push({name: "Home"})
+                          if (this.$route.query.fromCart === "true") {
+                            router.push({ name: "Signin", query: { fromCart: 'true' }});
+                          } else {
+                            router.push({ name: "Signin"});
+                          }
                         })
                         .catch(err => {
-                          router.push({ name: "Signin"});
+                          console.log(err);
                         });
                     }
                 })

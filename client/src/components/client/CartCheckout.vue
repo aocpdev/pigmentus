@@ -1,0 +1,227 @@
+<template>
+<div>
+    <v-container>
+      <v-row>
+        <v-col :cols="12" md="9" sm="12" >
+          <v-simple-table>
+            <template v-slot:default>
+              <thead>
+              <tr>
+                <th class="text-center">ITEM</th>
+                <th>PRICE</th>
+                <th>QUANTITY</th>
+                <th>TOTAL</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr v-for="item in $store.state.cartDetails.cart"
+                  :key="item.name">
+                <td>
+                  <v-list-item
+                  key="1"
+
+                >
+                  <v-list-item-avatar>
+                    <v-img v-bind:src="item.image" :alt="item.name" ></v-img>
+                  </v-list-item-avatar>
+
+                  <v-list-item-content>
+                    <v-list-item-title>{{item.productName}}</v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item></td>
+                <td>${{item.customerPrice}}</td>
+                <td>
+                  {{item.quantity}}
+                </td>
+                <td>${{item.price}}</td>
+
+              </tr>
+              </tbody>
+            </template>
+          </v-simple-table>
+        </v-col>
+
+
+        <v-col :cols="12" md="3" sm="12" style="background-color: rgb(252, 249, 237)" class="orderBorder">
+          <p class="headline">Order Summary</p>
+          <p class="overline">Shipping and additional costs are calculated based on values you have entered.
+          </p>
+          <v-simple-table>
+            <template v-slot:default>
+              <tbody>
+              <tr>
+                <td>Order Subtotal</td>
+                <td class="text-right" style="width: 50px;">${{$store.state.cartDetails.subtotal}}</td>
+              </tr>
+              <tr>
+                <td>Shipping Charges</td>
+                <td class="text-right" style="width: 50px;">${{$store.state.cartDetails.shippingFee}}</td>
+              </tr>
+              <tr>
+                <td>Tax</td>
+                <td class="text-right" style="width: 50px;">${{$store.state.cartDetails.tax}}</td>
+              </tr>
+              <tr>
+                <td>Total</td>
+                <td class="text-right" style="width: 50px;"><b>${{$store.state.cartDetails.total}}</b></td>
+              </tr>
+              </tbody>
+            </template>
+          </v-simple-table>
+
+
+          <!-- <div id="ATHMovil_Checkout_Button" ></div> -->
+
+          <div style="margin-top: 10px" ref="paypal"></div>
+
+
+        </v-col>
+
+      </v-row>
+
+        </v-container>
+        <v-btn color="primary"
+        @click="backToShiping()"
+        >
+        Back
+      </v-btn>
+      <v-btn text to="/cart/summary">
+        Cancel
+      </v-btn>
+</div>
+</template>
+
+<script>
+    import {mapState} from 'vuex'
+    import router from '../../router/index'
+    import orderModel, { orderJson } from '../../modules/orderModel'
+    import axios from 'axios'
+    export default {
+        name: 'CartCheckout',
+        data: () => ({
+          // ATHM_Checkout: {
+          //     env: 'sandbox',
+          //     publicToken: 'sandboxtoken01875617264',
+
+          //     timeout: 600,
+
+          //     theme: 'btn',
+          //     lang: 'en',
+
+          //     total: 1.00,
+          //     tax: 1.00,
+          //     subtotal: 1.00,
+
+          //     metadata1: 'metadata1 test',
+          //     metadata2: 'metadata2 test',
+
+          //     items: [],
+          //     onCompletedPayment: function (response)
+          //     {
+          //         console.log("mamamamamamama")
+          //     },
+          //     onCancelledPayment: function (response)
+          //     {
+          //         console.log("mamamamamaama", response )
+          //     },
+          //     onExpiredPayment: function (response)
+          //     {
+          //         //Handle response
+          //     }
+
+          // }
+
+        }),
+        created() {
+          this.$store.state.e2 = 2;
+          this.$store.state.cartHeading = 'Checkout Payment';
+
+          // let athMovilScript = document.createElement('script')
+          //     athMovilScript.src = "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js";
+          //     document.head.appendChild(athMovilScript);
+
+        },
+        mounted: function() {
+
+
+          // window.ATHM_Checkout = this.ATHM_Checkout;
+
+
+
+          // let athMovil = document.createElement('script')
+          //   athMovil.src = "https://www.athmovil.com/api/js/v3/athmovilV3.js";
+          //   document.body.appendChild(athMovil);
+
+          const script = document.createElement("script");
+              script.src =
+          "https://www.paypal.com/sdk/js?client-id=Aa7yUJ-MbLo8prf7N_VR9XhQuW0TMENMSUTVKKno1iEu8cl3mEoelJw5WuYBPvfYbZYCvNU8rdDnK7xq";
+              script.addEventListener("load", this.setLoaded);
+                  document.body.appendChild(script);
+        },
+
+        methods: {
+            setAthMovil: function() {
+
+
+            },
+            backToShiping: function () {
+              this.$store.state.e2 = 1;
+              this.$store.state.cartHeading = 'Shipping Address';
+              router.push({ path: '/cart/shipping'});
+            },
+            getCart: async function (userId) {
+                axios.get('api/v1.0/cart', { params: { userId: userId} }).then(res => {
+                this.$store.state.cartDetails = res.data.cartDetails;
+                }).catch(err => console.log(err))
+            },
+
+            setLoaded: function() {
+                window.paypal.Buttons({
+                createOrder: (data, actions) => {
+                  console.log("Data Data",data);
+                  console.log("Actions", actions);
+                    // This function sets up the details of the transaction, including the amount and line item details.
+                    return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                          currency_code: "USD",
+                          value: this.$store.state.cartDetails.total
+                        }
+                    }]
+                    });
+                },
+                onApprove: async (data, actions) => {
+
+                    // This function captures the funds from the transaction.
+                    console.log(actions.order)
+                    const paypalOrder = await actions.order.capture();
+                    console.log("order", paypalOrder);
+
+                    // Mapping
+                    orderModel.oder.id = paypalOrder.purchase_units[0].payments.captures[0].id,
+                    orderModel.oder.intent = paypalOrder.intent,
+                    orderModel.oder.status = paypalOrder.status,
+                    orderModel.oder.createdDate = paypalOrder.create_time,
+
+                    console.log(JSON.stringify(orderModel.order));
+                    // window.location.href("../");
+                },
+                onError: err => {
+                    console.log(err);
+                }
+                }).render(this.$refs.paypal);
+            },
+
+        },
+    }
+
+</script>
+
+<style >
+    #ATHMovil_Checkout_Button {
+    width: 100%!important;
+    margin-top: 10px;
+    min-height: 20px!important;
+    box-shadow: none !important;
+  }
+</style>

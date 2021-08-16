@@ -1,12 +1,12 @@
 <template>
         <v-row no-gutters>
-            <h1 style="text-align: center;"> Pigmentus Dashboard</h1>
+            <!-- <h1 style="text-align: center;"> Pigmentus Dashboard</h1> -->
 
 
                 <v-row no-gutters>
 
                     <!-- New Customers -->
-                        <v-hover v-slot="{ hover }">
+                        <!-- <v-hover v-slot="{ hover }">
                         <v-card
                         :elevation="hover ? 12 : 2"
                         width="260"
@@ -30,10 +30,10 @@
 
                         </v-card-text>
                         </v-card>
-                        </v-hover>
+                        </v-hover> -->
 
                     <!-- Daily Revenue -->
-                        <v-hover v-slot="{ hover }">
+                        <!-- <v-hover v-slot="{ hover }">
                             <v-card
                             :elevation="hover ? 12 : 2"
                             width="260"
@@ -57,10 +57,10 @@
 
                             </v-card-text>
                             </v-card>
-                        </v-hover>
+                        </v-hover> -->
 
                     <!-- Total Customers -->
-                        <v-hover v-slot="{ hover }">
+                        <!-- <v-hover v-slot="{ hover }">
                             <v-card
                             :elevation="hover ? 12 : 2"
                             width="260"
@@ -91,10 +91,10 @@
 
                             </v-card-text>
                             </v-card>
-                        </v-hover>
+                        </v-hover> -->
 
                     <!-- Total Products -->
-                    <v-hover v-slot="{ hover }">
+                    <!-- <v-hover v-slot="{ hover }">
                             <v-card
                             :elevation="hover ? 12 : 2"
                             width="260"
@@ -125,10 +125,10 @@
 
                             </v-card-text>
                             </v-card>
-                        </v-hover>
+                        </v-hover> -->
 
                     <!-- Total Courses -->
-                        <v-hover v-slot="{ hover }">
+                        <!-- <v-hover v-slot="{ hover }">
                         <v-card
                         :elevation="hover ? 12 : 2"
                         width="260"
@@ -152,10 +152,10 @@
 
                         </v-card-text>
                         </v-card>
-                        </v-hover>
+                        </v-hover> -->
 
                     <!-- Total Students -->
-                    <v-hover v-slot="{ hover }">
+                    <!-- <v-hover v-slot="{ hover }">
                     <v-card
                     :elevation="hover ? 12 : 2"
                     width="260"
@@ -179,10 +179,10 @@
 
                     </v-card-text>
                     </v-card>
-                    </v-hover>
+                    </v-hover> -->
 
                     <!-- Total Revenue -->
-                    <v-hover v-slot="{ hover }">
+                    <!-- <v-hover v-slot="{ hover }">
                     <v-card
                     :elevation="hover ? 12 : 2"
                     width="260"
@@ -206,7 +206,16 @@
 
                     </v-card-text>
                     </v-card>
-                    </v-hover>
+                    </v-hover> -->
+
+                    <!-- card with chart -->
+
+                    <products-chart></products-chart>
+                    <users-chart></users-chart>
+
+
+
+
                 </v-row>
 
 
@@ -255,34 +264,19 @@
 
 <script>
 import axios from 'axios'
+import ProductsChart from './ProductsChart.vue'
+import UsersChart   from './UsersChart.vue'
 export default {
     name: 'Dashboard',
+    components: {ProductsChart, UsersChart},
     data() {
         return {
             totalUsers: 0,
             totalProducts: 0,
             isLoadingCustomers: false,
             isLoadingProducts: false,
-            labels: [
-                '12am',
-                '3am',
-                '6am',
-                '9am',
-                '12pm',
-                '3pm',
-                '6pm',
-                '9pm',
-            ],
-            value: [
-                200,
-                675,
-                410,
-                390,
-                310,
-                460,
-                250,
-                240,
-            ],
+
+
         }
     },
     methods: {
@@ -309,7 +303,7 @@ export default {
         this.getTotalProducts();
     },
     mounted () {
-        console.log(this.$vuetify.breakpoint.width)
+        // console.log(this.$vuetify.breakpoint.width)
     }
 }
 </script>

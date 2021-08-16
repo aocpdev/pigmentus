@@ -4,14 +4,14 @@
         horizontal
         dense
     >
-        <v-btn small to="/"
+        <v-btn small to="/home"
         color="rgb(187, 162, 87)"
         text
         x-small>
         Home
         </v-btn>
 
-        <v-btn small to="/"
+        <v-btn small to="/home"
         color="rgb(187, 162, 87)"
         text
         x-small>
