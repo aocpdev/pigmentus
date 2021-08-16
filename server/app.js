@@ -58,7 +58,7 @@ app.use('/api/fees', require('./api/routes/fees'));
 app.use(history());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.set('port', process.env.PORT || 3000)
+app.set('port', process.env.DB_PORT || 3000)
 
 app.listen(app.get('port'), function(){
     console.log('Listening... Port 3000');
