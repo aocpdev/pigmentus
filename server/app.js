@@ -27,16 +27,6 @@ app.use(session({
     saveUninitialized: false
 }))
 
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    if ('OPTIONS' == req.method) {
-        res.header('Access-Control-Allow-Methods', 'DELETE, PUT, POST, GET, PATCH' );
-        res.status(200).json({});
-    }
-    next();
-    });
 
 
 
@@ -62,7 +52,7 @@ app.set('port', process.env.DB_PORT || 3000)
 
 app.listen(app.get('port'), function(){
     console.log('Listening... Port 3000');
-    console.log(process.env.PORT)
+    console.log(process.env.DB_PORT)
     console.log(process.env.JWT_KEY);
     console.log(process.env.DATABASE_URL);
 });

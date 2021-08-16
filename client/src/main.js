@@ -13,7 +13,7 @@ var VueCookie = require('vue-cookie');
 
 
 
-require('dotenv').config();
+require('../../node_modules/dotenv').config();
 Vue.use(VueAxios, axios, vuetify);
 Vue.use(VueCookie);
 Vue.use(VueLodash, { lodash: lodash });
@@ -36,8 +36,10 @@ Vue.config.productionTip = false
 
 // API URL
 if (process.env.NODE_ENV === 'production') {
+  console.log(process.env.NODE_ENV);
   axios.defaults.baseURL = 'https://pigmentus.herokuapp.com'; // Production
 }else {
+  console.log(process.env.NODE_ENV);
   axios.defaults.baseURL = 'http://localhost:3000'; // Local
 
 }
