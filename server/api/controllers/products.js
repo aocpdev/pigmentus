@@ -16,7 +16,7 @@ exports.getProducts = (req, res, next) => {
                 products.rows[productsIndex].customerPrice = formatter.format(productsValue.customerPrice);
             });
             res.status(200).json({products: products})
-        }).catch(err => res.status(401).json({ err }));
+        }).catch(err => res.status(500).json({ err }));
     } catch (error) {
         res.status(500).json({
             messags: 'Error ocurred',
@@ -38,7 +38,7 @@ exports.getProduct = (req, res, next) => {
             product.rows[0].customerPrice = formatter.format(product.rows[0].customerPrice);
 
             res.status(200).json({product: product})
-        }).catch(err => res.status(401).json({ err }));
+        }).catch(err => res.status(500).json({ err }));
     } catch (error) {
         res.status(500).json({
             messags: 'Error ocurred',
