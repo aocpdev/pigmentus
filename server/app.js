@@ -24,7 +24,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Express Session
 app.use(session({
-    secret: process.env.JWT_KEY,
+    secret: 'secret',
     resave: false,
     saveUninitialized: false
 }))
@@ -60,7 +60,7 @@ app.use('/api/v1.0/fees', require('./api/routes/fees'));
 app.use(history());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.set('port', process.env.PORT || 3000)
+app.set('port', 5432 || 3000)
 
 app.listen(app.get('port'), function(){
     console.log('Listening... Port 3000');
