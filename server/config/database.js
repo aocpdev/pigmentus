@@ -12,7 +12,8 @@ const connectionString = `postgresql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB
 
 const pool = new Pool ({
     connectionString: isProduction ? DATABASE_URL : connectionString,
-    ssl: true
+    ssl: true,
+    rejectUnauthorized: false
 })
 
 module.exports = {
