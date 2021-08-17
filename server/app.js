@@ -8,6 +8,7 @@ const cookieParser = require('cookie-parser');
 
 const app = express();
 require('dotenv').config();
+const { JWT_KEY } = require('./keys');
 
 var corsOptions = {
     origin: '*',
@@ -23,7 +24,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Express Session
 app.use(session({
-    secret: process.env.JWT_KEY,
+    secret: JWT_KEY,
     resave: false,
     saveUninitialized: false
 }))
