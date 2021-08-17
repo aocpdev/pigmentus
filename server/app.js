@@ -24,18 +24,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Express Session
-// app.use(session({
-//     secret: JWT_KEY,
-//     resave: false,
-//     saveUninitialized: false
-// }))
-
 app.use(session({
-  store: new (require('connect-pg-simple')(session))(),
-  secret: JWT_KEY,
-  resave: false,
-  cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } // 30 days
-}));
+    secret: JWT_KEY,
+    resave: false,
+    saveUninitialized: false
+}))
 
 
 // Routes
