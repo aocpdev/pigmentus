@@ -3,11 +3,12 @@ const morgan = require('morgan');
 const cors = require('cors');
 const path = require('path');
 const history = require('connect-history-api-fallback');
-const session = require('express-session');
+const session = require('cookie-session');
 const cookieParser = require('cookie-parser');
 
 const app = express();
 require('dotenv').config();
+
 const { JWT_KEY } = require('../server/config/keys');
 
 var corsOptions = {
