@@ -5,9 +5,9 @@
     "node": ">= 8.16.1"
   },
   "description": "This Api is for practice API",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "start": "node server/app.js --exec  ",
+    "start": "node ./server/app.js --exec  ",
     "dev": "nodemon server/app.js",
     "devbabel": "nodemon server/app.js --exec babel-node"
   },
