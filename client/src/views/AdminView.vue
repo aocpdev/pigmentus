@@ -101,12 +101,12 @@ export default {
     items: [
     { text: 'Dashboard', icon: 'mdi-view-dashboard', route: '/admin/dashboard'},
     { text: 'Customers', icon: 'mdi-account', route: '/admin/customers'},
-    { text: 'Revenue', icon: 'mdi-currency-usd', route: '' },
+    // { text: 'Revenue', icon: 'mdi-currency-usd', route: '' },
     { text: 'Inventory', icon: 'mdi-view-list', route: '/admin/inventory' },
-    { text: 'Orders', icon: 'mdi-history', route: '' },
-    { text: 'Courses', icon: 'mdi-history', route: '' },
-    { text: 'Purchases', icon: 'mdi-history', route: '' },
-    { text: 'Expenses', icon: 'mdi-history', route: '' },
+    // { text: 'Orders', icon: 'mdi-history', route: '' },
+    // { text: 'Courses', icon: 'mdi-history', route: '' },
+    // { text: 'Purchases', icon: 'mdi-history', route: '' },
+    // { text: 'Expenses', icon: 'mdi-history', route: '' },
     ],
     })
 }
