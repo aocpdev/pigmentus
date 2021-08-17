@@ -7,7 +7,7 @@ const session = require('express-session');
 const cookieParser = require('cookie-parser');
 
 const app = express();
-require('../client/node_modules/dotenv').config();
+require('dotenv').config();
 
 var corsOptions = {
     origin: '*',
