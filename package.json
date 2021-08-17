@@ -4,7 +4,7 @@
   "description": "This Api is for practice API",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server/app.js --exec babel-node -r ./client/node_modules/dotenv/config",
+    "start": "babel-node server/app.js --exec  -r ./client/node_modules/dotenv/config",
     "dev": "nodemon server/app.js",
     "devbabel": "nodemon server/app.js --exec babel-node"
   },
