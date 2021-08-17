@@ -61,7 +61,6 @@ export default {
                     }
                     this.users.push(userObject);
                 });
-                console.log(this.users);
             }).catch(err => console.log(err))
         },
     },

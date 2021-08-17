@@ -179,11 +179,11 @@
                 items: [],
                 onCompletedPayment: function (response)
                 {
-                    console.log("mamamamamamama")
+                    // console.log("mamamamamamama")
                 },
                 onCancelledPayment: function (response)
                 {
-                    console.log("mamamamamaama", response )
+                    // console.log("mamamamamaama", response )
                 },
                 onExpiredPayment: function (response)
                 {

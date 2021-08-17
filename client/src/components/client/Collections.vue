@@ -124,7 +124,7 @@ export default {
 
             const { page, length, products } = this;
             const number = 8  // Numero de elementos a mostrar por página
-            console.log(products.slice((page - 1) * number, page * number));
+            // console.log(products.slice((page - 1) * number, page * number));
             return products.slice((page - 1) * number, page * number);
 
         }

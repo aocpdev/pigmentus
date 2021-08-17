@@ -467,7 +467,6 @@ export default {
         },
         postProduct: async function (product, option) {
             axios.post('api/products', product).then(res => {
-                console.log(product);
                 this.getInventory();
                 this.snackbar = true;
                 this.text = option + ' Successfully'
@@ -536,7 +535,6 @@ export default {
 
                         }
                     })
-                    console.log(product)
 
                     axios.post('api/products', product).then(res => {
                     this.getInventory();
@@ -563,7 +561,6 @@ export default {
                 axios.post('api/products', product).then(res => {
                     this.getInventory();
                     this.snackbar = true;
-                    console.log(res);
                     this.text = res.data.message;
                 }).catch(err => console.log(err))
             }
@@ -611,7 +608,6 @@ export default {
     let monito = builder.buildObject(mono);
     axios.post('https://secure.shippingapis.com/ShippingAPI.dll?API=RateV4&XML=', null, { params: {XML: monito} } )
     .then(re => {
-        console.log(re)
     })
     .catch(error => {
         console.error(error)

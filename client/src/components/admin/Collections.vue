@@ -232,7 +232,6 @@ export default {
 
 
                 });
-                console.log(this.collections);
             }).catch(err => console.log(err))
         },
         editItem (item) {

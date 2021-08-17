@@ -57,7 +57,7 @@ export default {
             // }
             axios.get('api/paypal/success', { params: { payerId: payerId, paymentId: paymentId, paymentToken: paymentToken } })
                     .then(res => {
-                        console.log(res);
+                        // console.log(res);
                     }).catch(err => console.log(err))
         }
     },

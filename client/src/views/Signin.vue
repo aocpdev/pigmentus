@@ -134,11 +134,11 @@ export default {
     }
   },
   created() {
-    console.log(this.$route.query.fromCart);
+    // console.log(this.$route.query.fromCart);
   },
   beforeRouteEnter(to, from, next) {
     next(vm => {
-      console.log(from);
+      // console.log(from);
       vm.prevRoute = from.fullPath;
     })
   },

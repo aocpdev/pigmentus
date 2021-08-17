@@ -28,7 +28,7 @@ const verifyAuth = (req, res, next) => {
 
             updateToken(authInfo)
               .then(authInfoUpdate => {
-                console.log(authInfoUpdate)
+                // console.log(authInfoUpdate)
                 res.status(200).cookie('token', token, { maxAge: 12 * 60 * 60 * 1000, httpOnly: true, path:'/'}).send();
                 next();
               }).catch(err => { err });

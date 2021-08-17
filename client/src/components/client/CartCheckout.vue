@@ -178,8 +178,6 @@
             setLoaded: function() {
                 window.paypal.Buttons({
                 createOrder: (data, actions) => {
-                  console.log("Data Data",data);
-                  console.log("Actions", actions);
                     // This function sets up the details of the transaction, including the amount and line item details.
                     return actions.order.create({
                     purchase_units: [{
@@ -193,9 +191,7 @@
                 onApprove: async (data, actions) => {
 
                     // This function captures the funds from the transaction.
-                    console.log(actions.order)
                     const paypalOrder = await actions.order.capture();
-                    console.log("order", paypalOrder);
 
                     // Mapping
                     orderModel.oder.id = paypalOrder.purchase_units[0].payments.captures[0].id,

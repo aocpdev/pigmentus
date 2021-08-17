@@ -257,10 +257,10 @@ export default {
   }),
   methods: {
     isZero (quantity) {
-      console.log(quantity);
+      // console.log(quantity);
       if (parseInt(quantity) == 0) {
         this.cart.quantity = "1";
-        console.log(this.cart.quantity);
+        // console.log(this.cart.quantity);
       }
 
     },
@@ -353,7 +353,7 @@ export default {
                 store.state.cartDetails.cart[index].quantity = sum(quantityArray);
 
 
-                console.log(parseInt(cart.quantity));
+                // console.log(parseInt(cart.quantity));
 
                 store.state.cartDetails.cart[index].price = (store.state.cartDetails.cart[index].customerPrice * parseInt(store.state.cartDetails.cart[index].quantity)).toFixed(2);
 

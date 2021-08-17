@@ -455,7 +455,7 @@ export default {
       }
       else {
         this.cartDetails = JSON.parse(localStorage.__pigmentusCart);
-        console.log(this.cartDetails);
+        // console.log(this.cartDetails);
       }
 
     },

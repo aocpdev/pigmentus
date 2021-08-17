@@ -360,8 +360,6 @@
                     }
                   })
               }).catch(err => console.log(err))
-
-              console.log(this.dealsArray);
           },
         },
         created() {

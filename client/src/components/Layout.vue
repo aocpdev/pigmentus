@@ -356,7 +356,6 @@ export default {
             this.changeLoginStatus(false);
             this.changeRole(4);
             router.push({ path: "/home" });
-            console.log(this.$store.state.isLogin);
           }
         })
         .catch((err) => console.log(err));
