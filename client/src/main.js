@@ -37,6 +37,7 @@ Vue.config.productionTip = false
 // API URL
 if (process.env.NODE_ENV == 'production') {
   console.log(process.env.NODE_ENV);
+  console.log(process.env);
   axios.defaults.baseURL = 'https://pigmentus.herokuapp.com'; // Production
 }else {
   console.log(process.env.NODE_ENV);
