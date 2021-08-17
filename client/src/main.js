@@ -31,6 +31,7 @@ Vue.use(VCurrencyField, {
 
 });
 
+const {} = require('../../server/config/keys')
 
 Vue.config.productionTip = false
 
