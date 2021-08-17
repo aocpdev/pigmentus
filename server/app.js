@@ -3,7 +3,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const path = require('path');
 const history = require('connect-history-api-fallback');
-const session = require('cookie-session');
+const session = require('express-session');
 const cookieParser = require('cookie-parser');
 
 const app = express();

@@ -4,9 +4,9 @@ const { Pool } = require('pg');
 
 
 
-const { DATABASE_URL, DB_USER,DB_PASSWORD, DB_HOST, DB_PORT, DB_DATABASE } = require('./keys');
+const { DATABASE_URL, DB_USER,DB_PASSWORD, DB_HOST, DB_PORT, DB_DATABASE, NODE_ENV} = require('./keys');
 
-const isProduction = process.env.NODE_ENV === 'production';
+const isProduction = NODE_ENV === 'production';
 
 const connectionString = `postgresql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_DATABASE}`
 
