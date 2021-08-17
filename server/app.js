@@ -53,7 +53,7 @@ app.set('port', process.env.PORT || 3000)
 
 app.listen(app.get('port'), function(){
     console.log('Listening... Port 3000');
-    console.log(process.env.DB_PORT)
+    console.log(process.env.PORT)
     console.log(process.env.JWT_KEY);
     console.log(process.env.DATABASE_URL);
 });
