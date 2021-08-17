@@ -9,7 +9,7 @@ const cookieParser = require('cookie-parser');
 const app = express();
 require('dotenv').config();
 
-const { JWT_KEY } = require('../server/config/keys');
+// const { JWT_KEY } = require('../server/config/keys');
 
 var corsOptions = {
     origin: '*',
@@ -24,19 +24,19 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Express Session
-// app.use(session({
-//     secret: JWT_KEY,
-//     resave: false,
-//     saveUninitialized: false
-// }))
-
 app.use(session({
-    store: new (require('connect-pg-simple')(session))(),
-    secret: 'secret',
+    secret: JWT_KEY,
     resave: false,
-    saveUninitialized: false,
-    cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } // 30 days
-}));
+    saveUninitialized: false
+}))
+
+// app.use(session({
+//     store: new (require('connect-pg-simple')(session))(),
+//     secret: 'secret',
+//     resave: false,
+//     saveUninitialized: false,
+//     cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } // 30 days
+// }));
 
 
 // Routes
@@ -61,7 +61,7 @@ app.set('port', process.env.PORT || 3000)
 
 app.listen(app.get('port'), function(){
     console.log('Listening... Port 3000');
-    console.log(process.env.PORT)
+    console.log(process.env.PORT);
     console.log(process.env.JWT_KEY);
     console.log(process.env.DATABASE_URL);
 });
