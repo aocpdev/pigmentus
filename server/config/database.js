@@ -2,14 +2,16 @@ require('dotenv').config();
 
 const { Pool } = require('pg');
 
-const { NODE_ENV, DATABASE_URL } = require('../config/prod')
 
-const isProduction = process.env.NODE_ENV === 'production';
 
-const connectionString = `postgresql://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_DATABASE}`
+const { DATABASE_URL, DB_USER,DB_PASSWORD, DB_HOST, DB_PORT, DB_DATABASE, DB_USER } = require('./keys')
+
+// const isProduction = process.env.NODE_ENV === 'production';
+
+const connectionString = `postgresql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_DATABASE}`
 
 const pool = new Pool ({
-    connectionString: isProduction ? process.env.DATABASE_URL : connectionString
+    connectionString: isProduction ? DATABASE_URL : connectionString
 })
 
 module.exports = {

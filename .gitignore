@@ -6,3 +6,4 @@ client/dist
 # Server
 node_modules
 .env
+dev.js
