@@ -3,23 +3,23 @@ const morgan = require('morgan');
 const cors = require('cors');
 const path = require('path');
 const history = require('connect-history-api-fallback');
-// const session = require('express-session');
+const session = require('express-session');
 const cookieParser = require('cookie-parser');
-const pool = require('./config/database')
-const pg = require('pg')
-    , session = require('express-session')
-    , pgSession = require('connect-pg-simple')(session);
+// const pool = require('./config/database')
+// const pg = require('pg')
+//     , session = require('express-session')
+//     , pgSession = require('connect-pg-simple')(session);
 
-const { DATABASE_URL, DB_USER,DB_PASSWORD, DB_HOST, DB_PORT, DB_DATABASE, NODE_ENV} = require('./config/keys');
+// const { DATABASE_URL, DB_USER,DB_PASSWORD, DB_HOST, DB_PORT, DB_DATABASE, NODE_ENV} = require('./config/keys');
 
-const isProduction = NODE_ENV === 'production';
+// const isProduction = NODE_ENV === 'production';
 
-const connectionString = `postgresql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_DATABASE}`
-const pgPool = new pg.Pool({
-    // Insert pool options here
-    connectionString: isProduction ? DATABASE_URL : connectionString,
-    ssl: { rejectUnauthorized: false }
-});
+// const connectionString = `postgresql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_DATABASE}`
+// const pgPool = new pg.Pool({
+//     // Insert pool options here
+//     connectionString: isProduction ? DATABASE_URL : connectionString,
+//     ssl: { rejectUnauthorized: false }
+// });
 
 const app = express();
 require('dotenv').config();
@@ -39,12 +39,12 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Express Session
-// app.use(session({
-//     secret: JWT_KEY,
-//     resave: false,
-//     saveUninitialized: false
-// }))
+Express Session
+app.use(session({
+    secret: JWT_KEY,
+    resave: false,
+    saveUninitialized: false
+}))
 
 // app.use(session({
 //     store: new (require('connect-pg-simple')(session))(),
@@ -54,16 +54,16 @@ app.use(express.urlencoded({ extended: true }));
 //     cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } // 30 days
 // }));
 
-app.use(session({
-    store: new pgSession({
-      pool : pgPool,                // Connection pool
-      tableName : 'session'         // Use another table-name than the default "session" one
-    }),
-    secret: JWT_KEY,
-    resave: false,
-    saveUninitialized: false,
-    cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } // 30 days
-  }));
+// app.use(session({
+//     store: new pgSession({
+//       pool : pgPool,                // Connection pool
+//       tableName : 'session'         // Use another table-name than the default "session" one
+//     }),
+//     secret: JWT_KEY,
+//     resave: false,
+//     saveUninitialized: false,
+//     cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } // 30 days
+//   }));
 
 
 // Routes
