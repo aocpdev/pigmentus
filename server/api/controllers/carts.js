@@ -6,6 +6,7 @@ const Calculations = require('../directives/calculations')
 exports.getCart = (req, res, next) => {
 
     try {
+        console.log(req.query)
         getCart(req.query.userId).then( cart => {
             let totals = [];
             let totalAndTax = [];
@@ -50,6 +51,8 @@ exports.getCart = (req, res, next) => {
         })
     }
 }
+
+
 
 exports.saveToCart = (req, res, next) => {
     let hasProductInCart = false;
