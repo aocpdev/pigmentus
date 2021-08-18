@@ -39,7 +39,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-Express Session
+// Express Session
 app.use(session({
     secret: JWT_KEY,
     resave: false,
