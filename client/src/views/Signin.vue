@@ -106,6 +106,7 @@ export default {
           }
           this.$store.state.snackbarMessage = "Welcome Back!" + " "  + user.name + " "  + user.lastName
           this.$store.state.snackbar = true;
+          console.log(user);
           this.setUser(user);
           this.changeRole(user.roleId);
           if (this.$route.query.fromCart === "true") {
