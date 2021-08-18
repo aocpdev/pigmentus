@@ -18,7 +18,7 @@ const connectionString = `postgresql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB
 const pgPool = new pg.Pool({
     // Insert pool options here
     connectionString: isProduction ? DATABASE_URL : connectionString,
-    ssl: true
+    ssl: { rejectUnauthorized: false }
 });
 
 const app = express();
