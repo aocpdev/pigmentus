@@ -149,10 +149,12 @@ export default {
                 .then(res => {
                     if (res.data.message === "User added succesfully"){
                       let userLogin = {email: this.user.email, password: this.user.password1}
-                      this.axios.post('/api/auth/login', userLogin)
+                      this.axios.post('/api/auth/signin', userLogin)
                         .then(res => {
                           if (this.$route.query.fromCart === "true") {
                             router.push({ name: "Signin", query: { fromCart: 'true' }});
+                            this.$store.state.snackbarMessage = "Welcome to Pigmentus" + " "  + user.name + " "  + user.lastName
+                            this.$store.state.snackbar = true;
                           } else {
                             router.push({ name: "Signin"});
                           }
