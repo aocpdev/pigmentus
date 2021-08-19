@@ -212,7 +212,10 @@
         </template>
       </v-snackbar>
 
-      <router-view />
+      <v-container fluid class="px-0 py-0">
+        <router-view />
+      </v-container>
+
     </v-main>
 
     <!-- <v-card flat tile class=" primary" >
@@ -255,7 +258,7 @@
       </v-container>
     </v-card> -->
 
-    <v-footer dark padless v-if="!$store.state.isLoading">
+    <v-footer dark padless v-if="!$store.state.isLoading" app>
       <v-card class="flex" flat tile>
         <v-card-title style="color: black">
           <span style="color: white" class="border"

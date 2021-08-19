@@ -111,6 +111,7 @@ export default new Vuex.Store({
   actions: {
     isAuth: async function ({commit}) {
       axios.get('https://pigmentus.herokuapp.com/api/auth')
+      // axios.get('http://localhost:3000/api/auth')
         .then(user => {
           if (user.data.user === '') {
             state.user = "";
@@ -120,13 +121,7 @@ export default new Vuex.Store({
             commit('setUser', user.data.user)
           }
         })
-        .catch(err =>
-          {
-            if (err) {
-
-            }
-          }
-          )
+        .catch(err => { if (err) { } })
     }
   },
   modules: {

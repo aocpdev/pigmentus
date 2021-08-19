@@ -1,4 +1,5 @@
 <template>
+  <v-row no-gutters>
     <v-col class="col-md-12 col-sm-12 col-xs-12 pr-0 pl-0 pt-0 pb-0">
       <v-carousel reverse-transition="fade-transition"
       transition="fade-transition" hide-delimiters
@@ -28,8 +29,8 @@
         </v-row>
       </v-carousel-item>
 
-    </v-carousel>
-    <div class="pl-4 pr-4 row">
+      </v-carousel>
+    <div class="ml-4 mr-4 row">
       <div
        class="col-md-6 col-sm-6 col-xs-12"
       >
@@ -84,7 +85,7 @@
         </v-card>
       </div>
     </div>
-    <div class="pl-4 pr-4 row">
+    <div class="ml-4 mr-4 row">
       <div
        class="col-md-4 col-sm-4 col-xs-12"
       >
@@ -319,6 +320,8 @@
       </v-row>
     </v-container>
     </v-col>
+  </v-row>
+
 </template>
 
 <script>

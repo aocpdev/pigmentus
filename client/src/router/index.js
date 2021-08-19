@@ -84,23 +84,10 @@ Vue.use(VueRouter)
       {
         path: '/admin',
         beforeEnter: (to, from, next) => {
+
           axios.get('https://pigmentus.herokuapp.com/api/auth').then(user => {
+          // axios.get('http://localhost:3000/api/auth').then(user => {
             console.log(user);
-
-            // if (user.data.user === undefined){
-            //   next({
-            //     name: 'notFound'
-            //   })
-            // }
-
-            // } else if (store.state.user !== undefined) {
-            //   console.log(store.state);
-            //   console.log(typeof(store.state.user.roleId));
-            //   console.log(store.state.user);
-            //   console.log(store.state.user.roleId === 1);
-            //   console.log(store.state.user.roleId === 2);
-            //   console.log(store.state.user.roleId === 3);
-            //   console.log(store.state.user.roleId === 4);
 
               switch (user.data.user.roleId) {
 

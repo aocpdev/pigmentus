@@ -5,6 +5,7 @@ const path = require('path');
 const history = require('connect-history-api-fallback');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
+
 // const pool = require('./config/database')
 // const pg = require('pg')
 //     , session = require('express-session')
@@ -25,6 +26,7 @@ const app = express();
 require('dotenv').config();
 
 const { JWT_KEY } = require('../server/config/keys');
+const { log } = require('console');
 
 var corsOptions = {
     origin: '*',
@@ -87,8 +89,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('port', process.env.PORT || 3000)
 
 app.listen(app.get('port'), function(){
-    console.log(`Listening... Port ${process.env.PORT}`);
-    // console.log(process.env.PORT);
-    // console.log(process.env.JWT_KEY);
-    // console.log(process.env.DATABASE_URL);
+    if (process.env.PORT === undefined) {
+        console.log('App running at:');
+        console.log('- Port:    3000');
+        console.log('- Local:   http://localhost:3000')
+    } else {
+        console.log('App running at:');
+        console.log(`- Port:        ${process.env.PORT}`);
+        console.log('- Production:  https://pigmentus.herokuapp.com')
+    }
+
+
 });
