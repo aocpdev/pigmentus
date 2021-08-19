@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app :fullscreen="$vuetify.breakpoint.mobile">
 
     <loading></loading>
     <!-- <order-loading v-if="store.state.isPaymentLoading"></order-loading> -->
@@ -333,13 +333,27 @@ export default {
       { name: "Log Out", to: "", icon: "mdi-logout", click: "this.logOut()" },
     ],
     drawer: false,
+    isMobile: false,
   }),
+  beforeDestroy () {
+    if (typeof window === 'undefined') return
+
+    window.removeEventListener('resize', this.onResize, { passive: true })
+  },
+  mounted () {
+    this.onResize()
+
+    window.addEventListener('resize', this.onResize, { passive: true })
+  },
   methods: {
     ...mapActions(["isAuth"]),
     ...mapMutations(["changeLoginStatus", "changeRole"]),
     goCollection() {
       router.push({ path: "shop", query: { collection: 1 } });
     },
+    onResize () {
+        this.isMobile = window.innerWidth < 600
+      },
     logOut() {
       axios
         .get("api/auth/logout")
@@ -363,12 +377,8 @@ export default {
         })
         .catch((err) => console.log(err));
     },
-    isMobile() {
-      return this.$vuetify.breakpoint.smAndDown;
-    },
-    isMediumOrhigher() {
-      return this.$$vuetify.breakpoint.smAndUp;
-    },
+
+
   },
   created() {
     this.isAuth();
