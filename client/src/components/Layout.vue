@@ -1,5 +1,5 @@
 <template>
-  <v-app id="inspire">
+  <v-app>
 
     <loading></loading>
     <!-- <order-loading v-if="store.state.isPaymentLoading"></order-loading> -->

@@ -1,9 +1,8 @@
 <template>
-  <div id="app">
-    <!-- <link rel="stylesheet"
-        href="node_modules/@fortawesome/fontawesome-free/css/all.css"> -->
-      <router-view/>
-  </div>
+  <v-main>
+    <router-view/>
+  </v-main>
+
 </template>
 
 <script>
