@@ -1,5 +1,5 @@
 <template>
-  <v-app :fullscreen="$vuetify.breakpoint.mobile">
+  <v-app >
 
     <loading></loading>
     <!-- <order-loading v-if="store.state.isPaymentLoading"></order-loading> -->
@@ -7,7 +7,7 @@
     <v-app-bar
       app
       color="black"
-      :clipped-left="$vuetify.breakpoint.lgAndUp"
+
       dark
       v-if="!$store.state.isLoading"
     >
