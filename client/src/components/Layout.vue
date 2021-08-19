@@ -7,7 +7,7 @@
     <v-app-bar
       app
       color="black"
-
+      style="z-index: 101;"
       dark
       v-if="!$store.state.isLoading"
     >
