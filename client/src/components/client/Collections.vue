@@ -71,7 +71,7 @@
                                 <!-- <v-btn text x-small :to="`/shop/${collectionsId}/product/${item.id}`">
                                     <span style="text-decoration: none">{{item.name}}</span>
                                 </v-btn> -->
-                                <div><a :href="`/shop/${collectionsId}/product/${item.id}`" style="text-decoration: none">{{item.name}}</a></div>
+                                <div><a @click="goToProductInfo(collectionsId, item.id)" style="text-decoration: none">{{item.name}}</a></div>
                                 <div>${{item.customerPrice}} <span v-if="item.isDealDay">-</span><span v-if="item.isDealDay" style="color: red"> $<strike>{{item.lastCustomerPrice}}</strike></span></div>
                             </v-card-text>
 
@@ -95,6 +95,7 @@
 
 <script>
 import axios from 'axios'
+import router from '../../router/index'
 export default {
     name: 'Collections',
     props: {
@@ -142,6 +143,10 @@ export default {
                     this.products = res.data.products.rows;
                 }).catch(err => console.log(err))
             }
+
+        },
+        goToProductInfo: function (collectionId, itemId) {
+            router.replace({ path: "/shop/" + collectionId + "/product/" + itemId})
 
         }
 
