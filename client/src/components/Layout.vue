@@ -1,5 +1,5 @@
 <template>
-  <v-app >
+  <v-app id="inspire">
 
     <loading></loading>
     <!-- <order-loading v-if="store.state.isPaymentLoading"></order-loading> -->
@@ -258,7 +258,7 @@
       </v-container>
     </v-card> -->
 
-    <v-footer dark padless v-if="!$store.state.isLoading" app>
+    <v-footer dark padless v-if="!$store.state.isLoading">
       <v-card class="flex" flat tile>
         <v-card-title style="color: black">
           <span style="color: white" class="border"
