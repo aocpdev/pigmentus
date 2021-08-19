@@ -5,28 +5,41 @@
       transition="fade-transition" hide-delimiters
       :show-arrows="false"
       cycle
+      height="auto"
     >
       <v-carousel-item
-        :src="require('../assets/FirstImage.png')"
+
       >
-        <v-row
+      <v-img
+        :src="require('../assets/FirstImage.png')"
+        aspect-ratio="3.85"
+              contain
+        class="grey lighten-2"
+      >
+        <!-- <v-row
           class="fill-height"
           align="center"
           justify="center"
         >
 
-        </v-row>
+        </v-row> -->
       </v-carousel-item>
       <v-carousel-item
-        :src="require('../assets/SecondImage.png')"
+
       >
-        <v-row
+      <v-img
+        :src="require('../assets/SecondImage.png')"
+        aspect-ratio="3.85"
+              contain
+        class="grey lighten-2"
+      >
+        <!-- <v-row
           class="fill-height"
           align="center"
           justify="center"
         >
 
-        </v-row>
+        </v-row> -->
       </v-carousel-item>
 
       </v-carousel>
