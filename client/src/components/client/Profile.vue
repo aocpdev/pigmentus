@@ -10,9 +10,9 @@
                         src="https://i1.sndcdn.com/avatars-000143584345-3qxowr-t500x500.jpg"
                         alt="John"
                     > -->
-                    <span class="white--text text-h5">{{name}} {{lastName}}</span>
 
 
+                    <span style="font-size: 10px;">{{$store.state.user.name.charAt(0).toUpperCase()}} {{$store.state.user.lastName.charAt(0).toUpperCase()}}</span>
                     </v-list-item-avatar>
                     <v-list-item-content>
                     <v-list-item-title class="title" style="margin-top:20px;">{{$store.state.user.name}} {{$store.state.user.lastName}}</v-list-item-title>

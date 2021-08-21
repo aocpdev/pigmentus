@@ -148,10 +148,11 @@
           <v-card class="mx-auto mt-2" width="280" tile>
             <v-list>
               <v-list-item>
-                <v-list-item-avatar>
-                  <v-img
+                <v-list-item-avatar color="primary">
+                  <!-- <v-img
                     src="https://i1.sndcdn.com/avatars-000143584345-3qxowr-t500x500.jpg"
-                  ></v-img>
+                  ></v-img> -->
+                  <span style="font-size: 10px;">{{$store.state.user.name.charAt(0).toUpperCase()}} {{$store.state.user.lastName.charAt(0).toUpperCase()}}</span>
                 </v-list-item-avatar>
                 <v-list-item-content>
                   <v-list-item-title class="title"
@@ -173,7 +174,7 @@
                   </v-list-item-icon>
 
                   <v-list-item-content>
-                    <v-list-item-title>Profile</v-list-item-title>
+                    <v-list-item-title @click="goToProfile()">Profile</v-list-item-title>
                   </v-list-item-content>
                 </v-list-item>
 
@@ -354,6 +355,9 @@ export default {
     ...mapMutations(["changeLoginStatus", "changeRole"]),
     goCollection() {
       router.push({ path: "shop", query: { collection: 1 } });
+    },
+    goToProfile () {
+      router.replace({ name: "Profile", query: { id: this.$store.state.user.id }})
     },
     onResize () {
         this.isMobile = window.innerWidth < 600
