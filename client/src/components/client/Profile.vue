@@ -5,12 +5,13 @@
         <v-row style="margin:2.5%;position:absolute; top: 130px">
             <v-col>
                 <v-list-item>
-                    <v-list-item-avatar size="100">
+                    <v-list-item-avatar size="100" color="primary">
                     <!-- <img
                         src="https://i1.sndcdn.com/avatars-000143584345-3qxowr-t500x500.jpg"
                         alt="John"
                     > -->
-                    {{name}} {{lastName}}
+                    <span class="white--text text-h5">{{name}} {{lastName}}</span>
+
 
                     </v-list-item-avatar>
                     <v-list-item-content>
