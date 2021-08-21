@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p class="display-3 font-weight-light text-center pa-4">SHOPPING CART</p>
+    <p class="display-3 font-weight-light text-center pa-4">Shopping Cart</p>
     <v-row>
       <!-- Cuando no hay nada en el carrito -->
       <v-col :cols="12" md="9" sm="12"  v-if="isCartEmpty">
@@ -449,6 +449,7 @@ export default {
       axios.get("api/cart", { params: { userId: userId } }).then((res) => {
 
         this.cartDetails = res.data.cartDetails;
+        console.log('Cart details', this.cartDetails);
         this.$store.state.cartDetails.productsQuantity = this.cartDetails.productsQuantity;
       }).catch((err) => console.log(err));
 

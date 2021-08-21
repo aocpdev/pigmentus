@@ -465,7 +465,10 @@ export default {
   created() {
     this.getProduct(this.productId, this.collectionsId);
     window.scrollTo(0, 0);
-    this.$store.state.cartDetails = JSON.parse(localStorage.__pigmentusCart);
+    if (this.$store.state.user.id === undefined) {
+      this.$store.state.cartDetails = JSON.parse(localStorage.__pigmentusCart);
+    }
+
   },
 };
 </script>
