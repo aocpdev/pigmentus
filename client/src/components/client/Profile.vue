@@ -6,10 +6,12 @@
             <v-col>
                 <v-list-item>
                     <v-list-item-avatar size="100">
-                    <img
+                    <!-- <img
                         src="https://i1.sndcdn.com/avatars-000143584345-3qxowr-t500x500.jpg"
                         alt="John"
-                    >
+                    > -->
+                    {{name}} {{lastName}}
+
                     </v-list-item-avatar>
                     <v-list-item-content>
                     <v-list-item-title class="title" style="margin-top:20px;">{{$store.state.user.name}} {{$store.state.user.lastName}}</v-list-item-title>
@@ -68,6 +70,7 @@
     import Profile from '@/components/client/Profile.vue'
     import {mapState} from 'vuex'
 
+
     export default {
         name: 'Profile',
         components: {
@@ -83,7 +86,11 @@
         ],
         links: [{name: 'Account', to: '/account'}, {name: 'Purchase History', to: '/purchase-history'}, {name: 'Wishlist' }, {name: 'Settings' }],
         mini: true,
+        name: this.$store.state.user.name.charAt(0).toUpperCase(),
+        lastName: this.$store.user.lastName.charAt(0).toUpperCase()
 
     }),
     }
 </script>
+
+

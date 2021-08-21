@@ -158,7 +158,7 @@
         </v-card>
       </div>
     </div>
-    <v-container style="max-width: 1200px">
+    <v-container >
       <v-row no-gutters>
 
 
