@@ -1,6 +1,6 @@
 const {getProducts, saveProduct, getInventory, getProduct, editProduct} = require('../queries/products');
 
-const https = require('https')
+// const https = require('https')
 
 exports.getProducts = (req, res, next) => {
     try {

@@ -26,7 +26,7 @@ const app = express();
 require('dotenv').config();
 
 const { JWT_KEY } = require('../server/config/keys');
-const { log } = require('console');
+
 
 var corsOptions = {
     origin: '*',

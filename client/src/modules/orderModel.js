@@ -3,7 +3,7 @@ const order = {
     "id": String,
     "intent": String,
     "status": String,
-    "isUser": Boolean,
+    "userId": Number,
     "userName": String,
     "fullName": String,
     "createdDate": Date,
