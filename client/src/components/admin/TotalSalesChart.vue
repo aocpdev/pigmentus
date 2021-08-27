@@ -26,7 +26,8 @@
                     </v-btn>
                 </v-card-actions>
 
-                <span style="font-size: large">$0.00</span>
+                <span style="font-size: large">$ 0.00</span>
+
 
 
 
@@ -58,20 +59,23 @@ export default {
             loaded: false,
             datacollection: {
                 labels: [
-                "January",
-                "February",
-                "March",
-                "April",
-                "May",
-                "June",
-                "July",
-                "August",
-                "September",
-                "October",
-                "November",
-                "December",
+                "3:00 AM",
+                "6:00 AM",
+                "9:00 AM",
+                "12:00 PM",
+                "3:00 PM",
+                "6:00 PM",
+                "9:00 PM",
+                "12:00 AM",
                 ],
-                datasets: [],
+                datasets: [{
+                    data: [50.00, 80.00, 10.00],
+                    borderColor: "#4BB543",
+
+                    borderWidth: 1,
+                    pointBorderColor: 'white',
+                }
+                ],
             },
 
             options: {
@@ -94,7 +98,7 @@ export default {
                     display: true,
                     scaleLabel: {
                         display: true,
-                        labelString: 'Month'
+                        labelString: 'Hours'
                     }
                     }],
                     yAxes: [{
@@ -113,124 +117,6 @@ export default {
                 }
             },
         }
-    },
-    computed: {
-
-    },
-    methods: {
-        getTotalProducts: async function () {
-            this.loaded = false
-            axios.get('api/products/inventory')
-                .then(res => {
-                    // this.options.title.text = "Total Products: " + " (" + res.data.inventory.rows.length + ")";
-
-                    let data = [];
-
-                    res.data.inventory.rows.map((value, index) => {
-                        let monthsAndYears = {};
-                        let date = new Date(value.dateCreated);
-                        let year = date.getFullYear();
-                        let month = date.getMonth() + 1;
-
-                        monthsAndYears.year = year
-                        monthsAndYears.month = month;
-                        data.push(monthsAndYears);
-
-                    });
-
-                    let obj = data.reduce((res, curr) =>
-                    {
-                        if (res[curr.year]) {
-                            res[curr.year].push(curr);
-                        }
-                        else
-                            Object.assign(res, {[curr.year]: [curr]});
-                        return res;
-                    }, {});
-
-                    let objKey = Object.keys(obj)
-                    let separateYear = [{year: '', data: []}];
-                    let beforeYear = ''
-
-                    for (let index = 0; index < objKey.length; index++) {
-                        obj[Object.keys(obj)[index]].map((value, index1) => {
-                            if (beforeYear === '') {
-                                beforeYear = objKey[index];
-                                separateYear[index].year = objKey[index];
-                                separateYear[index].data.push(value.month);
-                                separateYear[index].total = 1;
-                            }else if (beforeYear === objKey[index] && index1 > 0) {
-                                separateYear[index].data.push(value.month);
-                                beforeYear = objKey[index];
-                                separateYear[index].total = separateYear[index].total + 1
-                            } else {
-                                separateYear.push({year: objKey[index], data: [value.month], total: 1})
-                                beforeYear = objKey[index]
-                            }
-                        })
-                    }
-
-
-
-                    let finalData = [];
-                    for (let index = 0; index < separateYear.length; index++) {
-                        const specimens = separateYear[index].data.filter((month, i) => i == 0 ? true : separateYear[index].data[i - 1] != month);
-                        const counterSpecimens = specimens.map(spec => {
-                            return {month: spec, count: 0};
-                        });
-                        counterSpecimens.map((countSpec, i) =>{
-
-                            const actualSpecLength = separateYear[index].data.filter(month => month === countSpec.month).length;
-                            countSpec.count = actualSpecLength;
-
-                        })
-                        finalData.push({year: separateYear[index].year, data: counterSpecimens})
-                    }
-
-                    finalData.map((value, index) => {
-                        if (index === 0) {
-                            this.datacollection.datasets.push({
-                            label: `${value.year}: (${separateYear[index].total})`,
-                            data: [0,0,0,0,0,0,0,0,0,0,0,0],
-                            borderColor: "#bba257",
-                            pointBackgroundColor: '#bba257',
-                            borderWidth: 1,
-                            pointBorderColor: 'white',
-                            fill: true,
-
-                        })
-                        }else {
-                            this.datacollection.datasets.push({
-                            label: `${value.year}: (${separateYear[index].total})`,
-                            data: [0,0,0,0,0,0,0,0,0,0,0,0],
-                            borderColor: "#bba257",
-                            pointBackgroundColor: '#bba257',
-                            borderWidth: 1,
-                            pointBorderColor: 'white',
-                            backgroundColor: 'white'
-                        })
-                        }
-
-                        finalData[index].data.map((value1, index1) => {
-
-                            this.datacollection.labels.map((value2, index2) => {
-                                if (value1.month === (index2 + 1)) {
-
-                                    this.datacollection.datasets[index].data[index2] = value1.count
-
-                                }
-                            })
-                        })
-                    })
-
-                    this.loaded = true;
-                }).catch(err => console.log(err))
-        }
-    },
-    mounted() {
-        // this.getTotalUsers();
-
-        this.getTotalProducts();
     },
 
 
