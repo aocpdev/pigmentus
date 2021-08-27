@@ -174,7 +174,7 @@
                   </v-list-item-icon>
 
                   <v-list-item-content>
-                    <v-list-item-title @click="goToProfile()">Profile</v-list-item-title>
+                    <v-list-item-title :to="`/profile/${$store.state.user.id}`">Profile</v-list-item-title>
                   </v-list-item-content>
                 </v-list-item>
 
@@ -357,7 +357,7 @@ export default {
       router.push({ path: "shop", query: { collection: 1 } });
     },
     goToProfile () {
-      router.replace({ name: "Profile", query: { id: this.$store.state.user.id }})
+      router.replace({ name: "Profile", query: { userId: this.$store.state.user.id }})
     },
     onResize () {
         this.isMobile = window.innerWidth < 600

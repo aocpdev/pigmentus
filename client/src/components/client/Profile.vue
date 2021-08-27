@@ -5,7 +5,7 @@
         <v-row style="margin:2.5%;position:absolute; top: 130px">
             <v-col>
                 <v-list-item>
-                    <v-list-item-avatar size="100" color="primary">
+                    <v-list-item-avatar size="50" color="primary">
                     <!-- <img
                         src="https://i1.sndcdn.com/avatars-000143584345-3qxowr-t500x500.jpg"
                         alt="John"
@@ -73,11 +73,7 @@
 
 
     export default {
-        name: 'Profile',
-        components: {
-        Profile
-    },
-
+    name: 'Profile',
     data: () => ({
         items: [
             { title: 'Account', icon: 'mdi-account' },

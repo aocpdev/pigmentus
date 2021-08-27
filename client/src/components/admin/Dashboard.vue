@@ -209,9 +209,10 @@
                     </v-hover> -->
 
                     <!-- card with chart -->
-
+                    <total-sales-chart></total-sales-chart>
                     <products-chart></products-chart>
                     <users-chart></users-chart>
+
 
 
 
@@ -266,9 +267,15 @@
 import axios from 'axios'
 import ProductsChart from './ProductsChart.vue'
 import UsersChart   from './UsersChart.vue'
+import TotalSalesChart   from './TotalSalesChart.vue'
 export default {
     name: 'Dashboard',
-    components: {ProductsChart, UsersChart},
+    components:
+    {
+        ProductsChart,
+        UsersChart,
+        TotalSalesChart
+    },
     data() {
         return {
             totalUsers: 0,

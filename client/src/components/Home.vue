@@ -13,7 +13,7 @@
       <v-img
         :src="require('../assets/FirstImage.png')"
         aspect-ratio="3.85"
-              contain
+        contain
         class="grey lighten-2"
       >
         <!-- <v-row
