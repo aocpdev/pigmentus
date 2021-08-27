@@ -31,7 +31,7 @@
 
 
 
-                <v-row class="middle" v-if="!loaded">
+                <v-row class="middle" v-if="false">
 
                     <v-progress-circular
                     indeterminate
@@ -40,7 +40,7 @@
 
                 </v-row>
 
-                <line-chart style="height: 320px; width: 320px" v-if="loaded" :chartdata="datacollection" :options="options"></line-chart>
+                <line-chart style="height: 320px; width: 320px" v-if="true" :chartdata="datacollection" :options="options"></line-chart>
 
             </v-card>
         <!-- </v-hover> -->
