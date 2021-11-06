@@ -259,6 +259,7 @@
 
 <script>
 import router from "../../router/index";
+import store from "../../store/index";
 import axios from "axios";
 export default {
     name: 'NavigationCart',
