@@ -258,6 +258,8 @@
 </template>
 
 <script>
+import router from "../../router/index";
+import axios from "axios";
 export default {
     name: 'NavigationCart',
     data() {
@@ -280,7 +282,6 @@ export default {
 
       }
       else {
-
         this.cartDetails = JSON.parse(localStorage.__pigmentusCart);
       }
 
@@ -357,7 +358,6 @@ export default {
   created() {
 
     this.getCart(this.$store.state.user.id);
-    console.log("entro aqui")
 
     if (this.$store.state.cartDetails.cart.length > 0) {
       this.isCartEmpty = false;
