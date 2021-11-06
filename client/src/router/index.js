@@ -85,8 +85,8 @@ Vue.use(VueRouter)
         path: '/admin',
         beforeEnter: (to, from, next) => {
 
-          // axios.get('https://pigmentus.herokuapp.com/api/auth').then(user => {
-          axios.get('http://localhost:3000/api/auth').then(user => {
+          axios.get('https://pigmentus.herokuapp.com/api/auth').then(user => {
+          // axios.get('http://localhost:3000/api/auth').then(user => {
             console.log(user);
 
               switch (user.data.user.roleId) {
