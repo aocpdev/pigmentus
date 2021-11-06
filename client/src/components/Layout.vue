@@ -89,7 +89,7 @@
             large
             color="white"
             icon
-            @click="$store.state.drawer = true"
+            @click="goCart()"
           >
             <v-badge
               color="rgb(187, 162, 87)"
@@ -264,7 +264,9 @@
       </v-container>
     </v-card> -->
 
-    <v-footer dark padless v-if="!$store.state.isLoading">
+
+
+    <v-footer dark padless v-if="!$store.state.isLoading && false">
       <v-card class="flex" flat tile>
         <v-card-title style="color: black">
           <span style="color: white" class="border"
@@ -398,8 +400,17 @@ export default {
         .catch((err) => console.log(err));
     },
 
+    goCart () {
+      if (this.$vuetify.breakpoint.mobile) {
+        router.push({ path: `/cart/summary`});
+      }else {
+        this.$store.state.drawer = true;
+      }
+    },
+
 
   },
+
   created() {
     this.isAuth();
 
