@@ -1,6 +1,8 @@
 <template>
 <div>
     <v-container>
+      <h2 class="display-2 	text-center pa-4">Checkout</h2>
+
       <v-row>
         <v-col :cols="12" md="9" sm="12" >
           <v-simple-table>
@@ -73,6 +75,9 @@
           <!-- <div id="ATHMovil_Checkout_Button" ></div> -->
 
           <div style="margin-top: 10px" ref="paypal"></div>
+          <v-btn class="cancelButton" color="primary" to="/cart/summary">
+            Cancel
+          </v-btn>
 
 
         </v-col>
@@ -80,14 +85,14 @@
       </v-row>
 
         </v-container>
-        <v-btn color="primary"
+        <!-- <v-btn color="primary"
         @click="backToShiping()"
         >
         Back
-      </v-btn>
-      <v-btn text to="/cart/summary">
+      </v-btn> -->
+      <!-- <v-btn color="primary" to="/cart/summary">
         Cancel
-      </v-btn>
+      </v-btn> -->
 </div>
 </template>
 
@@ -99,6 +104,7 @@
     export default {
         name: 'CartCheckout',
         data: () => ({
+            order: ""
           // ATHM_Checkout: {
           //     env: 'sandbox',
           //     publicToken: 'sandboxtoken01875617264',
@@ -136,6 +142,23 @@
           this.$store.state.e2 = 2;
           this.$store.state.cartHeading = 'Checkout Payment';
 
+          orderModel.order.userId = this.$store.state.user.id;
+          console.log(this.$store.state.shippingInformation);
+
+
+          if (localStorage.getItem("__pigmentusCart") !== undefined) {
+            if (this.$store.state.user !== '') {
+                this.getCart(this.$store.state.user.id);
+                console.log('Cart: ', this.$store.state.cartDetails);
+                console.log('Local Storage: ', JSON.parse(localStorage.getItem("__pigmentusCart")))
+            }else {
+
+            }
+          }else {
+
+          }
+
+
           // let athMovilScript = document.createElement('script')
           //     athMovilScript.src = "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js";
           //     document.head.appendChild(athMovilScript);
@@ -160,13 +183,10 @@
         },
 
         methods: {
-            setAthMovil: function() {
-
-
-            },
             backToShiping: function () {
               this.$store.state.e2 = 1;
               this.$store.state.cartHeading = 'Shipping Address';
+              this.$store.state.validatedAddress = false;
               router.push({ path: '/cart/shipping'});
             },
             getCart: async function (userId) {
@@ -175,16 +195,24 @@
                 }).catch(err => console.log(err))
             },
 
+            saveOrder: async function (order) {
+              axios.post("api/orders", order).then((res) => {
+                console.log(res.data.order);
+              })
+              .catch((err) => console.log(err));
+            },
+
             setLoaded: function() {
                 window.paypal.Buttons({
                 createOrder: (data, actions) => {
                     // This function sets up the details of the transaction, including the amount and line item details.
+
                     return actions.order.create({
                     purchase_units: [{
                         amount: {
                           currency_code: "USD",
                           value: this.$store.state.cartDetails.total
-                        }
+                        },
                     }]
                     });
                 },
@@ -193,13 +221,44 @@
                     // This function captures the funds from the transaction.
                     const paypalOrder = await actions.order.capture();
 
-                    // Mapping
-                    orderModel.oder.id = paypalOrder.purchase_units[0].payments.captures[0].id,
-                    orderModel.oder.intent = paypalOrder.intent,
-                    orderModel.oder.status = paypalOrder.status,
-                    orderModel.oder.createdDate = paypalOrder.create_time,
 
-                    console.log(JSON.stringify(orderModel.order));
+
+                    if (paypalOrder.status === "COMPLETED") {
+                      console.log('Paypal Order', JSON.stringify(paypalOrder));
+                      console.log('Status', paypalOrder.status)
+                      console.log('Shipping Information', paypalOrder.purchase_units[0].shipping);
+                      console.log('Cart Details', this.$store.state.cartDetails)
+
+                      console.log('UserId', this.$store.state.user.id);
+                      console.log('Name', this.$store.state.user.name);
+                      console.log('Last Name', this.$store.state.user.lastName);
+                      console.log('Email', this.$store.state.user.email);
+                      console.log('Order ID', paypalOrder.purchase_units[0].payments.captures[0].id)
+
+                      let order = {
+
+                        userId: this.$store.state.user.id,
+                        paypalOrder: JSON.stringify(paypalOrder),
+                        cartDetails: JSON.stringify(this.$store.state.cartDetails),
+                      }
+                      console.log(order);
+                      axios.post("api/orders", order).then((res) => {
+                        console.log(res.data.order);
+                      }).catch((err) => console.log(err));
+                    }else {
+
+                    }
+
+                    // console.log(orderModel);
+
+
+                    // Mapping
+                    // orderModel.oder.id = paypalOrder.purchase_units[0].payments.captures[0].id,
+                    // orderModel.oder.intent = paypalOrder.intent,
+                    // orderModel.oder.status = paypalOrder.status,
+                    // orderModel.oder.createdDate = paypalOrder.create_time,
+
+                    // console.log(JSON.stringify(orderModel.order));
                     // window.location.href("../");
                 },
                 onError: err => {
@@ -214,7 +273,7 @@
 </script>
 
 <style >
-    #ATHMovil_Checkout_Button {
+    .cancelButton {
     width: 100%!important;
     margin-top: 10px;
     min-height: 20px!important;

@@ -1,10 +1,10 @@
 <template>
-    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
         <!-- <v-hover v-slot="{ hover }"> -->
             <v-card
             outlined
             elevation="2"
-            max-width="355"
+            max-width="600"
             height="355"
             color='rgb(252, 249, 237)'
             shaped
@@ -42,7 +42,7 @@
 
                 </v-row>
 
-                <line-chart style="height: 320px; width: 320px" v-if="loaded" :chartdata="datacollection" :options="options"></line-chart>
+                <bar-chart style="height: 320px; max-width: 580px" v-if="loaded" :chartdata="datacollection" :options="options"></bar-chart>
 
             </v-card>
         <!-- </v-hover> -->
@@ -52,10 +52,10 @@
 
 <script>
 import axios from 'axios'
-import LineChart from './LineChart.vue'
+import BarChart from './BarChart.vue'
 export default {
     name: 'ProductsChart',
-    components: {LineChart},
+    components: {BarChart},
     data() {
         return {
             loaded: false,

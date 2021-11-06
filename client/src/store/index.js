@@ -15,7 +15,17 @@ export default new Vuex.Store({
     isCEO: false,
     isCustomer: false,
     enabledDashboard: false,
-    cartHeading: '',
+    // cartHeading: '',
+    // validatedAddress: false,
+    // shippingInformation: {
+    //   name: '',
+    //   address: '',
+    //   city: '',
+    //   state: '',
+    //   zip: '',
+    //   country: '',
+
+    // },
     e2: 1,
     paymentFee: 0.00,
     feeRate: 0.00,
@@ -28,6 +38,7 @@ export default new Vuex.Store({
       total: 0,
       productsQuantity: 0
     },
+
     snackbarMessage: '',
     snackbar: false,
     snackbarTimeout: 2000,
@@ -110,8 +121,8 @@ export default new Vuex.Store({
   },
   actions: {
     isAuth: async function ({commit}) {
-      axios.get('https://pigmentus.herokuapp.com/api/auth')
-      // axios.get('http://localhost:3000/api/auth')
+      // axios.get('https://pigmentus.herokuapp.com/api/auth')
+      axios.get('http://localhost:3000/api/auth')
         .then(user => {
           if (user.data.user === '') {
             state.user = "";

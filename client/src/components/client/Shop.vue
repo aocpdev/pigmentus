@@ -8,10 +8,19 @@
                 class="col-md-3 col-sm-3 col-xs-12"
                 v-if="!isProduct"
                 >
+
+
+
+
+
                         <v-card outlined>
                             <v-card-title>Shop</v-card-title>
                             <v-divider></v-divider>
-                            <v-list rounded>
+
+
+                            <skeleton-list v-if="loading"></skeleton-list>
+
+                            <v-list rounded   v-else>
                                 <v-list-item to="/shop/1" color="rgb(187, 162, 87)">
                                     <v-list-item-content>
                                     <v-list-item-title>All</v-list-item-title>
@@ -63,9 +72,10 @@ import axios from 'axios'
 import Collections from './Collections.vue'
 import router from '../../router/index'
 import BottomNavigation from '../BottomNavigation.vue'
+import SkeletonList from '../skeletonLoadings/SkeletonList.vue'
 import Product from './Product.vue'
 export default {
-    components: { 'collections': Collections, BottomNavigation, 'products': Product },
+    components: { 'collections': Collections, BottomNavigation, 'products': Product, 'skeletonList': SkeletonList },
     name: 'Shop',
     data() {
         return {
@@ -76,8 +86,17 @@ export default {
             isProduct: false,
             collectionsId: String,
             collectionId: String,
+            attrs: {
+
+                boilerplate: false,
+
+            },
+
+            loading: false,
+
         }
     },
+
     computed: {
         changeComponent: function () {
             if (this.$route.name === "collections") {
@@ -119,6 +138,7 @@ export default {
                                     if (collectionValue.categoriesId === categorieValue.id && collectionValue.name !== 'All') {
                                         collectionValue.to = `/shop/${collectionValue.id}`;
                                         categorieValue.children.push(collectionValue);
+                                        this.loading = false;
                                     }
                                 }
                             })
@@ -144,7 +164,7 @@ export default {
     },
 
     created() {
-
+        this.loading = true;
         this.collectionsId = this.$route.params.id;
         this.getCollections(this.collectionsId, this.collectionId);
 

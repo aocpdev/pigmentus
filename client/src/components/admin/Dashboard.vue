@@ -1,9 +1,9 @@
 <template>
-        <v-row no-gutters>
+        <!-- <v-row no-gutters> -->
             <!-- <h1 style="text-align: center;"> Pigmentus Dashboard</h1> -->
 
 
-                <v-row no-gutters>
+                <!-- <v-row no-gutters> -->
 
                     <!-- New Customers -->
                         <!-- <v-hover v-slot="{ hover }">
@@ -209,15 +209,24 @@
                     </v-hover> -->
 
                     <!-- card with chart -->
-                    <total-sales-chart></total-sales-chart>
-                    <products-chart></products-chart>
-                    <users-chart></users-chart>
+
+
+                    <v-container>
+                        <v-row>
+                            <total-sales-chart></total-sales-chart>
+                            <total-sales-chart></total-sales-chart>
+                            <products-chart></products-chart>
+                            <users-chart></users-chart>
+                        </v-row>
+
+                    </v-container>
 
 
 
 
 
-                </v-row>
+
+                <!-- </v-row> -->
 
 
 
@@ -260,7 +269,7 @@
                     </v-card-text>
                 </v-card>
             </v-col> -->
-        </v-row>
+        <!-- </v-row> -->
 </template>
 
 <script>

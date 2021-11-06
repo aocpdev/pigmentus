@@ -110,7 +110,7 @@ export default {
           this.setUser(user);
           this.changeRole(user.roleId);
           if (this.$route.query.fromCart === "true") {
-            router.push({ name: "cartShipping"});
+            router.push({ name: "cartCheckout"});
           } else {
             router.push('/home');
           }

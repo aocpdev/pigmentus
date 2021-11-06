@@ -194,6 +194,10 @@
       </div>
     </v-app-bar>
 
+
+
+
+
     <v-main v-if="!$store.state.isLoading" style="background-color: #f9f9f9">
       <v-snackbar
         v-model="$store.state.snackbar"
@@ -303,12 +307,15 @@
             x-small
             style="text-transform: none"
           >
-            <span>Powered by Axel Software Solutions LLC</span>
+            <span>Powered by Devaxec Software Solutions LLC</span>
           </v-btn>
         </v-card-text>
       </v-card>
     </v-footer>
   </v-app>
+
+
+
 </template>
 
 <script>

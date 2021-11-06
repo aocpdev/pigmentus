@@ -4,10 +4,9 @@ const order = {
     "intent": String,
     "status": String,
     "userId": Number,
-    "userName": String,
-    "fullName": String,
+    "payerName": String,
+    "payerEmail": String,
     "createdDate": Date,
-    "transactionType": String,
     "shippingAddress": {
         "addressLine1": String,
         "adminArea": String,
@@ -18,9 +17,14 @@ const order = {
     "items": [],
     "paypalFee": Number,
     "employeeCommission": Number,
-
+    "billingAddress": {
+        "addressLine1": String,
+        "adminArea": String,
+        "adminArea1": String,
+        "postalCode": Number,
+        "countryCode": String
+    }
 }
-
 
 module.exports = {
     order

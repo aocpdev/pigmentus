@@ -231,7 +231,7 @@
           </template>
         </v-simple-table>
 
-        <v-col cols="12">
+        <!-- <v-col cols="12">
           <v-checkbox v-model="checkbox1">
             <template v-slot:label>
               <div>
@@ -330,11 +330,11 @@
               </div>
             </template>
           </v-checkbox>
-        </v-col>
+        </v-col> -->
 
         <div class="text-center">
           <v-btn class="black mt-5" @click="goSignIn()" outlined>
-            <span style="color: rgb(187, 162, 87)">PROCEED TO PAY</span>
+            <span style="color: rgb(187, 162, 87)">Place Order</span>
 
             <svg
               style="width: 24px; height: 24px; color: rgb(187, 162, 87)"
@@ -449,21 +449,20 @@ export default {
       axios.get("api/cart", { params: { userId: userId } }).then((res) => {
 
         this.cartDetails = res.data.cartDetails;
-        console.log('Cart details', this.cartDetails);
         this.$store.state.cartDetails.productsQuantity = this.cartDetails.productsQuantity;
       }).catch((err) => console.log(err));
 
       }
       else {
+
         this.cartDetails = JSON.parse(localStorage.__pigmentusCart);
-        // console.log(this.cartDetails);
       }
 
     },
 
     goSignIn ( ) {
       if (this.$store.state.user.id !== undefined) {
-        router.replace({ path: "/cart/shipping"})
+        router.replace({ path: "/cart/checkout"})
       } else {
         router.replace({ name: "Signin", query: { fromCart: 'true' }})
       }

@@ -1,17 +1,27 @@
 <template>
   <div class="row" no-gutters width="100vh">
-    <v-container>
+
+    <skeleton-product-info v-if="loading"></skeleton-product-info>
+
+    <v-container v-else>
       <div class="row">
         <div class="col-md-5 col-sm-5 col-xs-12">
           <v-carousel height="400" hide-delimiters :show-arrows="false">
-            <v-carousel-item
+
+
+
+            <div>
+              <v-carousel-item
               aspect-ratio="1.4"
               contain
               v-for="(product, i) in product"
               :key="i"
               :src="product.image"
+
             >
             </v-carousel-item>
+            </div>
+
           </v-carousel>
         </div>
         <div
@@ -216,6 +226,244 @@
           </v-card-text>
         </div>
       </div>
+
+      <v-navigation-drawer
+      v-model="drawer"
+      right
+      temporary
+      app
+      style="background-color: #F7F7F7; width: 375px; z-index: 102"
+    >
+      <v-app-bar
+      app
+      color="black"
+      dark
+    >
+      <v-toolbar-title style="width: 350px">
+        <span style="color: rgb(187, 162, 87);"><b>Cart &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></span>
+        <span style="font-size: 12px;">({{$store.state.cartDetails.productsQuantity}})</span>
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+       <v-btn
+            tile
+            large
+            v-on="on"
+            color="primary"
+            class="ma-2"
+            icon
+            @click="drawer = !drawer"
+          >
+            <v-icon small>mdi-close</v-icon>
+          </v-btn>
+      </v-app-bar>
+
+
+      <template v-slot:append>
+        <v-row dense class="pa-2" style="background-color: white; height: 124px;">
+          <v-col cols="4">
+            <span style="font-size: 15px"><b>Estimated total</b></span>
+          </v-col>
+          <v-col cols="8" style="text-align: right;">
+            <span style="font-family: Roboto,sans-serif; font-size: 20px"><b>${{$store.state.cartDetails.total }}</b></span>
+          </v-col>
+
+          <v-col cols="12">
+            <v-btn to="/cart/checkout" class="black mt-0" style="width: 354px; text-transform: none" rounded>
+            <span style="color: rgb(187, 162, 87)">Continue to checkout</span>
+            <svg
+              style="width: 24px; height: 24px; color: rgb(187, 162, 87)"
+              class="pl-2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="currentColor"
+                d="M20 4H4A2 2 0 0 0 2 6V18A2 2 0 0 0 4 20H20A2 2 0 0 0 22 18V6A2 2 0 0 0 20 4M20 11H4V8H20Z"
+              />
+            </svg>
+          </v-btn>
+          </v-col>
+
+        </v-row>
+
+
+        <!-- <v-row>
+          <v-col>
+            <v-btn class="black mt-5"  rounded>
+                <span style="color: rgb(187, 162, 87)">Continue to checkout</span>
+
+            </v-btn>
+          </v-col>
+        </v-row> -->
+        <!-- <div class="pa-2" style="background-color: white; height: 124px;">
+          <span>Estimated Total</span>
+          <v-btn class="black mt-5"  rounded>
+            <span style="color: rgb(187, 162, 87)">Place Order</span>
+          Rounded Button
+        </v-btn>
+        </div> -->
+      </template>
+
+          <v-main>
+            <v-container>
+              <v-row class="mt-50px">
+                <v-col class="pt-50px">
+                  <v-card
+                    class="mx-auto"
+                    max-width="375"
+                  >
+
+                    <v-row v-if="!show">
+                      <v-col cols="4" class="pt-0">
+                        <v-card-subtitle class="pb-0">
+                          <span style="font-size: 12px">{{$store.state.cartDetails.productsQuantity}} items</span>
+                        </v-card-subtitle>
+                      </v-col>
+                      <v-col cols="8" style="text-align: right" class="pt-0" >
+                        <v-card-subtitle class="pb-0">
+                          <span style="font-size: 14px"><b>${{$store.state.cartDetails.subtotal}}</b></span>
+                        </v-card-subtitle>
+                      </v-col>
+                    </v-row>
+
+                    <v-row class="pl-2" v-if="!show">
+                      <v-col cols="3" v-for="item in $store.state.cartDetails.cart"
+                      :key="item.name">
+                        <v-badge
+                          color="black"
+                          overlap
+                          small
+                          :content="item.quantity"
+                          :value="item.quantity"
+                        >
+                        <v-img   v-bind:src="item.image" :alt="item.name" height="60px" width="60px" class="image" ></v-img>
+                        </v-badge>
+                      </v-col>
+
+                    </v-row>
+
+
+
+
+
+                    <v-card-actions>
+                      <v-btn
+                        text
+                        style="text-transform: none"
+                      >
+                        View all items
+                      </v-btn>
+
+                      <v-spacer></v-spacer>
+
+                      <v-btn
+                        icon
+                        @click="show = !show"
+                      >
+                        <v-icon style="color: black;">{{ show ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
+                      </v-btn>
+                    </v-card-actions>
+
+                    <v-expand-transition>
+                      <div v-show="show">
+                        <v-divider></v-divider>
+
+                        <v-row v-for="item in $store.state.cartDetails.cart"
+                          :key="item.name" class="pl-2" justify="center" align="center">
+
+                          <v-col cols="12">
+                            <v-row>
+                              <v-col cols="3" class="pr-0">
+
+                            <v-img v-bind:src="item.image" :alt="item.name" height="60px" width="60px" class="image" ></v-img>
+                          </v-col>
+
+                          <v-col cols="6" class="pl-0 pt-0 mb-0"  style="text-align: start;">
+                            <v-card-subtitle>
+                              <span style="font-size: 12px"><b> {{item.productName}}</b></span>
+                            </v-card-subtitle>
+                          </v-col>
+                          <v-col cols="3"  style="text-align: right;" class="pr-6">
+                            <span style="font-size: 12px"><b>${{item.price}}</b></span>
+                          </v-col>
+                            </v-row>
+                          </v-col>
+
+                          <v-col cols="12" class="pt-0 pb-0">
+                            <v-divider></v-divider>
+                          </v-col>
+
+
+
+
+
+                        </v-row>
+
+
+                      </div>
+                    </v-expand-transition>
+                  </v-card>
+                </v-col>
+              </v-row>
+
+              <v-row class="mt-50px">
+                <v-col class="pt-0">
+                  <v-card
+                    class="mx-auto pt-0"
+                    max-width="375"
+                  >
+
+                    <v-row>
+                      <v-col cols="4" class="pt-0">
+                        <v-card-subtitle class="pb-0">
+                          <span style="font-size: 15px"><b>Tax</b></span>
+                        </v-card-subtitle>
+                      </v-col>
+                      <v-col cols="8" style="text-align: right" class="pt-0" >
+                        <v-card-subtitle class="pb-0">
+                          <span style="font-size: 14px"><b>${{$store.state.cartDetails.tax}}</b></span>
+                        </v-card-subtitle>
+                      </v-col>
+                    </v-row>
+
+
+
+
+                  </v-card>
+                </v-col>
+              </v-row>
+
+              <v-row class="mt-50px">
+                <v-col class="pt-0">
+                  <v-card
+                    class="mx-auto"
+                    max-width="375"
+                  >
+
+                    <v-row>
+                      <v-col cols="6" class="pt-0">
+                        <v-card-subtitle class="pb-0">
+                          <span style="font-size: 15px"><b>Shipping fee</b></span>
+                        </v-card-subtitle>
+                      </v-col>
+                      <v-col cols="6" style="text-align: right" class="pt-0" >
+                        <v-card-subtitle class="pb-0">
+                          <span style="font-size: 14px"><b>$10.00</b></span>
+                        </v-card-subtitle>
+                      </v-col>
+                    </v-row>
+
+
+
+
+                  </v-card>
+                </v-col>
+              </v-row>
+            </v-container>
+          </v-main>
+
+
+
+    </v-navigation-drawer>
     </v-container>
   </div>
 </template>
@@ -224,24 +472,28 @@ import axios from "axios";
 import BottomNavigation from "../BottomNavigation.vue";
 import store from "../../store/index";
 import { mapState } from "vuex";
+import SkeletonProductsInfo from '../skeletonLoadings/SkeletonProductsInfo.vue'
 
 // Models
 import cartModel from "../../modules/cartModel";
 
 export default {
-  components: { bottom: BottomNavigation },
+  components: { bottom: BottomNavigation, 'skeletonProductInfo': SkeletonProductsInfo},
   props: {
     productId: {
       type: String,
     },
   },
-  name: "Product",
+  name: 'Product',
   data: () => ({
     rating: 4.5,
     product: [],
     breadcrums: {},
+    show: false,
     hasProductInCart: false,
     item: 5,
+    loading: false,
+    drawer: false,
     items: [
       {
         avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
@@ -287,6 +539,7 @@ export default {
           this.product = res.data.product.rows;
           this.cart.productId = this.product[0].id;
           this.cart.userId = this.$store.state.user.id;
+          this.loading = false;
         })
         .catch((err) => console.log(err));
     },
@@ -338,6 +591,7 @@ export default {
                 "__pigmentusCart",
                 JSON.stringify(store.state.cartDetails)
               );
+              this.drawer = true;
             } else {
 
 
@@ -384,6 +638,7 @@ export default {
                   "__pigmentusCart",
                   JSON.stringify(store.state.cartDetails)
                 );
+                this.drawer = true;
               }
             });
 
@@ -428,6 +683,7 @@ export default {
                 "__pigmentusCart",
                 JSON.stringify(store.state.cartDetails)
               );
+              this.drawer = true;
 
               // console.log(cartDetails);
 
@@ -446,6 +702,7 @@ export default {
           .post("api/cart", cart)
           .then((res) => {
             this.getCart(this.$store.state.user.id);
+            this.drawer = true;
           })
           .catch((err) => console.log(err));
       }
@@ -455,7 +712,6 @@ export default {
         .get("api/cart", { params: { userId: userId } })
         .then((res) => {
           this.$store.state.cartDetails = res.data.cartDetails;
-          console.log();
         })
         .catch((err) => console.log(err));
     },
@@ -465,11 +721,21 @@ export default {
   created() {
     this.getProduct(this.productId, this.collectionsId);
     window.scrollTo(0, 0);
-
+    this.loading = true;
     if (this.$store.state.user.id === undefined) {
       this.$store.state.cartDetails = JSON.parse(localStorage.__pigmentusCart);
     }
-
   },
 };
 </script>
+
+
+<style >
+  .image {
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        width: 150px;
+        box-shadow: 0 0 2px 1px rgb(187, 162, 87,  0.5);
+    }
+
+</style>

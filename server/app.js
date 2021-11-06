@@ -6,28 +6,12 @@ const history = require('connect-history-api-fallback');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 
-// const pool = require('./config/database')
-// const pg = require('pg')
-//     , session = require('express-session')
-//     , pgSession = require('connect-pg-simple')(session);
-
-// const { DATABASE_URL, DB_USER,DB_PASSWORD, DB_HOST, DB_PORT, DB_DATABASE, NODE_ENV} = require('./config/keys');
-
-// const isProduction = NODE_ENV === 'production';
-
-// const connectionString = `postgresql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_DATABASE}`
-// const pgPool = new pg.Pool({
-//     // Insert pool options here
-//     connectionString: isProduction ? DATABASE_URL : connectionString,
-//     ssl: { rejectUnauthorized: false }
-// });
-
 const app = express();
-require('dotenv').config();
-
-const { JWT_KEY } = require('../server/config/keys');
 
 
+// const { JWT_KEY } = require('../server/config/keys');
+
+// console.log(process.env);
 var corsOptions = {
     origin: '*',
     optionsSuccessStatus: 200,
@@ -43,29 +27,10 @@ app.use(express.urlencoded({ extended: true }));
 
 // Express Session
 app.use(session({
-    secret: JWT_KEY,
+    secret: 'secret',
     resave: false,
     saveUninitialized: false
 }))
-
-// app.use(session({
-//     store: new (require('connect-pg-simple')(session))(),
-//     secret: JWT_KEY,
-//     resave: false,
-//     saveUninitialized: false,
-//     cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } // 30 days
-// }));
-
-// app.use(session({
-//     store: new pgSession({
-//       pool : pgPool,                // Connection pool
-//       tableName : 'session'         // Use another table-name than the default "session" one
-//     }),
-//     secret: JWT_KEY,
-//     resave: false,
-//     saveUninitialized: false,
-//     cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 } // 30 days
-//   }));
 
 
 // Routes
@@ -78,26 +43,29 @@ app.use('/api/products', require('./api/routes/products'));
 app.use('/api/users', require('./auth/routes/users'));
 app.use('/api/cart', require('./api/routes/cart'));
 app.use('/api/fees', require('./api/routes/fees'));
+app.use('/api/orders', require('./api/routes/orders'));
 // app.use('/api/v1.0/paypal', require('./api/routes/paypal'));
 // app.use('/profile', require('./api/routes/profile'));
 
+
+console.log(process.env);
 
  // Middleware for Vue.js router mode history
 app.use(history());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.set('port', process.env.PORT || 3000)
+app.set('port', process.env.PORT)
 
 app.listen(app.get('port'), function(){
-    if (process.env.PORT === undefined) {
-        console.log('App running at:');
-        console.log('- Port:    3000');
-        console.log('- Local:   http://localhost:3000')
-    } else {
-        console.log('App running at:');
-        console.log(`- Port:        ${process.env.PORT}`);
-        console.log('- Production:  https://pigmentus.herokuapp.com')
-    }
+    // if (process.env.PORT === undefined) {
+    //     console.log('App running at:');
+    //     console.log('- Port:    3000');
+    //     console.log('- Local:   http://localhost:3000')
+    // } else {
+    //     console.log('App running at:');
+    //     console.log(`- Port:        ${process.env.PORT}`);
+    //     console.log('- Production:  https://pigmentus.herokuapp.com')
+    // }
 
 
 });

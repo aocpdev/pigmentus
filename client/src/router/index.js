@@ -85,8 +85,8 @@ Vue.use(VueRouter)
         path: '/admin',
         beforeEnter: (to, from, next) => {
 
-          axios.get('https://pigmentus.herokuapp.com/api/auth').then(user => {
-          // axios.get('http://localhost:3000/api/auth').then(user => {
+          // axios.get('https://pigmentus.herokuapp.com/api/auth').then(user => {
+          axios.get('http://localhost:3000/api/auth').then(user => {
             console.log(user);
 
               switch (user.data.user.roleId) {
@@ -152,10 +152,10 @@ Vue.use(VueRouter)
         redirect: {name: 'cartSummary'},
         children: [
           { path: 'summary', name: 'cartSummary', component: CartSummary},
-          { path: 'shipping', name: 'cartShipping', component: CartShipping,
-          children:[
-            { path: 'checkout', name: 'cartCheckout', component: CartCheckout}
-          ]},
+          // { path: 'shipping', name: 'cartShipping', component: CartShipping,
+          // children:[
+            { path: 'checkout', name: 'cartCheckout', component: CartCheckout},
+          // ]},
 
         ]
       },

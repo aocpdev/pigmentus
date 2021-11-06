@@ -1,10 +1,10 @@
 <template>
-    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
         <!-- <v-hover v-slot="{ hover }"> -->
             <v-card
             outlined
             elevation="2"
-            max-width="355"
+            max-width="600"
             height="355"
             color='rgb(252, 249, 237)'
             shaped
@@ -12,8 +12,8 @@
             >
                 <v-card-actions class="mt-0">
 
+                    <span><b>Total Sales</b></span>
 
-                    <span style="color: #4BB543" > <v-icon style="color: #4BB543">mdi-arrow-up</v-icon>100%</span>
                     <v-spacer></v-spacer>
 
 
@@ -28,6 +28,13 @@
                     </v-btn>
                 </v-card-actions>
 
+                <v-card-actions class="pt-0">
+                    <span>$140.00</span>
+                    <v-spacer></v-spacer>
+                    <span style="color: #4BB543"> <v-icon dense small style="color: #4BB543">mdi-arrow-up</v-icon>100%</span>
+                </v-card-actions>
+
+
 
 
 
@@ -40,7 +47,7 @@
 
                 </v-row>
 
-                <line-chart style="height: 320px; width: 320px" v-if="true" :chartdata="datacollection" :options="options"></line-chart>
+                <line-chart style="height: 280px; max-width: 580px" v-if="true" :chartdata="collection" :options="options"></line-chart>
 
             </v-card>
         <!-- </v-hover> -->
@@ -57,7 +64,7 @@ export default {
     data() {
         return {
             loaded: false,
-            datacollection: {
+            collection: {
                 labels: [
                 "3:00 AM",
                 "6:00 AM",
@@ -69,21 +76,13 @@ export default {
                 "12:00 AM",
                 ],
                 datasets: [{
-                    label: "Total Sales: $ 140.00",
-                    data: [50.00, 80.00, 10.00],
+                    label: ``,
+                    data: [1000.50, 80.00, 10.00],
                     borderColor: "#4BB543",
-
                     borderWidth: 1,
                     pointBorderColor: 'white',
-                    fill: false,
-
-
-
-
-                }
-                ],
+                    fill: false,}],
             },
-
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
@@ -94,6 +93,12 @@ export default {
                 tooltips: {
                     mode: 'index',
                     intersect: true,
+                    callbacks: {
+                label: function (tooltipItem, data) {
+                    var value = Number(data.datasets[0].data[tooltipItem.index]).toFixed(2);
+                    return ' $' + value;
+                }, },
+
                 },
                 hover: {
                     mode: 'nearest',
@@ -110,9 +115,9 @@ export default {
                     yAxes: [{
                     display: true,
                     ticks: {
-                        beginAtZero: true,
-                        callback: function (value) { if (Number.isInteger(value)) { return value; } },
-                        stepSize: 1
+                        callback: function(value, index, values) {
+                            return value.toLocaleString("en-US",{style:"currency", currency:"USD"});
+                        }
 
                     },
                     scaleLabel: {
@@ -123,6 +128,18 @@ export default {
                 }
             },
         }
+    },
+    methods: {
+        getDate: async function () {
+            let date = new Date()
+            let month = ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1)))
+            let day =  ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate()))
+            let year =  date.getFullYear()
+            this.collection.datasets[0].label = `${day}/${month}/${year}`
+        },
+    },
+    created() {
+        this.getDate();
     },
 
 

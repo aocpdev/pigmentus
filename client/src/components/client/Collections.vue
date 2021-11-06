@@ -7,25 +7,73 @@
             <v-breadcrumbs class="pb-0"></v-breadcrumbs>
 
             <v-row dense>
+
                 <v-col cols="12" sm="8" class="pl-6 pt-6">
+
                 <small>Showing 1-12 of 200 products</small>
                 </v-col>
                 <v-col cols="12" sm="4">
+
+                    <v-skeleton-loader
+                    v-bind="attrs"
+                    v-if="loading"
+                    type="text"
+                    ></v-skeleton-loader>
                 <!-- <v-select class="pa-0" v-model="select" :items="options" style="margin-bottom: -20px;" outlined dense></v-select> -->
-                <v-select class="pa-0"  style="margin-bottom: -20px;" outlined dense></v-select>
+                <v-select v-else class="pa-0"  style="margin-bottom: -20px;" outlined dense></v-select>
                 </v-col>
             </v-row>
 
             <v-divider></v-divider>
             <div class="row text-center" >
-                <div class="col-md-3 col-sm-6 col-xs-12" v-for="item in pages" :key="item.num" >
+                <!-- <div class="col-md-3 col-sm-6 col-xs-12"  v-if="loading">
+                <v-card
+                    :elevation="hover ? 12 : 2"
+                    class="mx-auto"
+                    color="grey lighten-4"
+                    max-width="600"
+                >
+                <v-skeleton-loader
+                    v-bind="attrs"
+                    type="image"
+                    ></v-skeleton-loader>
+                <v-card-text class="text--primary" style="background-color: rgb(252, 249, 237)">
+                    <v-skeleton-loader
+                    v-bind="attrs"
+                    type="text"
+                    ></v-skeleton-loader>
+                    <div style="padding-left: 80px; padding-right: 80px">
+                        <v-skeleton-loader
+                    v-bind="attrs"
+                    type="text"
+                    ></v-skeleton-loader>
+                    </div>
+
+
+                </v-card-text>
+
+                </v-card>
+                </div> -->
+
+                <skeleton-products v-if="loading"></skeleton-products>
+                <skeleton-products v-if="loading"></skeleton-products>
+                <skeleton-products v-if="loading"></skeleton-products>
+                <skeleton-products v-if="loading"></skeleton-products>
+                <skeleton-products v-if="loading"></skeleton-products>
+                <skeleton-products v-if="loading"></skeleton-products>
+                <skeleton-products v-if="loading"></skeleton-products>
+                <skeleton-products v-if="loading"></skeleton-products>
+                <div class="col-md-3 col-sm-6 col-xs-12" v-for="item in pages" :key="item.num" v-else>
+
                     <v-hover v-slot="{ hover }">
                     <v-card
                         :elevation="hover ? 12 : 2"
                         class="mx-auto"
                         color="grey lighten-4"
                         max-width="600"
+
                         >
+
 
                             <v-hover v-slot:default="{ hover }">
                             <v-img
@@ -72,6 +120,7 @@
                                     <span style="text-decoration: none">{{item.name}}</span>
                                 </v-btn> -->
                                 <div><a @click="goToProductInfo(collectionsId, item.id)" style="text-decoration: none">{{item.name}}</a></div>
+
                                 <div>${{item.customerPrice}} <span v-if="item.isDealDay">-</span><span v-if="item.isDealDay" style="color: red"> $<strike>{{item.lastCustomerPrice}}</strike></span></div>
                             </v-card-text>
 
@@ -82,7 +131,16 @@
             </div>
         <v-divider></v-divider>
         <v-row>
-            <v-col align="right">
+            <v-col align="center" v-if="loading">
+
+                <v-skeleton-loader
+                v-bind="attrs"
+                type="avatar"
+                ></v-skeleton-loader>
+
+            </v-col>
+
+            <v-col align="right" v-else>
                 <v-pagination v-model="page" :length="length" circle></v-pagination>
             </v-col>
         </v-row>
@@ -96,7 +154,10 @@
 <script>
 import axios from 'axios'
 import router from '../../router/index'
+import About from '../../views/About.vue'
+import SkeletonProducts from '../skeletonLoadings/SkeletonProducts.vue'
 export default {
+  components: { About,  'skeletonProducts': SkeletonProducts},
     name: 'Collections',
     props: {
         collectionsId: {
@@ -110,7 +171,12 @@ export default {
             dialog: false,
             isProductInfo: false,
             page: 1,
-            length: 2
+            length: 2,
+            attrs: {
+                boilerplate: false,
+            },
+            loading: false,
+            productsLoading: false,
         }
     },
     computed: {
@@ -136,11 +202,13 @@ export default {
                 axios.get('api/products/inventory')
                 .then(res => {
                     this.products = res.data.inventory.rows;
+                    this.loading = false;
                 }).catch(err => console.log(err))
             } else {
                 axios.get('api/products', { params: { collectionId: collectionId } })
                 .then(res => {
                     this.products = res.data.products.rows;
+                    this.loading = false;
                 }).catch(err => console.log(err))
             }
 
@@ -153,6 +221,7 @@ export default {
     },
     created() {
         this.getProducts(this.collectionsId);
+        this.loading = true;
     },
 
 }
@@ -174,5 +243,4 @@ export default {
         font-size: 6.5px;
         font-weight: bold
     }
-
 </style>

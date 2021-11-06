@@ -9,17 +9,25 @@
       :complete="$store.state.e2 > 1"
       step="1"
     >
-      Shipping Address
+      <div ><span> <strong> Shipping Address</strong></span></div>
+      <div v-if="$store.state.validatedAddress" style="padding-top: 5px"><span> <small> <strong>Name: </strong>{{name}}</small> </span> <br><span> <small> <strong>Adrress:</strong>  {{validatedAddress}}</small> </span></div>
       <!-- <small>Billing Address</small> -->
     </v-stepper-step>
 
     <v-stepper-content step="1">
         <v-container fluid>
-            <v-row>
+            <!-- <v-row> -->
+              <v-form
+                ref="form"
+                v-model="valid"
+                lazy-validation
+              >
+              <v-row>
                 <v-col
                 cols="12"
                 sm="6"
                 >
+
                     <v-text-field
                         ref="name"
                         v-model="name"
@@ -106,13 +114,14 @@
                         required
                     ></v-autocomplete>
                 </v-col>
-            </v-row>
+              </v-row>
+              </v-form>
+            <!-- </v-row> -->
         </v-container>
 
       <v-btn
         color="primary"
-        @click="e2 = 2"
-        to="/cart/shipping/checkout"
+        @click="validate"
       >
         Continue
       </v-btn>
@@ -141,6 +150,7 @@
 <script>
     import CartCheckout from './CartCheckout.vue'
     import {mapState} from 'vuex'
+    import router from '../../router/index'
     import axios from 'axios'
     export default {
         components: {CartCheckout},
@@ -155,9 +165,12 @@
         zip: null,
         country: null,
         formHasErrors: false,
-        headingText: ''
+        headingText: '',
+        valid: true,
+        validatedAddress: '',
         }),
         created() {
+          this.$store.state.validatedAddress = false;
           this.$store.state.e2 = 1;
           this.$store.state.cartHeading = 'Shipping Address';
           window.ATHM_Checkout = {
@@ -217,6 +230,38 @@
         },
 
         methods: {
+
+        validate () {
+          if (this.$refs.form.validate() === true) {
+            router.push({ path: `/cart/shipping/checkout`});
+
+            this.$store.state.shippingInformation = {
+              name: this.name,
+              address: this.address,
+              city: this.city,
+              state: this.state,
+              zip: this.zip,
+              country: this.country,
+            }
+
+            this.validatedAddress = this.address + " " + this.city + ", " + this.state + ", " + this.zip
+            this.$store.state.validatedAddress = true;
+
+            // let shippingAddress = {
+            //   name: this.name,
+            // address: this.address,
+            // city: this.city,
+            // state: this.state,
+            // zip: this.zip,
+            // country: this.country,
+            // }
+            // console.log(shippingAddress)
+
+          } else {
+
+          }
+
+        },
 
 
 

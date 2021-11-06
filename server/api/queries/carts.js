@@ -9,7 +9,8 @@ const getCart = function (userId) {
 }
 
 const saveToCart = function (cart) {
-    return pool.query('INSERT INTO carts (user_id, product_id, quantity, collection_id) VALUES ($1, $2, $3)', [cart.userId, cart.productId, cart.quantity]);
+    console.log(cart);
+    return pool.query('INSERT INTO carts (user_id, product_id, quantity) VALUES ($1, $2, $3)', [cart.userId, cart.productId, cart.quantity]);
 }
 
 const putCart = function (cart) {

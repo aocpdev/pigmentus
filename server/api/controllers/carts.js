@@ -59,10 +59,13 @@ exports.saveToCart = (req, res, next) => {
     let productId = 0;
     let id = 0;
     let quantity = 0;
+    console.log(req.body)
     try {
         getCart(req.body.userId).then(shopingCart => {
             // console.log(shopingCart.rows);
             // console.log(req.body.userId);
+            console.log(shopingCart);
+            console.log(shopingCart.rows.length === 0);
             if (shopingCart.rows.length === 0){
                 saveToCart(req.body)
                 .then( cart => {
