@@ -15,6 +15,7 @@ export default new Vuex.Store({
     isCEO: false,
     isCustomer: false,
     enabledDashboard: false,
+    drawer: false,
     // cartHeading: '',
     // validatedAddress: false,
     // shippingInformation: {

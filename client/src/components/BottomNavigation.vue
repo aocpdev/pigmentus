@@ -11,12 +11,12 @@
         Home
         </v-btn>
 
-        <v-btn small to="/home"
+        <!-- <v-btn small to="/home"
         color="rgb(187, 162, 87)"
         text
         x-small>
         Blog
-        </v-btn>
+        </v-btn> -->
 
         <!-- <v-menu open-on-hover offset-y>
         <template v-slot:activator="{ on }">

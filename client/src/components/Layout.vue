@@ -89,7 +89,7 @@
             large
             color="white"
             icon
-            to="/cart"
+            @click="$store.state.drawer = true"
           >
             <v-badge
               color="rgb(187, 162, 87)"
@@ -218,6 +218,7 @@
       </v-snackbar>
 
       <v-container fluid class="px-0 py-0">
+        <navigation-cart></navigation-cart>
         <router-view />
       </v-container>
 
@@ -323,14 +324,18 @@ import Loading from "@/components/Loading.vue";
 import { mapState, mapActions, mapMutations } from "vuex";
 import router from "../router/index";
 import axios from "axios";
+import NavigationCart from '../components/client/NavigationCart.vue'
 export default {
   name: "Layout",
 
   components: {
     Loading,
+    'navigationCart': NavigationCart
   },
 
   data: () => ({
+    drawer: false,
+    show: false,
     icons: [
       { icon: "mdi-facebook", color: "rgb(66 103 178)" },
       { icon: "mdi-linkedin", color: "rgb(66 103 178)" },
