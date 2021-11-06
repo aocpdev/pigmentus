@@ -2,9 +2,9 @@
   "name": "pigmentus-server",
   "version": "1.0.0",
   "description": "This Api is for practice API",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "start": "babel-node ./server/app.js --exec  -r ./node_modules/dotenv/config",
+    "start": "babel-node server/app.js --exec  ",
     "dev": "nodemon server/app.js",
     "devbabel": "nodemon server/app.js --exec babel-node"
   },
