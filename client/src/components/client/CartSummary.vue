@@ -1,5 +1,10 @@
 <template>
   <div>
+    <v-row>
+      <v-col cols="12" class="pt-0 pb-0 pl-6">
+        <span style="font-size: 22px; font-family: BogleWeb,Helvetica Neue,Helvetica,Arial,sans-serif"> <b> Cart</b> <span style="font-size: 12px; font-family: BogleWeb,Helvetica Neue,Helvetica,Arial,sans-serif">({{$store.state.cartDetails.productsQuantity}})</span></span>
+    </v-col>
+    </v-row>
     <v-row class="pb-4">
       <!-- Cuando no hay nada en el carrito -->
       <v-col :cols="12" md="9" sm="12"  v-if="isCartEmpty">
@@ -123,61 +128,7 @@
         </v-col>
 
       <!-- Cuando hay productos en el carrito -->
-      <v-col :cols="12" md="9" sm="12" v-if="!isCartEmpty">
-        <!-- <v-simple-table>
-          <template v-slot:default>
-            <thead>
-              <tr>
-                <th class="text-center">ITEM</th>
-                <th>PRICE</th>
-                <th>QUANTITY</th>
-                <th>TOTAL</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="(item, index) in cartDetails.cart" :key="item.name">
-                <td>
-                  <v-list-item
-                    key="index"
-                    :to="`/shop/${item.collectionId}/product/${item.productId}`"
-                    primary
-                  >
-                    <v-list-item-avatar>
-                      <v-img v-bind:src="item.image" :alt="item.name"></v-img>
-                    </v-list-item-avatar>
-
-                    <v-list-item-content>
-                      <v-list-item-title>{{
-                        item.productName
-                      }}</v-list-item-title>
-                    </v-list-item-content>
-                  </v-list-item>
-                </td>
-                <td>${{ item.customerPrice }}</td>
-                <td>
-                  <v-text-field
-                    class="pt-8"
-                    outlined
-                    style="width: 80px"
-                    dense
-                    type="number"
-                    v-model="item.quantity"
-                    @input="up(item)"
-                    min="1"
-                    oninput="if(Number(this.value) === Number(0)) this.value = 1;"
-                  ></v-text-field>
-                </td>
-                <td>${{ item.price }}</td>
-                <td>
-                  <v-btn icon color="red">
-                    <v-icon small color="red">mdi-delete-forever</v-icon>
-                  </v-btn>
-                </td>
-              </tr>
-            </tbody>
-          </template>
-        </v-simple-table> -->
+      <v-col :cols="12"  v-if="!isCartEmpty" class="pt-0">
 
         <template v-slot:append>
             <v-row dense class="pa-2" style="background-color: white; height: 124px;">
@@ -216,7 +167,6 @@
                     <v-col class="pt-0">
                       <v-card
                         class="mx-auto"
-                        max-width="375"
                       >
 
                         <v-row v-if="!show">
@@ -356,7 +306,6 @@
                     <v-col class="pt-0">
                       <v-card
                         class="mx-auto pt-0"
-                        max-width="375"
                       >
 
                         <v-row>
@@ -402,170 +351,6 @@
               </v-main>
 
       </v-col>
-
-      <!-- <v-col
-        :cols="12"
-        md="3"
-        sm="12"
-        style="background-color: rgb(252, 249, 237)"
-        class="orderBorder"
-        v-if="!isCartEmpty"
-      > -->
-        <!-- <p class="headline">Order Summary</p>
-        <p class="overline">
-          Shipping and additional costs are calculated based on values you have
-          entered.
-        </p> -->
-        <!-- <v-simple-table>
-          <template v-slot:default>
-            <tbody>
-              <tr>
-                <td>Order Subtotal</td>
-                <td class="text-right" style="width: 50px">
-                  ${{ cartDetails.subtotal }}
-                </td>
-              </tr>
-              <tr>
-                <td>Shipping Charges</td>
-                <td class="text-right" style="width: 50px">
-                  ${{ cartDetails.shippingFee }}
-                </td>
-              </tr>
-
-              <tr>
-                <td>Tax</td>
-                <td class="text-right" style="width: 50px">
-                  ${{ cartDetails.tax }}
-                </td>
-              </tr>
-              <tr>
-                <td><b>Total</b></td>
-                <td class="text-right" style="width: 50px">
-                  <b>${{ cartDetails.total }}</b>
-                </td>
-              </tr>
-            </tbody>
-          </template>
-        </v-simple-table> -->
-
-        <!-- <v-col cols="12">
-          <v-checkbox v-model="checkbox1">
-            <template v-slot:label>
-              <div>
-                I agree
-                <v-dialog v-model="dialog" width="600px">
-                  <template v-slot:activator="{ on, attrs }">
-                    <v-btn
-                      medium
-                      text
-                      v-bind="attrs"
-                      v-on="on"
-                      style="text-transform: none"
-                      class="pl-0 pr-0"
-                      color="primary"
-                    >
-                      Terms and Conditions
-                    </v-btn>
-                  </template>
-                  <v-card>
-                    <v-card-title>
-                      <span class="text-h5"
-                        >Pigmentus® Terms and Conditions</span
-                      >
-                    </v-card-title>
-                    <v-card-text>
-                      Ay Fonsi DY Oh-oh Oh no, oh no (oh) Hey yeah Diridiri,
-                      dirididi Daddy Go Sí, sabes que ya llevo un rato mirándote
-                      Tengo que bailar contigo hoy (DY) Vi que tu mirada ya
-                      estaba llamándome Muéstrame el camino que yo voy Oh Tú, tú
-                      eres el imán y yo soy el metal Me voy acercando y voy
-                      armando el plan Solo con pensarlo se acelera el pulso Oh
-                      yeah Ya, ya me está gustando más de lo normal Todos mis
-                      sentidos van pidiendo más Esto hay que tomarlo sin ningún
-                      apuro Despacito Quiero respirar tu cuello despacito Deja
-                      que te diga cosas al oído Para que te acuerdes si no estás
-                      conmigo Despacito Quiero desnudarte a besos despacito
-                      Firmar las paredes de tu laberinto Y hacer de tu cuerpo
-                      todo un manuscrito (sube, sube, sube) (Sube, sube) Oh
-                      Quiero ver bailar tu pelo Quiero ser tu ritmo (eh-oh)
-                      (uh-oh, uh-oh) Que le enseñes a mi boca (eh-oh) (uh-oh,
-                      uh-oh) Tus lugares favoritos (eh-oh) (favoritos, favoritos
-                      baby) Déjame sobrepasar Tus zonas de peligro (eh-oh)
-                      (uh-oh, uh-oh) Hasta provocar tus gritos (uh-oh, uh-oh) Y
-                      que olvides tu apellido (diridiri, dirididi Daddy) Yo sé
-                      que estás pensándolo (yeh) Llevo tiempo intentándolo (yeh)
-                      Mami, esto es dando y dándolo Sabes que tu corazón conmigo
-                      te hace bam bam Sabe que esa beba 'tá buscando de mi bam
-                      bam Ven prueba de mi boca para ver cómo te sabe (eh-eh)
-                      Quiero, quiero, quiero ver cuánto amor a ti te cabe Yo no
-                      tengo prisa, yo me quiero dar el viaje Empezamo' lento,
-                      después salvaje Pasito a pasito, suave suavecito Nos vamos
-                      pegando poquito a poquito Cuando tú me besas con esa
-                      destreza Veo que eres malicia con delicadeza Pasito a
-                      pasito, suave suavecito Nos vamos pegando, poquito a
-                      poquito (oh oh) Y es que esa belleza es un rompecabezas
-                      (oh no) Pero pa montarlo aquí tengo la pieza (slow, oh
-                      yeah) Despacito (yeh, go) Quiero respirar tu cuello
-                      despacito (yeh) Deja que te diga cosas al oído (yeh) Para
-                      que te acuerdes si no estás conmigo Despacito Quiero
-                      desnudarte a besos despacito (yeh) Firmar las paredes de
-                      tu laberinto Y hacer de tu cuerpo todo un manuscrito
-                      (sube, sube, sube) (Sube, sube) Oh Quiero ver bailar tu
-                      pelo Quiero ser tu ritmo (eh-oh) (uh-oh, uh-oh) Que le
-                      enseñes a mi boca (eh-oh) (uh-oh, uh-oh) Tus lugares
-                      favoritos (eh-oh) (favoritos, favoritos baby) Déjame
-                      sobrepasar Tus zonas de peligro (eh-oh) (uh-oh, uh-oh)
-                      Hasta provocar tus gritos (uh-oh, uh-oh) Y que olvides tu
-                      apellido (eh-oh) Despacito Vamo' a hacerlo en una playa en
-                      Puerto Rico Hasta que las olas griten "Ay, bendito" Para
-                      que mi sello se quede contigo (báilalo) Pasito a pasito,
-                      suave suavecito (hey yeah, yeah) Nos vamos pegando,
-                      poquito a poquito (oh no) Que le enseñes a mi boca (eh-oh)
-                      (uh-oh, uh-oh) Tus lugares favoritos (eh-oh) (favoritos,
-                      favoritos baby) Pasito a pasito, suave suavecito Nos vamos
-                      pegando, poquito a poquito (eh-oh) Hasta provocar tus
-                      gritos (eh-oh) (Fonsi) Y que olvides tu apellido (DY)
-                      Despacito Fuente: LyricFind Compositores: Erika Ender /
-                      Luis Fonsi / Ramon Ayala Letra de Despacito © Sony/ATV
-                      Music Publishing LLC
-                    </v-card-text>
-                    <v-card-actions>
-                      <v-spacer></v-spacer>
-                      <v-btn color="red" text @click="dialog = false">
-                        Disagree
-                      </v-btn>
-                      <v-btn
-                        color="green darken-1"
-                        text
-                        @click="dialog = false"
-                      >
-                        Agree
-                      </v-btn>
-                    </v-card-actions>
-                  </v-card>
-                </v-dialog>
-              </div>
-            </template>
-          </v-checkbox>
-        </v-col> -->
-
-        <!-- <div class="text-center">
-          <v-btn class="black mt-5" @click="goSignIn()" outlined>
-            <span style="color: rgb(187, 162, 87)">Place Order</span>
-
-            <svg
-              style="width: 24px; height: 24px; color: rgb(187, 162, 87)"
-              class="pl-2"
-              viewBox="0 0 24 24"
-            >
-              <path
-                fill="currentColor"
-                d="M20 4H4A2 2 0 0 0 2 6V18A2 2 0 0 0 4 20H20A2 2 0 0 0 22 18V6A2 2 0 0 0 20 4M20 11H4V8H20Z"
-              />
-            </svg>
-          </v-btn>
-        </div>
-      </v-col> -->
     </v-row>
 
     <v-row v-if="false">
@@ -643,27 +428,27 @@
 
     <v-footer fixed padless style="height: 130px" color="white">
     <v-col cols="6">
-                <span style="font-size: 15px; font-family: BogleWeb,Helvetica Neue,Helvetica,Arial,sans-serif"><b>Estimated total</b></span>
-              </v-col>
-              <v-col cols="6" style="text-align: right;">
-                <span style="font-family: BogleWeb,Helvetica Neue,Helvetica,Arial,sans-serif; font-size: 20px"><b>${{cartDetails.total }}</b></span>
-              </v-col>
+      <span style="font-size: 15px; font-family: BogleWeb,Helvetica Neue,Helvetica,Arial,sans-serif"><b>Estimated total</b></span>
+    </v-col>
+    <v-col cols="6" style="text-align: right;">
+      <span style="font-family: BogleWeb,Helvetica Neue,Helvetica,Arial,sans-serif; font-size: 20px"><b>${{cartDetails.total }}</b></span>
+    </v-col>
 
-              <v-col cols="12" class="pt-0">
-                <v-btn to="/cart/checkout" class="black mt-0" style="width: 354px; text-transform: none" rounded>
-                <span style="color: rgb(187, 162, 87)">Continue to checkout</span>
-                <svg
-                  style="width: 24px; height: 24px; color: rgb(187, 162, 87)"
-                  class="pl-2"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fill="currentColor"
-                    d="M20 4H4A2 2 0 0 0 2 6V18A2 2 0 0 0 4 20H20A2 2 0 0 0 22 18V6A2 2 0 0 0 20 4M20 11H4V8H20Z"
-                  />
-                </svg>
-              </v-btn>
-              </v-col>
+    <v-col cols="12" class="pt-0">
+      <v-btn to="/cart/checkout" class="black mt-0" style="max-width: 812px; text-transform: none" block rounded>
+      <span style="color: rgb(187, 162, 87)">Continue to checkout</span>
+      <svg
+        style="width: 24px; height: 24px; color: rgb(187, 162, 87)"
+        class="pl-2"
+        viewBox="0 0 24 24"
+      >
+        <path
+          fill="currentColor"
+          d="M20 4H4A2 2 0 0 0 2 6V18A2 2 0 0 0 4 20H20A2 2 0 0 0 22 18V6A2 2 0 0 0 20 4M20 11H4V8H20Z"
+        />
+      </svg>
+    </v-btn>
+    </v-col>
   </v-footer>
   </div>
 
