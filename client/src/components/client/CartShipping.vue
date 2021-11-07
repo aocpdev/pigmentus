@@ -125,7 +125,7 @@
       >
         Continue
       </v-btn>
-      <v-btn text to="/cart/summary">
+      <v-btn text to="/cart">
         Cancel
       </v-btn>
     </v-stepper-content>

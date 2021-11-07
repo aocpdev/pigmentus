@@ -402,7 +402,7 @@ export default {
 
     goCart () {
       if (this.$vuetify.breakpoint.mobile) {
-        router.push({ path: `/cart/summary`});
+        router.push({ path: `/cart`});
       }else {
         this.$store.state.drawer = true;
       }

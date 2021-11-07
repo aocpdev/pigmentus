@@ -6,7 +6,7 @@ import Activity from '../components/client/Activity.vue';
 import UserAccount from '../components/client/UserAccount.vue';
 import Messages from '../components/client/Messages.vue';
 import Profile from '../components/client/Profile.vue';
-import Cart from '../components/client/Cart.vue';
+import CartView from '../views/Cart.vue';
 import CartShipping from '../components/client/CartShipping.vue';
 import CartSummary from '../components/client/CartSummary.vue';
 import CartCheckout from '../components/client/CartCheckout.vue';
@@ -148,10 +148,10 @@ Vue.use(VueRouter)
       {
         path: '/cart',
         name: 'cart',
-        component: Cart,
+        component: CartView,
         redirect: {name: 'cartSummary'},
         children: [
-          { path: 'summary', name: 'cartSummary', component: CartSummary},
+          { path: '', name: 'cartSummary', component: CartSummary},
           // { path: 'shipping', name: 'cartShipping', component: CartShipping,
           // children:[
             { path: 'checkout', name: 'cartCheckout', component: CartCheckout},

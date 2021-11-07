@@ -75,7 +75,7 @@
           <!-- <div id="ATHMovil_Checkout_Button" ></div> -->
 
           <div style="margin-top: 10px" ref="paypal"></div>
-          <v-btn class="cancelButton" color="primary" to="/cart/summary">
+          <v-btn class="cancelButton" color="primary" to="/cart">
             Cancel
           </v-btn>
 
