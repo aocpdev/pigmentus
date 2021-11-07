@@ -151,6 +151,7 @@
                 this.getCart(this.$store.state.user.id);
                 console.log('Cart: ', this.$store.state.cartDetails);
                 console.log('Local Storage: ', JSON.parse(localStorage.getItem("__pigmentusCart")))
+
             }else {
 
             }

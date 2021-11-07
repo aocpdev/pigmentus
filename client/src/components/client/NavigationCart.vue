@@ -5,6 +5,7 @@
           temporary
           app
           style="background-color: #F7F7F7; width: 375px; z-index: 102"
+          touchless
         >
           <v-app-bar
           app
@@ -40,7 +41,7 @@
               </v-col>
 
               <v-col cols="12">
-                <v-btn to="/cart/checkout" class="black mt-0" style="width: 354px; text-transform: none" rounded>
+                <v-btn @click="goSignIn()" class="black mt-0" style="width: 354px; text-transform: none" rounded>
                 <span style="color: rgb(187, 162, 87)">Continue to checkout</span>
                 <svg
                   style="width: 24px; height: 24px; color: rgb(187, 162, 87)"

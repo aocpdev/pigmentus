@@ -333,7 +333,7 @@
     </v-col>
 
     <v-col cols="12" class="pt-0">
-      <v-btn to="/cart/checkout" class="black mt-0" style="max-width: 812px; text-transform: none" block rounded>
+      <v-btn @click="goSignIn()" class="black mt-0" style="max-width: 812px; text-transform: none" block rounded>
       <span style="color: rgb(187, 162, 87)">Continue to checkout</span>
       <svg
         style="width: 24px; height: 24px; color: rgb(187, 162, 87)"
