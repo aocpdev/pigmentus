@@ -1,6 +1,7 @@
 <template>
     <v-navigation-drawer
           v-model="$store.state.drawer"
+          v-if="!$vuetify.breakpoint.mobile"
           right
           temporary
           app
@@ -31,7 +32,7 @@
           </v-app-bar>
 
 
-          <template v-slot:append>
+          <template v-slot:append v-if="!$store.state.isCartEmpty">
             <v-row dense class="pa-2" style="background-color: white; height: 124px;">
               <v-col cols="4">
                 <span style="font-size: 15px; font-family: BogleWeb,Helvetica Neue,Helvetica,Arial,sans-serif"><b>Estimated total</b></span>
@@ -67,7 +68,7 @@
 
                   <!-- Cuando el Carrito esta empty -->
                   <div v-if="$store.state.isCartEmpty">
-                    <v-row class="mt-50px" >
+                  <v-row class="mt-50px" >
                     <v-col class="pt-1 pb-0">
                       <v-card
                         elevation="1"
@@ -141,9 +142,6 @@
                             </v-card-subtitle>
                           </v-col>
                           <v-col cols="8" style="text-align: right" class="pt-0" >
-                            <!-- <v-card-subtitle class="pb-0">
-                              <span style="font-size: 14px"><b>${{$store.state.cartDetails.subtotal}}</b></span>
-                            </v-card-subtitle> -->
                           </v-col>
                         </v-row>
 
@@ -299,7 +297,7 @@
                               <span style="font-size: 14px; font-family: BogleWeb,Helvetica Neue,Helvetica,Arial,sans-serif" class="pl-3 pr-3"><b>Estimated total</b></span>
                           </v-col>
                           <v-col cols="6" style="text-align: right"  >
-                              <span style="font-size: 14px; font-family: BogleWeb,Helvetica Neue,Helvetica,Arial,sans-serif" class="pl-3 pr-3"><b>${{cartDetails.total}}</b></span>
+                              <span style="font-size: 14px; font-family: BogleWeb,Helvetica Neue,Helvetica,Arial,sans-serif" class="pl-3 pr-3"><b>${{$store.state.cartDetails.total}}</b></span>
                           </v-col>
                         </v-row>
 
@@ -323,10 +321,11 @@
                         color="primary"
 
                       >
-                        <v-tab>Wishlist (0)</v-tab>
-                        <v-tab>Buy it again (0)</v-tab>
+                        <v-tab  style="font-size: 13px">Wishlist (0)</v-tab>
+                        <v-tab style="font-size: 13px">Buy it again (0)</v-tab>
+                        <v-tab style="font-size: 13px">Saved (0)</v-tab>
 
-                        <v-tab-item
+                        <!-- <v-tab-item
                         >
                           <v-container fluid>
                             <v-row>
@@ -338,6 +337,88 @@
 
                               </v-col>
                             </v-row>
+                          </v-container>
+                        </v-tab-item> -->
+
+                        <v-tab-item
+                        >
+                          <v-container fluid>
+                            <v-row>
+                              <v-subheader style="text-align: center">No tiene Productos</v-subheader>
+                            </v-row>
+                            <!-- <v-row>
+                              <v-col
+                              >
+                                <v-list flat>
+
+                                    <v-list-item class="list-item">
+                                        <v-list-item-action >
+                                            <v-img height="60px" width="60px" class="image" ></v-img>
+                                        </v-list-item-action>
+                                        <v-list-item-content>
+
+                                            <a><v-list-item-title> Nombre del Producto</v-list-item-title></a>
+                                            <v-list-item-subtitle>Descripcion del Producto: </v-list-item-subtitle>
+                                            <div style="width: 70px">
+                                              <v-btn
+                                                x-small
+                                                outlined
+                                                color="primary"
+                                              >
+                                                Add to Cart
+                                              </v-btn>
+                                            </div>
+
+                                        </v-list-item-content>
+
+                                        <v-list-item-action>
+                                          <v-list-item-title><b>$2.99</b></v-list-item-title>
+                                        </v-list-item-action>
+                                    </v-list-item>
+                                </v-list>
+                              </v-col>
+                            </v-row> -->
+                          </v-container>
+                        </v-tab-item>
+
+                        <v-tab-item
+                        >
+                          <v-container fluid>
+                            <v-row>
+                              <v-subheader style="text-align: center">No tiene Productos</v-subheader>
+                            </v-row>
+                            <!-- <v-row>
+                              <v-col
+                              >
+                                <v-list flat>
+
+                                    <v-list-item class="list-item">
+                                        <v-list-item-action >
+                                            <v-img height="60px" width="60px" class="image" ></v-img>
+                                        </v-list-item-action>
+                                        <v-list-item-content>
+
+                                            <a><v-list-item-title> Nombre del Producto</v-list-item-title></a>
+                                            <v-list-item-subtitle>Descripcion del Producto: </v-list-item-subtitle>
+                                            <div style="width: 70px">
+                                              <v-btn
+                                                x-small
+                                                outlined
+                                                color="primary"
+                                              >
+                                                Add to Cart
+                                              </v-btn>
+                                            </div>
+
+                                        </v-list-item-content>
+
+                                        <v-list-item-action>
+                                          <v-list-item-title><b>$2.99</b></v-list-item-title>
+                                        </v-list-item-action>
+                                    </v-list-item>
+                                </v-list>
+                              </v-col>
+                            </v-row> -->
                           </v-container>
                         </v-tab-item>
 
@@ -386,6 +467,12 @@
                     </v-col>
                   </v-row>
 
+                  <v-row>
+                    <v-col class="pt-0">
+                      <top-picks></top-picks>
+                    </v-col>
+                  </v-row>
+
 
 
                 </v-container>
@@ -399,8 +486,10 @@
 <script>
 import router from "../../router/index";
 import store from "../../store/index";
+import TopPicks from '../client/TopPicks.vue'
 import axios from "axios";
 export default {
+    components: {TopPicks},
     name: 'NavigationCart',
     data() {
         return {
@@ -419,7 +508,7 @@ export default {
         this.cartDetails = res.data.cartDetails;
         this.$store.state.cartDetails.productsQuantity = this.cartDetails.productsQuantity;
         if (res.data.cartDetails.cart.length > 0) {
-          this$store.state.isCartEmpty = false;
+          this.$store.state.isCartEmpty = false;
         }
       }).catch((err) => console.log(err));
 

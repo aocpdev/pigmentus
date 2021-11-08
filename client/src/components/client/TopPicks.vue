@@ -5,7 +5,6 @@
         <v-subheader style="text-align: center"><b>Best Seller</b></v-subheader>
         <v-divider></v-divider>
         <v-list-item-group
-            v-model="selectedItem"
             color="primary"
         >
             <v-list-item class="list-item">

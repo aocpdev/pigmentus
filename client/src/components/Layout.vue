@@ -29,8 +29,6 @@
           <v-btn
             tile
             large
-            v-bind="attrs"
-            v-on="on"
             color="white"
             class="ma-2"
             icon
@@ -47,8 +45,6 @@
           <v-btn
             tile
             large
-            v-bind="attrs"
-            v-on="on"
             color="white"
             class="ma-2"
             icon
@@ -65,8 +61,6 @@
           <v-btn
             tile
             large
-            v-bind="attrs"
-            v-on="on"
             color="white"
             icon
             to="/admin"
@@ -84,8 +78,6 @@
           <v-btn
             class="ma-2"
             tile
-            v-bind="attrs"
-            v-on="on"
             large
             color="white"
             icon
@@ -110,8 +102,6 @@
           <v-btn
             class="ma-2"
             tile
-            v-bind="attrs"
-            v-on="on"
             large
             color="white"
             icon

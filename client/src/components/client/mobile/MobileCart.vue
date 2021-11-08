@@ -324,7 +324,7 @@
 
 
 
-    <v-footer fixed padless style="" color="white">
+    <v-footer v-if="!$store.state.isCartEmpty" fixed padless style="" color="white">
     <v-col cols="6">
       <span style="font-size: 15px; font-family: BogleWeb,Helvetica Neue,Helvetica,Arial,sans-serif"><b>Estimated total</b></span>
     </v-col>
