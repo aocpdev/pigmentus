@@ -23,8 +23,6 @@
         </div>
         <div
           class="col-md-7 col-sm-7 col-xs-12"
-          v-for="(product, i) in product"
-          :key="i"
 
         >
 

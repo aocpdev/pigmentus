@@ -15,7 +15,7 @@
         aspect-ratio="3.85"
         contain
         class="grey lighten-2"
-      >
+      />
         <!-- <v-row
           class="fill-height"
           align="center"
@@ -32,7 +32,7 @@
         aspect-ratio="3.85"
               contain
         class="grey lighten-2"
-      >
+      />
         <!-- <v-row
           class="fill-height"
           align="center"
@@ -380,6 +380,7 @@
         },
         created() {
           this.getInventory();
+          this.$store.state.bottomNavigation = false;
         },
     }
 </script>

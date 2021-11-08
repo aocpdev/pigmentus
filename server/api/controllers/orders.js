@@ -28,7 +28,6 @@ exports.getAllOrders = (req, res, next) => {
 }
 
 exports.saveOrder = (req, res, next) => {
-    console.log(req.body);
     try {
         saveOrder(req.body)
         .then( order => {

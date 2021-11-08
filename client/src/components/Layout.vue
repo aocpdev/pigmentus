@@ -24,8 +24,8 @@
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
-      <v-tooltip bottom color="black">
-        <template v-slot:activator="{ on, attrs }">
+      <!-- <v-tooltip bottom color="black">
+        <template v-slot:activator="{ on, attrs }"> -->
           <v-btn
             tile
             large
@@ -38,12 +38,12 @@
           >
             <v-icon small>mdi-school</v-icon>
           </v-btn>
-        </template>
+        <!-- </template>
         <span style="color: rgb(187, 162, 87)">Academy</span>
-      </v-tooltip>
+      </v-tooltip> -->
 
-      <v-tooltip bottom color="black">
-        <template v-slot:activator="{ on, attrs }">
+      <!-- <v-tooltip bottom color="black">
+        <template v-slot:activator="{ on, attrs }"> -->
           <v-btn
             tile
             large
@@ -56,12 +56,12 @@
           >
             <v-icon small>mdi-shopping</v-icon>
           </v-btn>
-        </template>
+        <!-- </template>
         <span style="color: rgb(187, 162, 87)">Shop</span>
-      </v-tooltip>
+      </v-tooltip> -->
 
-      <v-tooltip bottom color="black">
-        <template v-slot:activator="{ on, attrs }">
+      <!-- <v-tooltip bottom color="black">
+        <template v-slot:activator="{ on, attrs }"> -->
           <v-btn
             tile
             large
@@ -75,12 +75,12 @@
           >
             <v-icon small>mdi-account-cog</v-icon>
           </v-btn>
-        </template>
+        <!-- </template>
         <span style="color: rgb(187, 162, 87)">Admin</span>
-      </v-tooltip>
+      </v-tooltip> -->
 
-      <v-tooltip bottom color="black">
-        <template v-slot:activator="{ on, attrs }">
+      <!-- <v-tooltip bottom color="black">
+        <template v-slot:activator="{ on, attrs }"> -->
           <v-btn
             class="ma-2"
             tile
@@ -101,12 +101,12 @@
               <v-icon small>mdi-cart</v-icon>
             </v-badge>
           </v-btn>
-        </template>
+        <!-- </template>
         <span style="color: rgb(187, 162, 87)">Cart</span>
-      </v-tooltip>
+      </v-tooltip> -->
 
-      <v-tooltip bottom color="black">
-        <template v-slot:activator="{ on, attrs }">
+      <!-- <v-tooltip bottom color="black">
+        <template v-slot:activator="{ on, attrs }"> -->
           <v-btn
             class="ma-2"
             tile
@@ -120,9 +120,9 @@
           >
             <v-icon small>mdi-login</v-icon>
           </v-btn>
-        </template>
+        <!-- </template>
         <span style="color: rgb(187, 162, 87)">Login</span>
-      </v-tooltip>
+      </v-tooltip> -->
 
       <div
         class="d-flex justify-center align-center"
@@ -198,7 +198,10 @@
 
 
 
+
+
     <v-main v-if="!$store.state.isLoading" style="background-color: #f9f9f9">
+      <bottom-navigation v-if="$store.state.bottomNavigation"></bottom-navigation>
       <v-snackbar
         v-model="$store.state.snackbar"
         :timeout="$store.state.snackbarTimeout"
@@ -217,7 +220,7 @@
         </template>
       </v-snackbar>
 
-      <v-container fluid class="px-0 py-0">
+      <v-container fluid class="px-0 py-0" >
         <navigation-cart></navigation-cart>
         <router-view />
       </v-container>
@@ -326,13 +329,15 @@ import Loading from "@/components/Loading.vue";
 import { mapState, mapActions, mapMutations } from "vuex";
 import router from "../router/index";
 import axios from "axios";
+import BottomNavigation from '../components/BottomNavigation.vue'
 import NavigationCart from '../components/client/NavigationCart.vue'
 export default {
   name: "Layout",
 
   components: {
     Loading,
-    'navigationCart': NavigationCart
+    NavigationCart,
+    BottomNavigation
   },
 
   data: () => ({
@@ -395,6 +400,7 @@ export default {
             this.changeLoginStatus(false);
             this.changeRole(4);
             router.push({ path: "/home" });
+            this.$store.state.isCartEmpty = true;
           }
         })
         .catch((err) => console.log(err));
@@ -405,7 +411,10 @@ export default {
         router.push({ path: `/cart`});
       }else {
         this.$store.state.drawer = true;
-      }
+          if (this.$store.state.cartDetails.cart.length > 0) {
+            this.$store.state.isCartEmpty = false;
+          }
+        }
     },
 
 
@@ -413,7 +422,7 @@ export default {
 
   created() {
     this.isAuth();
-
+    this.$store.state.bottomNavigation = true;
     if (
       this.$store.state.user === "" &&
       localStorage.__pigmentusCart !== undefined

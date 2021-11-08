@@ -1,64 +1,59 @@
 <template>
 
         <div>
-            <bottom-navigation></bottom-navigation>
             <v-container>
-            <div class="row">
+                 <div class="row" >
                 <div
                 class="col-md-3 col-sm-3 col-xs-12"
                 v-if="!isProduct"
                 >
+                    <v-card outlined>
+                        <v-card-title>Shop</v-card-title>
+                        <v-divider></v-divider>
 
 
+                        <skeleton-list v-if="loading"></skeleton-list>
 
+                        <v-list rounded   v-else>
+                            <v-list-item to="/shop/1" color="rgb(187, 162, 87)">
+                                <v-list-item-content>
+                                <v-list-item-title>All</v-list-item-title>
+                            </v-list-item-content>
+                            </v-list-item>
 
+                            <v-list-group
+                                v-for="item in collectionTest"
+                                :key="item.name"
+                                v-model="item.active"
+                                color="rgb(187, 162, 87)"
+                            >
+                                <template v-slot:activator>
+                                <v-list-item-content>
+                                    <v-list-item-title v-text="item.name"></v-list-item-title>
+                                </v-list-item-content>
+                                </template>
 
-                        <v-card outlined>
-                            <v-card-title>Shop</v-card-title>
-                            <v-divider></v-divider>
+                                <v-list-item
+                                v-for="child in item.children"
+                                :key="child.name"
+                                :to="child.to"
 
-
-                            <skeleton-list v-if="loading"></skeleton-list>
-
-                            <v-list rounded   v-else>
-                                <v-list-item to="/shop/1" color="rgb(187, 162, 87)">
-                                    <v-list-item-content>
-                                    <v-list-item-title>All</v-list-item-title>
+                                >
+                                <v-list-item-content>
+                                    <v-list-item-title v-text="child.name"></v-list-item-title>
                                 </v-list-item-content>
                                 </v-list-item>
-
-                                <v-list-group
-                                    v-for="item in collectionTest"
-                                    :key="item.name"
-                                    v-model="item.active"
-                                    color="rgb(187, 162, 87)"
-                                >
-                                    <template v-slot:activator>
-                                    <v-list-item-content>
-                                        <v-list-item-title v-text="item.name"></v-list-item-title>
-                                    </v-list-item-content>
-                                    </template>
-
-                                    <v-list-item
-                                    v-for="child in item.children"
-                                    :key="child.name"
-                                    :to="child.to"
-
-                                    >
-                                    <v-list-item-content>
-                                        <v-list-item-title v-text="child.name"></v-list-item-title>
-                                    </v-list-item-content>
-                                    </v-list-item>
-                                </v-list-group>
-                            </v-list>
-                        </v-card>
+                            </v-list-group>
+                        </v-list>
+                    </v-card>
                 </div>
 
                 <component v-bind:is="changeComponent" v-bind="currentProperties" :key="$route.params.id"></component>
 
 
             </div>
-        </v-container>
+            </v-container>
+
         </div>
 
 
@@ -165,6 +160,8 @@ export default {
 
     created() {
         this.loading = true;
+        this.$store.state.bottomNavigation = true;
+        window.scrollTo(0, 0);
         this.collectionsId = this.$route.params.id;
         this.getCollections(this.collectionsId, this.collectionId);
 

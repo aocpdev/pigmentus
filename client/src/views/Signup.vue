@@ -143,6 +143,9 @@ export default {
           }
 
         },
+        created() {
+          this.$store.state.bottomNavigation = false;
+        },
         createUser() {
             this.user.enable = true;
             this.axios.post('/api/auth/signup', this.user)

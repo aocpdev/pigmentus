@@ -6,7 +6,6 @@ const Calculations = require('../directives/calculations')
 exports.getCart = (req, res, next) => {
 
     try {
-        console.log(req.query)
         getCart(req.query.userId).then( cart => {
             let totals = [];
             let totalAndTax = [];
@@ -35,13 +34,13 @@ exports.getCart = (req, res, next) => {
             subWithShipping.push(cartDetails.subtotal);
             subWithShipping.push(cartDetails.shippingFee);
             cartDetails.subtotalWithShipping = Calculations.sum(subWithShipping).toFixed(2);
-            // console.log(cartDetails.subtotalWithShipping);
+
             totalAndTax.push(cartDetails.subtotal);
             totalAndTax.push(cartDetails.shippingFee);
 
             totalAndTax.push(cartDetails.tax);
             cartDetails.total = Calculations.sum(totalAndTax).toFixed(2);
-            // console.log(cartDetails.total);
+
             res.status(200).json({cartDetails: cartDetails});
         })
     } catch (error) {
@@ -59,13 +58,8 @@ exports.saveToCart = (req, res, next) => {
     let productId = 0;
     let id = 0;
     let quantity = 0;
-    console.log(req.body)
     try {
         getCart(req.body.userId).then(shopingCart => {
-            // console.log(shopingCart.rows);
-            // console.log(req.body.userId);
-            console.log(shopingCart);
-            console.log(shopingCart.rows.length === 0);
             if (shopingCart.rows.length === 0){
                 saveToCart(req.body)
                 .then( cart => {
@@ -76,7 +70,6 @@ exports.saveToCart = (req, res, next) => {
                 }).catch(err => res.status(401).json({ err }));
             } else {
                 shopingCart.rows.forEach(element => {
-                    // console.log(element.id);
                     if (element.productId === req.body.productId) {
                         hasProductInCart = true;
                         id = element.id;
@@ -91,7 +84,6 @@ exports.saveToCart = (req, res, next) => {
                         productId: productId,
                         quantity: quantity
                     }
-                    // console.log(editQuantity);
                     putCart(editQuantity).then(refresh => {
                         res.status(200).json({
                             message: "Cart added successfully"
@@ -104,7 +96,6 @@ exports.saveToCart = (req, res, next) => {
                         productId: productId,
                         quantity: req.body.quantity
                     }
-                    // console.log(editQuantity);
                     putCart(editQuantity).then(refresh => {
                         res.status(200).json({
                             message: "Cart added successfully"

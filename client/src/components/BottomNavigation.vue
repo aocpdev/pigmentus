@@ -1,15 +1,19 @@
 <template>
-    <v-bottom-navigation
+    <v-app-bar
         style="background-color: rgb(252, 249, 237)"
         horizontal
         dense
     >
+        <v-spacer></v-spacer>
         <v-btn small to="/home"
         color="rgb(187, 162, 87)"
         text
-        x-small>
+        x-small
+        style="text-transform: none">
         Home
         </v-btn>
+
+        <v-spacer></v-spacer>
 
         <!-- <v-btn small to="/home"
         color="rgb(187, 162, 87)"
@@ -43,7 +47,7 @@
 
         </v-card>
         </v-menu> -->
-    </v-bottom-navigation>
+    </v-app-bar>
 </template>
 
 <script>

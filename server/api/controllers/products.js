@@ -72,7 +72,6 @@ exports.getInventory = (req, res, next) => {
 }
 
 exports.saveProduct = (req, res, next) => {
-        // console.log(req.body);
         if (req.body.id > 0) {
             try {
                 let product = {

@@ -104,77 +104,86 @@
     export default {
         name: 'CartCheckout',
         data: () => ({
-            order: ""
-          // ATHM_Checkout: {
-          //     env: 'sandbox',
-          //     publicToken: 'sandboxtoken01875617264',
-
-          //     timeout: 600,
-
-          //     theme: 'btn',
-          //     lang: 'en',
-
-          //     total: 1.00,
-          //     tax: 1.00,
-          //     subtotal: 1.00,
-
-          //     metadata1: 'metadata1 test',
-          //     metadata2: 'metadata2 test',
-
-          //     items: [],
-          //     onCompletedPayment: function (response)
-          //     {
-          //         console.log("mamamamamamama")
-          //     },
-          //     onCancelledPayment: function (response)
-          //     {
-          //         console.log("mamamamamaama", response )
-          //     },
-          //     onExpiredPayment: function (response)
-          //     {
-          //         //Handle response
-          //     }
-
-          // }
-
+            order: "",
+            cartDetails: {}
         }),
         created() {
           this.$store.state.e2 = 2;
           this.$store.state.cartHeading = 'Checkout Payment';
 
           orderModel.order.userId = this.$store.state.user.id;
-          console.log(this.$store.state.shippingInformation);
 
+
+
+
+        },
+        mounted: function() {
 
           if (localStorage.getItem("__pigmentusCart") !== undefined) {
+            const sum = function (a) {
+              return (a.length && parseFloat(a[0]) + sum(a.slice(1))) || 0;
+            };
+            let localStrg = JSON.parse(localStorage.getItem("__pigmentusCart"))
             if (this.$store.state.user !== '') {
-                this.getCart(this.$store.state.user.id);
-                console.log('Cart: ', this.$store.state.cartDetails);
-                console.log('Local Storage: ', JSON.parse(localStorage.getItem("__pigmentusCart")))
+              axios.get('api/cart', { params: { userId: this.$store.state.user.id} }).then(res => {
+                this.$store.state.cartDetails = res.data.cartDetails;
+                if (res.data.cartDetails.cart.length > 0) {
+                  localStrg.cart.forEach((storage, indx) => {
+                    let isSaved = false;
+                    let quantityArray = []
+                    res.data.cartDetails.cart.forEach((element, index) => {
+                      if (storage.productId === element.productId) {
+                        isSaved = true;
+                        quantityArray.push(storage.quantity);
+                        quantityArray.push(element.quantity);
 
+                        element.quantity = sum(quantityArray);
+                        element.isEditInCart = true;
+                        axios
+                        .post("api/cart", element)
+                        .then((res) => {
+                          this.getCart(this.$store.state.user.id);
+                        })
+                        .catch((err) => console.log(err));
+
+                        console.log(sum(quantityArray))
+
+                      }else if (isSaved === false && res.data.cartDetails.cart.length === index + 1) {
+                        storage.isEditInCart = false;
+
+                        let newProduct = {
+                          isEditInCart: false,
+                          productId: storage.productId,
+                          userId: this.$store.state.user.id,
+                          quantity: storage.quantity,
+                        }
+
+                        axios
+                        .post("api/cart", newProduct)
+                        .then((res) => {
+                          this.getCart(this.$store.state.user.id);
+                        })
+                        .catch((err) => console.log(err));
+
+                      }
+                    });
+                    localStorage.removeItem('__pigmentusCart');
+                  });
+
+                }else {
+
+                }
+
+
+              }).catch(err => console.log(err))
+                // console.log('Cart: ', this.$store.state.cartDetails);
+                // console.log('Local Storage: ', JSON.parse(localStorage.getItem("__pigmentusCart")))
             }else {
 
             }
           }else {
 
           }
-
-
-          // let athMovilScript = document.createElement('script')
-          //     athMovilScript.src = "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js";
-          //     document.head.appendChild(athMovilScript);
-
-        },
-        mounted: function() {
-
-
-          // window.ATHM_Checkout = this.ATHM_Checkout;
-
-
-
-          // let athMovil = document.createElement('script')
-          //   athMovil.src = "https://www.athmovil.com/api/js/v3/athmovilV3.js";
-          //   document.body.appendChild(athMovil);
 
           const script = document.createElement("script");
               script.src =
@@ -193,6 +202,8 @@
             getCart: async function (userId) {
                 axios.get('api/cart', { params: { userId: userId} }).then(res => {
                 this.$store.state.cartDetails = res.data.cartDetails;
+                this.cartDetails = res.data.cartDetails;
+                console.log('dime que si')
                 }).catch(err => console.log(err))
             },
 

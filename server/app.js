@@ -48,7 +48,7 @@ app.use('/api/orders', require('./api/routes/orders'));
 // app.use('/profile', require('./api/routes/profile'));
 
 
-console.log(process.env);
+// console.log(process.env);
 
  // Middleware for Vue.js router mode history
 app.use(history());

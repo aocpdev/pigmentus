@@ -186,6 +186,9 @@ export default {
         this.drawer = false
       },
     },
+    created() {
+      this.$store.state.bottomNavigation = false;
+    },
 }
 </script>
 

@@ -136,6 +136,7 @@ export default {
   },
   created() {
     // console.log(this.$route.query.fromCart);
+    this.$store.state.bottomNavigation = false;
   },
   beforeRouteEnter(to, from, next) {
     next(vm => {

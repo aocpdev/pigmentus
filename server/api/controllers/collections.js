@@ -16,7 +16,6 @@ exports.getCollections = (req, res, next) => {
 
 exports.getCollection = (req, res, next) => {
     try {
-        // console.log(req.query.id);
         getCollection(req.query.id)
         .then( collection => {
             res.status(200).json({collection: collection})

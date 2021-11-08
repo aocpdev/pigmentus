@@ -1,6 +1,5 @@
 <template>
   <div>
-      <bottom-navigation></bottom-navigation>
       <v-container>
         <router-view/>
       </v-container>
