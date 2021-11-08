@@ -8,18 +8,12 @@
                 class="mx-auto"
                 >
 
-                <v-row v-if="!show">
-                            <v-col cols="4" class="pt-0">
-                            <v-card-subtitle class="pb-0">
-                                <span style="font-size: 12px">{{$store.state.cartDetails.productsQuantity}} items</span>
-                            </v-card-subtitle>
-                            </v-col>
-                            <v-col cols="8" style="text-align: right" class="pt-0" >
-                            <!-- <v-card-subtitle class="pb-0">
-                                <span style="font-size: 14px"><b>${{$store.state.cartDetails.subtotal}}</b></span>
-                            </v-card-subtitle> -->
-                            </v-col>
-                        </v-row>
+                <v-row>
+                    <v-col cols="12" class="pt-0 pb-0">
+                        <span style="font-size: 24px; font-family: BogleWeb,Helvetica Neue,Helvetica,Arial,sans-serif"> <b> Checkout</b> <span style="font-size: 12px; font-family: BogleWeb,Helvetica Neue,Helvetica,Arial,sans-serif">({{$store.state.cartDetails.productsQuantity}} items)</span></span>
+                    </v-col>
+                    </v-row>
+                    <v-row>
 
                 <v-row class="pl-6 pr-6" v-if="!show">
                             <v-col cols="3" v-for="item in $store.state.cartDetails.cart"
