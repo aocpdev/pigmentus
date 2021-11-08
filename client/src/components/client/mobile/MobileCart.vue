@@ -160,7 +160,7 @@
                                 :content="item.quantity"
                                 :value="item.quantity"
                             >
-                            <v-img   v-bind:src="item.image" :alt="item.name" height="60px" width="60px" class="image" ></v-img>
+                            <v-img   v-bind:src="item.image" :alt="item.name" height="50px" width="50px" class="image" ></v-img>
                             </v-badge>
                             </v-col>
 
@@ -347,7 +347,7 @@
       </svg>
     </v-btn>
     </v-col>
-  </v-footer>
+    </v-footer>
   </div>
 
 </template>
