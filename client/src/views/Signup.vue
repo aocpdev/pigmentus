@@ -148,6 +148,7 @@ export default {
         },
         createUser() {
             this.user.enable = true;
+            this.user.email.toLowerCase();
             this.axios.post('/api/auth/signup', this.user)
                 .then(res => {
                     if (res.data.message === "User added succesfully"){

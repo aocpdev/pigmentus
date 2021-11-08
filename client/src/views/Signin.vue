@@ -38,7 +38,7 @@
                        {{errorMessage}}
                     </v-alert>
                     </div>
-                    <v-form>
+                    <v-form @keyup.native.enter="login()">
                       <v-text-field
                       v-model="user.email"
                       label="Email"
@@ -100,7 +100,7 @@ export default {
             id: res.data.id,
             name: res.data.name,
             lastName: res.data.lastName,
-            email: res.data.email,
+            email: res.data.email.toLowerCase(),
             preferences: res.data.preferences,
             roleId: res.data.roleId
           }
@@ -137,6 +137,13 @@ export default {
   created() {
     // console.log(this.$route.query.fromCart);
     this.$store.state.bottomNavigation = false;
+    let input = document.getElementById("myInput");
+    input.addEventListener("keyup", function(event) {
+      if (event.keyCode === 13) {
+      event.preventDefault();
+      document.getElementById("myBtn").click();
+      }
+    });
   },
   beforeRouteEnter(to, from, next) {
     next(vm => {
