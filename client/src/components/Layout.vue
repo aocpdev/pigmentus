@@ -259,7 +259,7 @@
 
 
 
-    <v-footer dark padless v-if="!$store.state.isLoading && false">
+    <v-footer dark padless v-if="!$store.state.isLoading">
       <v-card class="flex" flat tile>
         <v-card-title style="color: black">
           <span style="color: white" class="border"
