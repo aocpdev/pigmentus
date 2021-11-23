@@ -205,7 +205,7 @@
                 <v-divider></v-divider>
 
                 <v-tabs color="primary">
-                    <v-tab>Wishlist (0)</v-tab>
+                    <v-tab>Wishlist(0)</v-tab>
                     <v-tab>Buy it again</v-tab>
 
                     <v-tab-item>

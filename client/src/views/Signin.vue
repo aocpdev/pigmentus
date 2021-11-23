@@ -83,7 +83,9 @@
 <script>
 import {mapMutations, mapState} from 'vuex'
 import router from '../router/index'
+import Helpers from '../components/client/common/Helpers.vue'
 export default {
+  components: { Helpers },
   data: () => ({
     user: {},
     error: false,
@@ -104,6 +106,7 @@ export default {
             preferences: res.data.preferences,
             roleId: res.data.roleId
           }
+
           this.$store.state.snackbarMessage = "Welcome Back!" + " "  + user.name + " "  + user.lastName
           this.$store.state.snackbar = true;
           console.log(user);
@@ -114,7 +117,10 @@ export default {
           } else {
             router.push('/home');
           }
-
+          // Helpers.methods.getSaveForLater(res.data.id);
+          // Helpers.methods.getCartforDB(res.data.id);
+          Helpers.methods.compareLStoDB();
+          Helpers.methods.getSavedProducts();
         })
         .catch(err => {
           this.error = false;

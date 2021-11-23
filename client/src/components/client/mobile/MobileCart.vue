@@ -212,6 +212,7 @@
                                     color="#D32F2F"
                                     style="text-transform: none"
                                     small
+                                    @click="deleProductFromCart(item.id)"
                                     >
                                     Remove
                                     </v-btn>
@@ -324,7 +325,7 @@
 
 
 
-    <v-footer v-if="!$store.state.isCartEmpty" fixed padless style="" color="white">
+    <v-footer v-if="!isCartEmpty" fixed padless style="" color="white">
     <v-col cols="6">
       <span style="font-size: 15px; font-family: BogleWeb,Helvetica Neue,Helvetica,Arial,sans-serif"><b>Estimated total</b></span>
     </v-col>
@@ -374,6 +375,9 @@ export default {
 
         this.cartDetails = res.data.cartDetails;
         this.$store.state.cartDetails.productsQuantity = this.cartDetails.productsQuantity;
+        if (this.cartDetails.cart.length === 0) {
+          this.isCartEmpty = true;
+        }
       }).catch((err) => console.log(err));
 
       }
@@ -383,7 +387,17 @@ export default {
       }
 
     },
+    deleProductFromCart (productId) {
+      if (this.$store.state.user !== '') {
+        axios.delete("api/cart", { params: { productId: productId } }).then((res) => {
+            console.log(res)
+            this.getCart(this.$store.state.user.id);
+        }).catch((err) => console.log(err));
+      }else {
+        console.log('entro aqui');
+      }
 
+    },
     goSignIn ( ) {
       if (this.$store.state.user.id !== undefined) {
         router.replace({ path: "/cart/checkout"})

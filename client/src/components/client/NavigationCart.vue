@@ -5,7 +5,7 @@
           right
           temporary
           app
-          style="background-color: #F7F7F7; width: 375px; z-index: 102"
+          style="background-color: #F7F7F7; width: 400px; z-index: 102"
           touchless
           :fullscreen="$vuetify.breakpoint.xsOnly"
         >
@@ -14,7 +14,7 @@
           color="black"
           dark
         >
-          <v-toolbar-title style="width: 350px">
+          <v-toolbar-title style="width: 400px">
             <span style="color: rgb(187, 162, 87);"><b>Cart &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></span>
             <span style="font-size: 12px;">({{$store.state.cartDetails.productsQuantity}})</span>
           </v-toolbar-title>
@@ -42,7 +42,7 @@
               </v-col>
 
               <v-col cols="12">
-                <v-btn @click="goSignIn()" class="black mt-0" style="width: 354px; text-transform: none" rounded>
+                <v-btn @click="goSignIn()" class="black mt-0" style="width: 382px; text-transform: none" rounded>
                 <span style="color: rgb(187, 162, 87)">Continue to checkout</span>
                 <svg
                   style="width: 24px; height: 24px; color: rgb(187, 162, 87)"
@@ -125,7 +125,7 @@
 
 
                   <!-- Cuando el carro tiene productsos -->
-                  <div v-else>
+                  <div v-if="!$store.state.isCartEmpty">
                     <v-row class="mt-50px" >
                     <v-col class="pt-2">
 
@@ -209,6 +209,7 @@
                                     color="#D32F2F"
                                     style="text-transform: none"
                                     small
+                                    @click="deleteProductFromCart(item.id)"
                                   >
                                     Remove
                                   </v-btn>
@@ -216,9 +217,10 @@
                                 <v-col cols="5" class="pb-0">
                                   <v-btn
                                     text
-                                    color="primary"
+                                    color="#558B2F"
                                     style="text-transform: none"
                                     small
+                                    @click="savedProducts(item)"
                                   >
                                     Save for later
                                   </v-btn>
@@ -310,161 +312,8 @@
                   </v-row>
                   </div>
 
-                  <v-row>
-                    <v-col class="pt-0">
-                      <v-card class="mt-5">
-                      <v-subheader style="text-align: center"><b>Your Items</b></v-subheader>
-                      <v-divider></v-divider>
-
-
-                      <v-tabs
-                        color="primary"
-
-                      >
-                        <v-tab  style="font-size: 13px">Wishlist (0)</v-tab>
-                        <v-tab style="font-size: 13px">Buy it again (0)</v-tab>
-                        <v-tab style="font-size: 13px">Saved (0)</v-tab>
-
-                        <!-- <v-tab-item
-                        >
-                          <v-container fluid>
-                            <v-row>
-                              <v-subheader style="text-align: center">No tiene Productos</v-subheader>
-                            </v-row>
-                            <v-row>
-                              <v-col
-                              >
-
-                              </v-col>
-                            </v-row>
-                          </v-container>
-                        </v-tab-item> -->
-
-                        <v-tab-item
-                        >
-                          <v-container fluid>
-                            <v-row>
-                              <v-subheader style="text-align: center">No tiene Productos</v-subheader>
-                            </v-row>
-                            <!-- <v-row>
-                              <v-col
-                              >
-                                <v-list flat>
-
-                                    <v-list-item class="list-item">
-                                        <v-list-item-action >
-                                            <v-img height="60px" width="60px" class="image" ></v-img>
-                                        </v-list-item-action>
-                                        <v-list-item-content>
-
-                                            <a><v-list-item-title> Nombre del Producto</v-list-item-title></a>
-                                            <v-list-item-subtitle>Descripcion del Producto: </v-list-item-subtitle>
-                                            <div style="width: 70px">
-                                              <v-btn
-                                                x-small
-                                                outlined
-                                                color="primary"
-                                              >
-                                                Add to Cart
-                                              </v-btn>
-                                            </div>
-
-                                        </v-list-item-content>
-
-                                        <v-list-item-action>
-                                          <v-list-item-title><b>$2.99</b></v-list-item-title>
-                                        </v-list-item-action>
-                                    </v-list-item>
-                                </v-list>
-                              </v-col>
-                            </v-row> -->
-                          </v-container>
-                        </v-tab-item>
-
-                        <v-tab-item
-                        >
-                          <v-container fluid>
-                            <v-row>
-                              <v-subheader style="text-align: center">No tiene Productos</v-subheader>
-                            </v-row>
-                            <!-- <v-row>
-                              <v-col
-                              >
-                                <v-list flat>
-
-                                    <v-list-item class="list-item">
-                                        <v-list-item-action >
-                                            <v-img height="60px" width="60px" class="image" ></v-img>
-                                        </v-list-item-action>
-                                        <v-list-item-content>
-
-                                            <a><v-list-item-title> Nombre del Producto</v-list-item-title></a>
-                                            <v-list-item-subtitle>Descripcion del Producto: </v-list-item-subtitle>
-                                            <div style="width: 70px">
-                                              <v-btn
-                                                x-small
-                                                outlined
-                                                color="primary"
-                                              >
-                                                Add to Cart
-                                              </v-btn>
-                                            </div>
-
-                                        </v-list-item-content>
-
-                                        <v-list-item-action>
-                                          <v-list-item-title><b>$2.99</b></v-list-item-title>
-                                        </v-list-item-action>
-                                    </v-list-item>
-                                </v-list>
-                              </v-col>
-                            </v-row> -->
-                          </v-container>
-                        </v-tab-item>
-
-                        <v-tab-item
-                        >
-                          <v-container fluid>
-                            <v-row>
-                              <v-subheader style="text-align: center">No tiene Productos</v-subheader>
-                            </v-row>
-                            <!-- <v-row>
-                              <v-col
-                              >
-                                <v-list flat>
-
-                                    <v-list-item class="list-item">
-                                        <v-list-item-action >
-                                            <v-img height="60px" width="60px" class="image" ></v-img>
-                                        </v-list-item-action>
-                                        <v-list-item-content>
-
-                                            <a><v-list-item-title> Nombre del Producto</v-list-item-title></a>
-                                            <v-list-item-subtitle>Descripcion del Producto: </v-list-item-subtitle>
-                                            <div style="width: 70px">
-                                              <v-btn
-                                                x-small
-                                                outlined
-                                                color="primary"
-                                              >
-                                                Add to Cart
-                                              </v-btn>
-                                            </div>
-
-                                        </v-list-item-content>
-
-                                        <v-list-item-action>
-                                          <v-list-item-title><b>$2.99</b></v-list-item-title>
-                                        </v-list-item-action>
-                                    </v-list-item>
-                                </v-list>
-                              </v-col>
-                            </v-row> -->
-                          </v-container>
-                        </v-tab-item>
-                      </v-tabs>
-                    </v-card>
-                    </v-col>
+                  <v-row class="mt-5">
+                    <your-items></your-items>
                   </v-row>
 
                   <v-row>
@@ -487,9 +336,11 @@
 import router from "../../router/index";
 import store from "../../store/index";
 import TopPicks from '../client/TopPicks.vue'
+import YourItems from '../../views/YourItems.vue'
 import axios from "axios";
+import Helpers from '../client/common/Helpers.vue'
 export default {
-    components: {TopPicks},
+    components: {TopPicks, YourItems},
     name: 'NavigationCart',
     data() {
         return {
@@ -507,8 +358,8 @@ export default {
         this.$store.state.cartDetails = res.data.cartDetails;
         this.cartDetails = res.data.cartDetails;
         this.$store.state.cartDetails.productsQuantity = this.cartDetails.productsQuantity;
-        if (res.data.cartDetails.cart.length > 0) {
-          this.$store.state.isCartEmpty = false;
+        if (this.cartDetails.cart.length === 0) {
+          this.$store.state.isCartEmpty = true;
         }
       }).catch((err) => console.log(err));
 
@@ -520,7 +371,41 @@ export default {
       }
 
     },
+    deleteProductFromCart (productId) {
+      if (this.$store.state.user !== '') {
+        axios.delete("api/cart", { params: { productId: productId } }).then((res) => {
+            console.log('dimelo: ', res)
+            this.getCart(this.$store.state.user.id);
+        }).catch((err) => console.log(err));
+      }else {
+        console.log('entro aqui');
+      }
+    },
+    savedProducts (productToSave) {
 
+      console.log('User Id: ', this.$store.state.user.id)
+
+      console.log('Product To Save:', productToSave);
+
+      let savedProduct = {}
+
+      if (this.$store.state.user.id !== undefined) {
+        savedProduct.product = {productToSave};
+        savedProduct.userId = this.$store.state.user.id;
+        let date = new Date();
+        savedProduct.createdDate = date;
+
+        axios.post("api/saved", savedProduct).then((res) => {
+          console.log(res);
+          this.deleteProductFromCart(productToSave.id);
+          Helpers.methods.getSavedProducts();
+        })
+        .catch((err) => console.log(err));
+
+      } else {
+
+      }
+    },
     goSignIn ( ) {
       if (this.$store.state.user.id !== undefined) {
         router.replace({ path: "/cart/checkout"})
@@ -601,8 +486,19 @@ export default {
 
   created() {
 
-    this.getCart(this.$store.state.user.id);
+    if (this.$store.state.user.id !== undefined) {
+      this.getCart(this.$store.state.user.id);
+    }else {
+      if (this.$store.state.cartDetails.cart.length > 0) {
+        this.$store.state.isCartEmpty = false;
+      }
+    }
 
+
+    // axios.get("api/saved", { params: { userId: 2 } }).then((res) => {
+
+    //     console.log(res.data.savedProducts)
+    //   }).catch((err) => console.log(err));
 
   },
   updated() {

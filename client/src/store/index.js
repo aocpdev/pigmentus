@@ -18,6 +18,7 @@ export default new Vuex.Store({
     drawer: false,
     isCartEmpty: true,
     bottomNavigation: false,
+    saveForLater: [],
     // cartHeading: '',
     // validatedAddress: false,
     // shippingInformation: {
@@ -27,7 +28,6 @@ export default new Vuex.Store({
     //   state: '',
     //   zip: '',
     //   country: '',
-
     // },
     e2: 1,
     paymentFee: 0.00,

@@ -43,7 +43,8 @@ app.use('/api/products', require('./api/routes/products'));
 app.use('/api/users', require('./auth/routes/users'));
 app.use('/api/cart', require('./api/routes/cart'));
 app.use('/api/fees', require('./api/routes/fees'));
-app.use('/api/orders', require('./api/routes/orders'));
+// app.use('/api/orders', require('./api/routes/orders'));
+app.use('/api/saved', require('./api/routes/savedProducts.js'));
 // app.use('/api/v1.0/paypal', require('./api/routes/paypal'));
 // app.use('/profile', require('./api/routes/profile'));
 

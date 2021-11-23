@@ -30,73 +30,72 @@
 
         },
         mounted: function() {
+          // if (localStorage.getItem("__pigmentusCart") !== undefined) {
+          //   const sum = function (a) {
+          //     return (a.length && parseFloat(a[0]) + sum(a.slice(1))) || 0;
+          //   };
+          //   let localStrg = JSON.parse(localStorage.getItem("__pigmentusCart"))
+          //   if (this.$store.state.user !== '') {
+          //     axios.get('api/cart', { params: { userId: this.$store.state.user.id} }).then(res => {
+          //       this.$store.state.cartDetails = res.data.cartDetails;
+          //       if (res.data.cartDetails.cart.length > 0) {
+          //         localStrg.cart.forEach((storage, indx) => {
+          //           let isSaved = false;
+          //           let quantityArray = []
+          //           res.data.cartDetails.cart.forEach((element, index) => {
+          //             if (storage.productId === element.productId) {
+          //               isSaved = true;
+          //               quantityArray.push(storage.quantity);
+          //               quantityArray.push(element.quantity);
 
-          if (localStorage.getItem("__pigmentusCart") !== undefined) {
-            const sum = function (a) {
-              return (a.length && parseFloat(a[0]) + sum(a.slice(1))) || 0;
-            };
-            let localStrg = JSON.parse(localStorage.getItem("__pigmentusCart"))
-            if (this.$store.state.user !== '') {
-              axios.get('api/cart', { params: { userId: this.$store.state.user.id} }).then(res => {
-                this.$store.state.cartDetails = res.data.cartDetails;
-                if (res.data.cartDetails.cart.length > 0) {
-                  localStrg.cart.forEach((storage, indx) => {
-                    let isSaved = false;
-                    let quantityArray = []
-                    res.data.cartDetails.cart.forEach((element, index) => {
-                      if (storage.productId === element.productId) {
-                        isSaved = true;
-                        quantityArray.push(storage.quantity);
-                        quantityArray.push(element.quantity);
+          //               element.quantity = sum(quantityArray);
+          //               element.isEditInCart = true;
+          //               axios
+          //               .post("api/cart", element)
+          //               .then((res) => {
+          //                 this.getCart(this.$store.state.user.id);
+          //               })
+          //               .catch((err) => console.log(err));
 
-                        element.quantity = sum(quantityArray);
-                        element.isEditInCart = true;
-                        axios
-                        .post("api/cart", element)
-                        .then((res) => {
-                          this.getCart(this.$store.state.user.id);
-                        })
-                        .catch((err) => console.log(err));
+          //               console.log(sum(quantityArray))
 
-                        console.log(sum(quantityArray))
+          //             }else if (isSaved === false && res.data.cartDetails.cart.length === index + 1) {
+          //               storage.isEditInCart = false;
 
-                      }else if (isSaved === false && res.data.cartDetails.cart.length === index + 1) {
-                        storage.isEditInCart = false;
+          //               let newProduct = {
+          //                 isEditInCart: false,
+          //                 productId: storage.productId,
+          //                 userId: this.$store.state.user.id,
+          //                 quantity: storage.quantity,
+          //               }
 
-                        let newProduct = {
-                          isEditInCart: false,
-                          productId: storage.productId,
-                          userId: this.$store.state.user.id,
-                          quantity: storage.quantity,
-                        }
+          //               axios
+          //               .post("api/cart", newProduct)
+          //               .then((res) => {
+          //                 this.getCart(this.$store.state.user.id);
+          //               })
+          //               .catch((err) => console.log(err));
 
-                        axios
-                        .post("api/cart", newProduct)
-                        .then((res) => {
-                          this.getCart(this.$store.state.user.id);
-                        })
-                        .catch((err) => console.log(err));
+          //             }
+          //           });
 
-                      }
-                    });
+          //           localStorage.removeItem('__pigmentusCart');
+          //         });
 
-                    localStorage.removeItem('__pigmentusCart');
-                  });
+          //       }else {
 
-                }else {
-
-                }
+          //       }
 
 
-              }).catch(err => console.log(err))
-                // console.log('Cart: ', this.$store.state.cartDetails);
-                // console.log('Local Storage: ', JSON.parse(localStorage.getItem("__pigmentusCart")))
-            }else {
+          //     }).catch(err => console.log(err))
+          //       // console.log('Cart: ', this.$store.state.cartDetails);
+          //       // console.log('Local Storage: ', JSON.parse(localStorage.getItem("__pigmentusCart")))
+          //   }else {
 
-            }
-          }else {
+          //   }
+          // }else {
 
-          }
+          // }
 
           // const script = document.createElement("script");
           //     script.src =
@@ -116,7 +115,6 @@
                 axios.get('api/cart', { params: { userId: userId} }).then(res => {
                 this.$store.state.cartDetails = res.data.cartDetails;
                 this.cartDetails = res.data.cartDetails;
-                console.log('dime que si')
                 }).catch(err => console.log(err))
             },
 

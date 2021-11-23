@@ -1,4 +1,4 @@
-const {getCart, saveToCart, putCart} = require('../queries/carts')
+const { getCart, saveToCart, putCart, deleteProduct } = require('../queries/carts')
 const Calculations = require('../directives/calculations')
 
 
@@ -43,6 +43,21 @@ exports.getCart = (req, res, next) => {
 
             res.status(200).json({cartDetails: cartDetails});
         })
+    } catch (error) {
+        res.status(500).json({
+            message: 'Error ocurred',
+            error
+        })
+    }
+}
+
+exports.deleteProduct = (req, res, next) => {
+    try {
+        deleteProduct(req.query.productId).then(response => {
+            res.status(200).json({
+                message: "Product deleted successfully"
+            })
+        }).catch(err => res.status(401).json({ err }));
     } catch (error) {
         res.status(500).json({
             message: 'Error ocurred',

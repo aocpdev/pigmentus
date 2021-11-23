@@ -13,6 +13,7 @@
     >
       <!-- <v-app-bar app color="black" :clipped-left="$vuetify.breakpoint.lgAndUp" dark v-if="false"> -->
       <v-toolbar-title style="width: 350px">
+        <a @click="goToHome()" >
         <v-img
           alt="Pigmentus Logo"
           class="shrink mr-2"
@@ -20,13 +21,13 @@
           src="../assets/pigmentus-logo.png"
           transition="scale-transition"
           width="80"
-        />
+        /></a>
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
       <!-- <v-tooltip bottom color="black">
         <template v-slot:activator="{ on, attrs }"> -->
-          <v-btn
+          <!-- <v-btn
             tile
             large
             color="white"
@@ -35,7 +36,7 @@
             to="/home"
           >
             <v-icon small>mdi-school</v-icon>
-          </v-btn>
+          </v-btn> -->
         <!-- </template>
         <span style="color: rgb(187, 162, 87)">Academy</span>
       </v-tooltip> -->
@@ -390,6 +391,7 @@ export default {
             this.changeLoginStatus(false);
             this.changeRole(4);
             router.push({ path: "/home" });
+            this.$store.state.saveForLater = [];
             this.$store.state.isCartEmpty = true;
           }
         })
@@ -406,7 +408,9 @@ export default {
           }
         }
     },
-
+    goToHome() {
+      router.push({ path: `/home`});
+    },
 
   },
 

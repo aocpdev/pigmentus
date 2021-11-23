@@ -268,6 +268,10 @@
             </div>
         </v-expand-transition>
         </v-card>
+
+        <div class="pt-5 pl-0 pr-0">
+          <your-items></your-items>
+        </div>
       </v-col>
 
       <v-col
@@ -276,6 +280,7 @@
         sm="12"
         v-if="!isCartEmpty"
       >
+
         <v-card
         class="mx-auto pt-0"
         >
@@ -327,91 +332,35 @@
         </v-row>
 
         </v-card>
+
+        <div class="pt-5">
+          <top-picks></top-picks>
+        </div>
+
+
       </v-col>
     </v-row>
 
-    <v-row v-if="false">
-      <v-col>
-        <v-card class="mt-5">
-          <v-subheader style="text-align: center"
-            ><b>Your Items</b></v-subheader
-          >
-          <v-divider></v-divider>
+    <!-- <v-row >
+      <v-col :cols="12" md="8" sm="12">
 
-          <v-tabs color="primary">
-            <v-tab>Wishlist (0)</v-tab>
-            <v-tab>Buy it again</v-tab>
-
-            <v-tab-item>
-              <v-container fluid>
-                <v-row>
-                  <v-subheader style="text-align: center"
-                    >No tiene Productos</v-subheader
-                  >
-                </v-row>
-                <v-row>
-                  <v-col> </v-col>
-                </v-row>
-              </v-container>
-            </v-tab-item>
-
-            <v-tab-item>
-              <v-container fluid>
-                <v-row>
-                  <v-subheader style="text-align: center"
-                    >No tiene Productos</v-subheader
-                  >
-                </v-row>
-                <v-row>
-                  <v-col>
-                    <v-list flat>
-                      <v-list-item class="list-item">
-                        <v-list-item-action>
-                          <v-img
-                            height="100px"
-                            width="100px"
-                            class="image"
-                          ></v-img>
-                        </v-list-item-action>
-                        <v-list-item-content>
-                          <a href="#"
-                            ><v-list-item-title>
-                              Nombre del Producto</v-list-item-title
-                            ></a
-                          >
-                          <v-list-item-subtitle
-                            >Descripcion del Producto:
-                          </v-list-item-subtitle>
-                          <div style="width: 70px">
-                            <v-btn x-small outlined color="primary">
-                              Add to Cart
-                            </v-btn>
-                          </div>
-                        </v-list-item-content>
-
-                        <v-list-item-action>
-                          <v-list-item-title><b>$2.99</b></v-list-item-title>
-                        </v-list-item-action>
-                      </v-list-item>
-                    </v-list>
-                  </v-col>
-                </v-row>
-              </v-container>
-            </v-tab-item>
-          </v-tabs>
-        </v-card>
       </v-col>
-    </v-row>
+
+      <v-col :cols="12" md="4" sm="12">
+        <top-picks></top-picks>
+      </v-col>
+    </v-row> -->
   </div>
 
 </template>
 <script>
 import TopPicks from "../TopPicks.vue";
+import YourItems from '../../../views/YourItems.vue'
 import axios from "axios";
 import router from "../../../router/index";
 export default {
   name: "CartSummary",
-  components: { TopPicks },
+  components: { TopPicks, YourItems },
   data: () => ({
 
     viewItems: "View all items",

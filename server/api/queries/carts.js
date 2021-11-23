@@ -2,7 +2,7 @@ const { pool } = require('../../config/database');
 
 const getCart = function (userId) {
     return pool.query(
-        'SELECT c.id, c.user_id as "userId", c.quantity, c.product_id as "productId", u.name as "userName", u.email as "userEmail", p.name as "productName", p.customer_price as "customerPrice", p.collection_id as "collectionId", p.weight, p.description, p.image FROM carts c JOIN products p ON p.id = c.product_id JOIN users u ON u.id = $1 where c.user_id = $1;',
+        'SELECT c.id, c.created_date as "createdDate", c.user_id as "userId", c.quantity, c.product_id as "productId", u.name as "userName", u.email as "userEmail", p.name as "productName", p.customer_price as "customerPrice", p.collection_id as "collectionId", p.weight, p.description, p.image FROM carts c JOIN products p ON p.id = c.product_id JOIN users u ON u.id = $1 where c.user_id = $1;',
         [
             userId
         ]);
@@ -24,8 +24,17 @@ const putCart = function (cart) {
 
 }
 
+const deleteProduct = function (productId) {
+    return pool.query('DELETE FROM carts WHERE id = $1;',
+        [
+            productId
+        ]
+    );
+}
+
 module.exports = {
     getCart,
     saveToCart,
     putCart,
+    deleteProduct,
 }
