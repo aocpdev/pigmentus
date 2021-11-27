@@ -304,7 +304,7 @@
             x-small
             style="text-transform: none"
           >
-            <span>Powered by Devaxec Software Solutions LLC</span>
+            <span>Powered by Devasks Software Solutions LLC</span>
           </v-btn>
         </v-card-text>
       </v-card>
