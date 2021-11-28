@@ -9,6 +9,8 @@ import VCurrencyField from 'v-currency-field'
 import { VTextField } from 'vuetify/lib'
 import VueLodash from 'vue-lodash'
 import lodash from 'lodash'
+import VueGtag from "vue-gtag";
+
 var VueCookie = require('vue-cookie');
 
 
@@ -18,6 +20,9 @@ Vue.use(VueAxios, axios, vuetify);
 Vue.use(VueCookie);
 Vue.use(VueLodash, { lodash: lodash });
 Vue.component('v-text-field', VTextField);
+Vue.use(VueGtag, {
+  config: { id: "UA-213747468-2" }
+});
 Vue.use(VCurrencyField, {
 
 	locale: 'en-US',

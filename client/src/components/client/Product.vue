@@ -891,7 +891,14 @@ export default {
       }
     },
     addToCart: async function (cart) {
+      // console.log(cart);
       cart.isEditInCart = false;
+
+      this.$gtag.event('add_to_cart', {
+        'event_category': 'ecommerce',
+        'event_label': 'cart',
+        'value': cart.quantity
+      })
 
       if (this.$vuetify.breakpoint.mobile) {
 
