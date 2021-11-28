@@ -107,6 +107,8 @@ export default {
             roleId: res.data.roleId
           }
 
+          this.$gtag('set', {'user_id': 'res.data.id'}); // Set the user ID using signed-in user_id.
+
           this.$store.state.snackbarMessage = "Welcome Back!" + " "  + user.name + " "  + user.lastName
           this.$store.state.snackbar = true;
           console.log(user);
