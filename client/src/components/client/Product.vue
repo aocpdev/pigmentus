@@ -726,6 +726,7 @@
 </template>
 <script>
 import axios from "axios";
+import VueGtag from "vue-gtag";
 import BottomNavigation from "../BottomNavigation.vue";
 import store from "../../store/index";
 import TopPicks from '../client/TopPicks.vue'
