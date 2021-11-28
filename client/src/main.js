@@ -9,7 +9,7 @@ import VCurrencyField from 'v-currency-field'
 import { VTextField } from 'vuetify/lib'
 import VueLodash from 'vue-lodash'
 import lodash from 'lodash'
-// import VueAnalytics from 'vue-analytics';
+import VueAnalytics from 'vue-analytics';
 
 // import VueGtag from "vue-gtag";
 
@@ -25,10 +25,10 @@ Vue.component('v-text-field', VTextField);
 // Vue.use(VueGtag, {
 //   config: { id: "UA-213747468-2" }
 // });
-// Vue.use(VueAnalytics, {
-//   id: 'UA-213748408-1',
-//   router
-// });
+Vue.use(VueAnalytics, {
+  id: 'UA-213747468-2',
+  router
+});
 Vue.use(VCurrencyField, {
 
 	locale: 'en-US',
