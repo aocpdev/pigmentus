@@ -26,10 +26,9 @@ Vue.component('v-text-field', VTextField);
 //   config: { id: "UA-213747468-2" }
 // });
 Vue.use(VueAnalytics, {
-  id: 'UA-213747468-1',
+  id: 'UA-213747468-2',
   router
 });
-
 Vue.use(VCurrencyField, {
 
 	locale: 'en-US',
