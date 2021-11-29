@@ -106,7 +106,7 @@ export default {
             preferences: res.data.preferences,
             roleId: res.data.roleId
           }
-          Vue.$gtag.set('user_id', res.data.id);
+          // Vue.$gtag.set('user_id', res.data.id);
 
           // this.$gtag.set( {'user_id': res.data.id}); // Set the user ID using signed-in user_id.
 
