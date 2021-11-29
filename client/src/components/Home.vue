@@ -57,7 +57,7 @@
             gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
             height="400px"
           >
-           <h1 class="text-center font-size border">Top Picks</h1>
+           <h2 class="text-center font-size border" style="font-size: 32px">Top Picks</h2>
             <div class="text-center">
               <v-btn  to="/shop" class="white--text" outlined>SHOP NOW</v-btn>
             </div>
@@ -90,7 +90,7 @@
             gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
             height="400px"
           >
-            <h1 class="text-center font-size border">New Arrivals</h1>
+            <h2 class="text-center font-size border" style="font-size: 32px">New Arrivals</h2>
             <div class="text-center">
               <v-btn  to="/shop" class="white--text" outlined>SHOP NOW</v-btn>
             </div>
@@ -111,7 +111,7 @@
             gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
             height="300px"
           >
-            <h1 class="text-center font-size border">Colors</h1>
+            <h2 class="text-center font-size border" style="font-size: 32px">Colors</h2>
             <div class="text-center mt-2">
               <v-btn class="white--text caption" to="/shop" text>SHOP NOW <v-icon class="white--text caption">mdi-arrow-right</v-icon></v-btn>
             </div>
@@ -130,7 +130,7 @@
             gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
             height="300px"
           >
-            <h1 class="text-center font-size border">Needles</h1>
+            <h2 class="text-center font-size border" style="font-size: 32px">Needles</h2>
             <div class="text-center mt-2">
               <v-btn class="white--text caption" to="/shop" text>SHOP NOW <v-icon class="white--text caption">mdi-arrow-right</v-icon></v-btn>
             </div>
@@ -149,7 +149,7 @@
             gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
             height="300px"
           >
-            <h1 class="text-center font-size border">Kits</h1>
+            <h2 class="text-center font-size border" style="font-size: 32px">Kits</h2>
             <div class="text-center mt-2">
               <v-btn class="white--text caption" to="/shop" text>SHOP NOW <v-icon class="white--text caption">  mdi-arrow-right</v-icon></v-btn>
 

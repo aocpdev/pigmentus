@@ -263,8 +263,8 @@
     <v-footer dark padless v-if="!$store.state.isLoading">
       <v-card class="flex" flat tile>
         <v-card-title style="color: black">
-          <span style="color: white" class="border"
-            >connected with us on social networks!</span
+          <h1 style="color: white; font-size: 18px" class="border"
+            >Connected with our Microblading social networks!</h1
           >
 
           <v-spacer></v-spacer>
