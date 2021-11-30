@@ -264,7 +264,7 @@
       <v-card class="flex" flat tile>
         <v-card-title style="color: black">
           <h1 style="color: white; font-size: 18px" class="border"
-            >Connected with our Microblading social networks!</h1
+            >Microblading Puerto Rico by Pigmentus</h1
           >
 
           <v-spacer></v-spacer>
