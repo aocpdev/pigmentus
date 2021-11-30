@@ -181,7 +181,6 @@ Vue.use(VueRouter)
       },
       {
         path: '/404',
-        alias: '*',
         name: 'notFound',
         component: NotFound
       }
