@@ -26,6 +26,9 @@ export default {
       // Google / Schema.org markup:
       { itemprop: 'name', content: 'Microblading by Pigmentus Academy ← Pigmentus Puerto Rico'},
       { itemprop: 'description', content: 'Microblading by Pigmentus is a beauty academy and store with Headquarter in Puerto Rico. Best Microblading in Puerto Rico.'},
+    ],
+    link: [
+      {rel: 'canonical', href: 'https://pigmentus.herokuapp.com/home'}
     ]
 
   },
