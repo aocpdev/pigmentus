@@ -17,7 +17,7 @@ export default {
     },
     meta: [
       { charset: 'utf-8' },
-      { name: 'description', content: 'Microblading by Pigmentus is a beauty academy and store with Headquarter in Puerto Rico. Best Microblading in Puerto Rico.' },
+      { name: 'description', content: 'Microblading by Pigmentus is a beauty academy and store with Headquarter in Puerto Rico. Best Microblading Puerto Rico Academy.'},
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { property: 'og:title', content: 'Microblading Puerto Rico'},
       { property: 'og:site_name', content: 'Pigmentus Academy'},
