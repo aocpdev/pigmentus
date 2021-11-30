@@ -31,9 +31,7 @@ Vue.use(VueAnalytics, {
   router
 });
 
-Vue.use(VueMeta, {
-  keyName: 'head'
-})
+Vue.use(VueMeta)
 
 Vue.use(VCurrencyField, {
 
