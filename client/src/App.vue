@@ -25,6 +25,7 @@ export default {
       { property: 'og:description', content: 'Microblading by Pigmentus is a Microblading Puerto Rico Academy'},
       // { property: 'og:image', content: 'https://www.my-site.com/my-special-image.jpg'},
       { property: 'og:type', content: 'website'},
+      {name: 'robots', content: 'index,follow'} ,
 
       // Google / Schema.org markup:
       { itemprop: 'name', content: 'Microblading by Pigmentus Academy ← Pigmentus Puerto Rico'},

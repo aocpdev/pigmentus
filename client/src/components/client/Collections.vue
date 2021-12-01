@@ -70,18 +70,19 @@
                         :elevation="hover ? 12 : 2"
                         class="mx-auto"
                         color="grey lighten-4"
-                        max-width="600"
+                        max-width="400"
 
                         >
 
 
                             <v-hover v-slot:default="{ hover }">
                             <v-img
-                                content
+                                contain
                                 class="white--text align-end"
                                 :aspect-ratio="16/9"
-                                height="200px"
+                                height="180px"
                                 :src='item.image'
+                                style="background-color: white"
                             >
 
                                 <v-row no-gutters  justify="start"  class="mt-n4 mb-0">
