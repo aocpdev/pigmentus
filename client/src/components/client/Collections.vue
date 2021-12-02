@@ -187,8 +187,15 @@ export default {
             } else if (this.products.length < 20){
                 this.length = 2;
             } else if (this.products.length < 30) {
-                this.length = 3
+                this.length = 3;
+            } else if (this.products.length < 40) {
+                this.length = 4;
+            } else if (this.products.length < 50) {
+                this.length = 5;
+            } else if (this.products.length < 60) {
+                this.length = 6;
             }
+
 
             const { page, length, products } = this;
             const number = 8  // Numero de elementos a mostrar por página

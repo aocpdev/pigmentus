@@ -27,7 +27,7 @@
       <v-spacer></v-spacer>
       <!-- <v-tooltip bottom color="black">
         <template v-slot:activator="{ on, attrs }"> -->
-          <!-- <v-btn
+          <v-btn
             tile
             large
             color="white"
@@ -36,7 +36,7 @@
             to="/home"
           >
             <v-icon small>mdi-school</v-icon>
-          </v-btn> -->
+          </v-btn>
         <!-- </template>
         <span style="color: rgb(187, 162, 87)">Academy</span>
       </v-tooltip> -->
