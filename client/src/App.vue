@@ -10,8 +10,8 @@ export default {
   }),
 
   metaInfo: {
-    title: 'Microblading Puerto Rico | Pigmentus Academy LLC',
-    titleTemplate: '%s | Pigmentus Puerto Rico',
+    title: 'Microblading Puerto Rico',
+    titleTemplate: '%s | Pigmentus Academy LLC',
     htmlAttrs: {
       lang: 'en-US'
     },
