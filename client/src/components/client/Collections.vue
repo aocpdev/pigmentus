@@ -142,7 +142,7 @@
             </v-col>
 
             <v-col align="right" v-else>
-                <v-pagination v-model="page" :length="length" circle></v-pagination>
+                <v-pagination v-model="page" :length="length" :total-visible="7" circle></v-pagination>
             </v-col>
         </v-row>
 
@@ -182,20 +182,58 @@ export default {
     },
     computed: {
         pages () {
-            if (this.products.length < 10) {
+            if (this.products.length < 8) {
                 this.length = 1;
-            } else if (this.products.length < 20){
+            } else if (this.products.length < 16){
                 this.length = 2;
-            } else if (this.products.length < 30) {
+            } else if (this.products.length < 24) {
                 this.length = 3;
-            } else if (this.products.length < 40) {
+            } else if (this.products.length < 32) {
                 this.length = 4;
-            } else if (this.products.length < 50) {
+            } else if (this.products.length < 40) {
                 this.length = 5;
-            } else if (this.products.length < 60) {
+            } else if (this.products.length < 48) {
                 this.length = 6;
+            } else if (this.products.length < 56) {
+                this.length = 7;
+            } else if (this.products.length < 64) {
+                this.length = 8;
+            } else if (this.products.length < 72) {
+                this.length = 9;
+            } else if (this.products.length < 80) {
+                this.length = 10;
+            } else if (this.products.length < 88) {
+                this.length = 11;
+            } else if (this.products.length < 96) {
+                this.length = 12;
+            } else if (this.products.length < 104) {
+                this.length = 13;
+            } else if (this.products.length < 112) {
+                this.length = 14;
+            } else if (this.products.length < 120) {
+                this.length = 15;
+            } else if (this.products.length < 128) {
+                this.length = 16;
+            } else if (this.products.length < 136) {
+                this.length = 17;
+            } else if (this.products.length < 144) {
+                this.length = 18;
+            } else if (this.products.length < 152) {
+                this.length = 19;
+            } else if (this.products.length < 160) {
+                this.length = 20;
+            } else if (this.products.length < 168) {
+                this.length = 21;
+            } else if (this.products.length < 176) {
+                this.length = 22;
+            } else if (this.products.length < 184) {
+                this.length = 23;
+            } else if (this.products.length < 192) {
+                this.length = 24;
+            } else if (this.products.length < 200) {
+                this.length = 25;
             }
-
+            // console.log(this.products.length)
 
             const { page, length, products } = this;
             const number = 8  // Numero de elementos a mostrar por página
