@@ -182,6 +182,7 @@ export default {
     },
     computed: {
         pages () {
+            // A esto hay que hacerle un for sencillo
             if (this.products.length < 8) {
                 this.length = 1;
             } else if (this.products.length < 16){

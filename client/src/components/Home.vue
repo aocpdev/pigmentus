@@ -42,6 +42,8 @@
         </v-row> -->
       </v-carousel-item>
 
+
+
       </v-carousel>
     <div class="ml-4 mr-4 row">
       <div
@@ -158,7 +160,38 @@
         </v-card>
       </div>
     </div>
+    <!-- <section id="stats">
+        <v-parallax
+          :height="$vuetify.breakpoint.smAndDown ? 700 : 500"
+          src="../assets/15.png"
+        >
+          <v-container fill-height>
+            <v-row class="mx-auto">
+              <v-col
+                v-for="[value, title] of stats"
+                :key="title"
+                cols="12"
+                md="3"
+              >
+                <div class="text-center">
+                  <div
+                    class="display-3 font-weight-black mb-4"
+                    v-text="value"
+                  ></div>
+
+                  <div
+                    class="title font-weight-regular text-uppercase"
+                    v-text="title"
+                  ></div>
+                </div>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-parallax>
+      </section> -->
+
     <v-container >
+
       <v-row no-gutters>
 
 

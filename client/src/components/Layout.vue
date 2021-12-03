@@ -33,7 +33,7 @@
             color="white"
             class="ma-2"
             icon
-            to="/home"
+            to="/academy"
           >
             <v-icon small>mdi-school</v-icon>
           </v-btn>
