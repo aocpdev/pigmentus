@@ -27,7 +27,7 @@
                 icon
                 @click="closeNavigationDrawer()"
               >
-                <v-icon small>mdi-close</v-icon>
+                <v-icon small>mdiClose</v-icon>
               </v-btn>
           </v-app-bar>
 
