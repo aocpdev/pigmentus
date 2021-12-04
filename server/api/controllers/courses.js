@@ -1,9 +1,22 @@
-const { getCourses, saveCourse} = require('../queries/courses')
+const { getCourses, saveCourse, getCourseById} = require('../queries/courses')
 
 exports.getCourses = (req, res, next) => {
     try {
         getCourses().then( courses => {
             res.status(200).json({courses: courses})
+        })
+    } catch (error) {
+        res.status(500).json({
+            messags: 'Error ocurred',
+            error
+        })
+    }
+}
+
+exports.getCourseById = (req, res, next) => {
+    try {
+        getCourseById(req.body.courseId).then( course => {
+            res.status(200).json({course: course})
         })
     } catch (error) {
         res.status(500).json({

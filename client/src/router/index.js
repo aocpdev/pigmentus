@@ -14,6 +14,7 @@ import OrderLoading from '../components/client/OrderLoading.vue';
 import PersonalInfo from '../components/client/PersonalInfo.vue';
 import Shop from '../components/client/Shop.vue';
 import Academy from '../components/client/Academy.vue';
+import PresentialCourse from '../components/client/PresentialCourse.vue';
 import Collections from '../components/client/Collections.vue';
 import Product from '../components/client/Product.vue';
 import ProductInfo from '../components/client/ProductInfo.vue';
@@ -86,7 +87,11 @@ Vue.use(VueRouter)
         path: '/academy',
         name: 'Academy',
         component: Academy
+        // children: [
+        //   { path: 'presential/:courseId', component: PresentialCourse }
+        // ]
       },
+      { path: '/academy/presential/:courseId', component: PresentialCourse },
 
       {
         path: '/admin',
