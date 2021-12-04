@@ -5,7 +5,7 @@ const getCourses = function () {
 }
 
 const getCourseById = function (courseId) {
-    return pool.query('SELECT id, enable, courseInformation FROM courses WHERE id = $1',
+    return pool.query('SELECT id, enabled, courseInformation FROM courses WHERE id = $1',
     [
         courseId
     ]);
