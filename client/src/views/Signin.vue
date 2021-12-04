@@ -123,7 +123,7 @@ export default {
           // Helpers.methods.getSaveForLater(res.data.id);
           // Helpers.methods.getCartforDB(res.data.id);
           Helpers.methods.compareLStoDB();
-          Helpers.methods.getSavedProducts();
+          Helpers.methods.getSavedProducts(res.data.id);
         })
         .catch(err => {
           this.error = false;
