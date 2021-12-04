@@ -15,7 +15,7 @@ exports.getCourses = (req, res, next) => {
 
 exports.getCourseById = (req, res, next) => {
     try {
-        getCourseById(req.body.courseId).then( course => {
+        getCourseById(req.query.courseId).then( course => {
             res.status(200).json({course: course})
         })
     } catch (error) {
