@@ -1,7 +1,7 @@
 <template>
   <v-app >
 
-    <loading></loading>
+    <!-- <loading></loading> -->
     <!-- <order-loading v-if="store.state.isPaymentLoading"></order-loading> -->
 
     <v-app-bar
@@ -9,7 +9,7 @@
       color="black"
       style="z-index: 101;"
       dark
-      v-if="!$store.state.isLoading"
+
     >
       <!-- <v-app-bar app color="black" :clipped-left="$vuetify.breakpoint.lgAndUp" dark v-if="false"> -->
       <v-toolbar-title style="width: 350px">
@@ -191,7 +191,7 @@
 
 
 
-    <v-main v-if="!$store.state.isLoading" style="background-color: #f9f9f9">
+    <v-main style="background-color: #f9f9f9">
       <bottom-navigation v-if="$store.state.bottomNavigation"></bottom-navigation>
       <v-snackbar
         v-model="$store.state.snackbar"
@@ -260,7 +260,7 @@
 
 
 
-    <v-footer dark padless v-if="!$store.state.isLoading">
+    <v-footer dark padless>
       <v-card class="flex" flat tile>
         <v-card-title style="color: black">
           <h1 style="color: white; font-size: 18px" class="border"

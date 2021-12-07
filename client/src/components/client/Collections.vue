@@ -142,7 +142,7 @@
             </v-col>
 
             <v-col align="right" v-else>
-                <v-pagination v-model="page" :length="length" :total-visible="7" circle></v-pagination>
+                <v-pagination v-model="page" :length="length" :total-visible="5" circle></v-pagination>
             </v-col>
         </v-row>
 
@@ -185,53 +185,53 @@ export default {
             // A esto hay que hacerle un for sencillo
             if (this.products.length < 8) {
                 this.length = 1;
-            } else if (this.products.length < 16){
+            } else if (this.products.length < 17){
                 this.length = 2;
-            } else if (this.products.length < 24) {
+            } else if (this.products.length < 25) {
                 this.length = 3;
-            } else if (this.products.length < 32) {
+            } else if (this.products.length < 33) {
                 this.length = 4;
-            } else if (this.products.length < 40) {
+            } else if (this.products.length < 41) {
                 this.length = 5;
-            } else if (this.products.length < 48) {
+            } else if (this.products.length < 49) {
                 this.length = 6;
-            } else if (this.products.length < 56) {
+            } else if (this.products.length < 57) {
                 this.length = 7;
-            } else if (this.products.length < 64) {
+            } else if (this.products.length < 65) {
                 this.length = 8;
-            } else if (this.products.length < 72) {
+            } else if (this.products.length < 73) {
                 this.length = 9;
-            } else if (this.products.length < 80) {
+            } else if (this.products.length < 81) {
                 this.length = 10;
-            } else if (this.products.length < 88) {
+            } else if (this.products.length < 89) {
                 this.length = 11;
-            } else if (this.products.length < 96) {
+            } else if (this.products.length < 97) {
                 this.length = 12;
-            } else if (this.products.length < 104) {
+            } else if (this.products.length < 105) {
                 this.length = 13;
-            } else if (this.products.length < 112) {
+            } else if (this.products.length < 113) {
                 this.length = 14;
-            } else if (this.products.length < 120) {
+            } else if (this.products.length < 121) {
                 this.length = 15;
-            } else if (this.products.length < 128) {
+            } else if (this.products.length < 129) {
                 this.length = 16;
-            } else if (this.products.length < 136) {
+            } else if (this.products.length < 137) {
                 this.length = 17;
-            } else if (this.products.length < 144) {
+            } else if (this.products.length < 145) {
                 this.length = 18;
-            } else if (this.products.length < 152) {
+            } else if (this.products.length < 153) {
                 this.length = 19;
-            } else if (this.products.length < 160) {
+            } else if (this.products.length < 161) {
                 this.length = 20;
-            } else if (this.products.length < 168) {
+            } else if (this.products.length < 169) {
                 this.length = 21;
-            } else if (this.products.length < 176) {
+            } else if (this.products.length < 177) {
                 this.length = 22;
-            } else if (this.products.length < 184) {
+            } else if (this.products.length < 185) {
                 this.length = 23;
-            } else if (this.products.length < 192) {
+            } else if (this.products.length < 193) {
                 this.length = 24;
-            } else if (this.products.length < 200) {
+            } else if (this.products.length < 201) {
                 this.length = 25;
             }
             // console.log(this.products.length)
