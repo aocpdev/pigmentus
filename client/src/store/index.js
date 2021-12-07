@@ -7,7 +7,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     isLogin: false,
-    isLoading: true,
+    isLoading: false,
     isPaymentLoading: false,
     user: '',
     isAdmin: false,
