@@ -18,11 +18,7 @@
     {{course}}
         </v-col>
 
-        <!-- <v-row style="height: 800px">
-            <v-col cols="12" >
-            <iframe id="testimonialto-c-alfonso-bonin-light" src="https://embed.testimonial.to/c/alfonso-bonin?theme=light" allow="camera;microphone" frameborder="0" scrolling="yes" width="100%" height="800px"></iframe>
-        </v-col>
-        </v-row> -->
+
 
 
 
@@ -34,7 +30,6 @@
 <script>
 import axios from 'axios'
 import router from '../../router/index'
-import postscribe from 'postscribe'
 export default {
     name: "PresentialCourse",
     data() {
