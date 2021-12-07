@@ -99,10 +99,6 @@
                                     </v-col> -->
                                 </v-row>
 
-
-
-
-
                             <v-expand-transition>
                                 <div
                                     v-if="hover"
