@@ -258,8 +258,6 @@
       </v-container>
     </v-card> -->
 
-
-
     <v-footer dark padless>
       <v-card class="flex" flat tile>
         <v-card-title style="color: black">
