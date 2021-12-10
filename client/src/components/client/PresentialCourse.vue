@@ -1,66 +1,68 @@
 <template>
-    <!-- <v-container fluid>
-        <v-row>
-
-        </v-row>
-    </v-container> -->
-    <v-row class="pt-0 mt-0">
-        <v-col cols="12" class="pr-0 pl-0 pt-0 pb-0">
-            <v-img
-                aspect-ratio="3.85"
-                :src="course.courseInformation.image"
-                contain
-                max-height="300px"
-            >
-            <!-- <div class="row fill-height text-right ma-0 pt-0">
-                <div class="col col-12">
-                    <h2 class="mx-0 mb-2 pr-6">
-                        {{course.courseInformation.courseName}}
-                    </h2>
-                    <div class="caption">
-                        Horario
-                    </div>
-                </div>
-            </div> -->
-
-            </v-img>
-        </v-col>
-
     <v-container fill-height fluid>
       <v-row justify="center">
+          <v-col cols="12" sm="8" md="8">
+              <v-card
+                    shaped
+                    class="mx-auto my-12"
+                    max-width="374"
+
+                >
+
+                    <v-img
+                    height="350"
+                    :src="course.courseInformation.image"
+                    ></v-img>
+
+              </v-card>
+          </v-col>
       <v-col cols="12" sm="8" md="8" >
-            <h3 class="pb-3" style="text-align: center"><strong>{{course.courseInformation.courseTheme}}</strong></h3>
+
+          <!-- <v-card>
+              <v-card-text> -->
+                  <h3 class="pb-3" style="text-align: center"><strong>{{course.courseInformation.courseTheme}}</strong></h3>
 
                 <section class="container">
                     <div  v-html="course.courseInformation.courseDescription"></div>
                 </section>
+              <!-- </v-card-text>
+          </v-card> -->
+
       </v-col>
+
 
       <v-col cols="12" sm="8" md="8">
           <v-row class="pl-3">
+              <v-col cols="6">
+                  <h3 class="pb-3" style="text-align: start"><strong>Temas:</strong></h3>
+                    <div v-for="topics in course.courseInformation.topics" :key="topics.length">
+                        • {{ topics }} <br>
+                    </div>
+              </v-col>
               <v-col cols="6">
                   <h3 class="pb-3" style="text-align: start"><strong>Incluye:</strong></h3>
             <div v-for="includes in course.courseInformation.includes" :key="includes.length">
                 • {{ includes }} <br>
             </div>
               </v-col>
-              <v-col cols="6" >
-                  <h3 class="pb-3" style="text-align: start"><strong>Temas:</strong></h3>
-            <div v-for="topics in course.courseInformation.topics" :key="topics.length">
-                • {{ topics }} <br>
-            </div>
-              </v-col>
           </v-row>
+          <!-- <v-card>
+              <v-card-text> -->
 
-
+              <!-- </v-card-text>
+          </v-card> -->
       </v-col>
-      <!-- <v-col cols="12" sm="8" md="8">
-
-      </v-col> -->
       </v-row>
+
+        <!-- <iframe id="testimonialto-c-pigmentus-light" src="https://embed.testimonial.to/c/pigmentus?theme=light" allow="camera;microphone" frameborder="0" scrolling="yes" width="100%" height="500px"></iframe> -->
+        <!-- <iframe id="testimonialto-pigmentus-dark" src="https://embed.testimonial.to/w/pigmentus?theme=dark&card=base" frameborder="0" scrolling="no" width="100%" height="800px"></iframe> -->
+
+
     </v-container>
 
-    </v-row>
+
+
+
 
 
 
