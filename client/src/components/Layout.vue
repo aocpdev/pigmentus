@@ -314,7 +314,7 @@
 </template>
 
 <script>
-import Loading from "@/components/Loading.vue";
+
 import { mapState, mapActions, mapMutations } from "vuex";
 import router from "../router/index";
 import axios from "axios";
@@ -324,7 +324,6 @@ export default {
   name: "Layout",
 
   components: {
-    Loading,
     NavigationCart,
     BottomNavigation
   },

@@ -63,7 +63,7 @@
                 <skeleton-products v-if="loading"></skeleton-products>
                 <skeleton-products v-if="loading"></skeleton-products>
                 <skeleton-products v-if="loading"></skeleton-products>
-                <div class="col-md-3 col-sm-6 col-xs-12" v-for="item in pages" :key="item.num" v-else>
+                <div class="col-md-3 col-sm-6 col-xs-12" v-for="item in pages" :key="item.num" v-else ref="products">
 
                     <v-hover v-slot="{ hover }">
                     <v-card
